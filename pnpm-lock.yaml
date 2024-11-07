@@ -2846,6 +2846,7 @@ snapshots:
       framer-motion: 10.16.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       lucide-react: 0.284.0(react@18.2.0)
       markdown-wasm: 1.2.0
+      mongoose: 8.8.0
       next: 13.5.4(@opentelemetry/api@1.4.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-contentlayer: 0.3.4(contentlayer@0.3.4(esbuild@0.19.4)(markdown-wasm@1.2.0))(esbuild@0.19.4)(markdown-wasm@1.2.0)(next@13.5.4(@opentelemetry/api@1.4.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react: 18.2.0
@@ -2857,17 +2858,24 @@ snapshots:
       remark-gfm: 3.0.1
       typescript: 5.2.2
     transitivePeerDependencies:
+      - '@aws-sdk/credential-providers'
       - '@babel/core'
       - '@effect-ts/otel-node'
       - '@mdx-js/loader'
       - '@mdx-js/react'
+      - '@mongodb-js/zstd'
       - '@opentelemetry/api'
       - '@sveltejs/kit'
       - babel-plugin-macros
       - encoding
       - esbuild
+      - gcp-metadata
+      - kerberos
+      - mongodb-client-encryption
       - sass
       - shiki
+      - snappy
+      - socks
       - supports-color
       - svelte
       - vue

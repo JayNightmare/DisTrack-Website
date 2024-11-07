@@ -39,13 +39,19 @@ export default async function ShowcasePage() {
           <div className="grid grid-cols-1 gap-8 mx-auto lg:grid-cols-2">
             <Card>
               <div className="p-4 md:p-8">
-                <h3 className="text-xl font-bold text-zinc-100">Total Coding Time</h3>
+                <h3 className="text-xl font-bold text-zinc-100">Your Coding Time</h3>
                 <p className="mt-2 text-zinc-400">{totalCodingTime} hours</p>
               </div>
             </Card>
             <Card>
               <div className="p-4 md:p-8">
-                <h3 className="text-xl font-bold text-zinc-100">Active Users</h3>
+                <h3 className="text-xl font-bold text-zinc-100">Active Sessions</h3>
+                <p className="mt-2 text-zinc-400">{activeUsers}</p>
+              </div>
+            </Card>
+            <Card>
+              <div className="p-4 md:p-8">
+                <h3 className="text-xl font-bold text-zinc-100">Most Used Languages</h3>
                 <p className="mt-2 text-zinc-400">{activeUsers}</p>
               </div>
             </Card>
@@ -61,7 +67,6 @@ export default async function ShowcasePage() {
               <Card key={language}>
                 <div className="p-4 md:p-8">
                   <h3 className="text-xl font-bold text-zinc-100">{language}</h3>
-                  <p className="mt-2 text-zinc-400">{time} hours</p>
                 </div>
               </Card>
             ))}

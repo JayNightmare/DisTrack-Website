@@ -1,7 +1,8 @@
 import Link from "next/link";
 import React from "react";
 import Particles from "./components/particles";
-// import style sheet
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
 import "./style.css";
 
 const navigation = [
@@ -12,6 +13,7 @@ const navigation = [
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen overflow-hidden bg-gradient-to-tl from-black via-zinc-600/20 to-black">
+      <SpeedInsights />
       <nav className="my-16 animate-fade-in">
         <ul className="flex items-center justify-center gap-4">
           {navigation.map((item) => (
@@ -48,5 +50,6 @@ export default function Home() {
         </h2>
       </div>
     </div>
+    
   );
 }

@@ -7,18 +7,18 @@ import { Analytics } from "./components/analytics";
 export const metadata: Metadata = {
   title: {
     default: "Dis.Track",
-    template: "%s | https://distrack-website-4cj66rmxy-jaynightmares-projects.vercel.app",
+    template: "%s | https://distrack-website.vercel.app",
   },
   description: "VSCode Plugin that tracks your duration on vscode, posting it on discord",
   openGraph: {
     title: "dis.track",
     description:
       "VSCode Plugin that tracks your duration on vscode, posting it on discord",
-    url: "https://distrack-website-4cj66rmxy-jaynightmares-projects.vercel.app",
+    url: "https://distrack-website.vercel.app",
     siteName: "chronark.com",
     images: [
       {
-        url: "https://chronark.com/og.png",
+        url: "../public/og.png",
         width: 1920,
         height: 1080,
       },

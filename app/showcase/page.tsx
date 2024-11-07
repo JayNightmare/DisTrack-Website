@@ -5,6 +5,8 @@ import { Card } from "../components/card";
 import { Redis } from "@upstash/redis";
 import { Eye } from "lucide-react";
 
+import "./style.css";
+
 const redis = Redis.fromEnv();
 
 export const revalidate = 60;

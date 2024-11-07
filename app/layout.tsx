@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     siteName: "chronark.com",
     images: [
       {
-        url: "../public/og.png",
+        url: "https://distrack-website.vercel.app/og.png",
         width: 1920,
         height: 1080,
       },

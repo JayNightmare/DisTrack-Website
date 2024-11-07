@@ -6,15 +6,15 @@ import { Analytics } from "./components/analytics";
 
 export const metadata: Metadata = {
   title: {
-    default: "chronark.com",
-    template: "%s | chronark.com",
+    default: "Dis.Track",
+    template: "%s | https://distrack-website-4cj66rmxy-jaynightmares-projects.vercel.app",
   },
-  description: "Co-founder of unkey.dev and founder of planetfall.io",
+  description: "VSCode Plugin that tracks your duration on vscode, posting it on discord",
   openGraph: {
-    title: "chronark.com",
+    title: "dis.track",
     description:
-      "Co-founder of unkey.dev and founder of planetfall.io",
-    url: "https://chronark.com",
+      "VSCode Plugin that tracks your duration on vscode, posting it on discord",
+    url: "https://distrack-website-4cj66rmxy-jaynightmares-projects.vercel.app",
     siteName: "chronark.com",
     images: [
       {

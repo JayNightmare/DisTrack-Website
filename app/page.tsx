@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import Particles from "./components/particles";
 // import style sheet
-import "./styles.css";
+import "./style.css";
 
 const navigation = [
   { name: "Projects", href: "/projects" },

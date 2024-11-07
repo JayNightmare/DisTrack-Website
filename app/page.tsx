@@ -5,7 +5,7 @@ import Particles from "./components/particles";
 import "./style.css";
 
 const navigation = [
-  { name: "Projects", href: "/projects" },
+  { name: "Explore", href: "/showcase" },
   { name: "Contact", href: "/contact" },
 ];
 

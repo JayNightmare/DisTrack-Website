@@ -18,8 +18,7 @@ export default function Home() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm duration-500 text-zinc-500 hover:text-zinc-300"
-            >
+              className="nav-link text-md font-semibold px-4 py-2 duration-300 text-zinc-300 hover:text-white hover:scale-110 hover:text-shadow">
               {item.name}
             </Link>
           ))}
@@ -48,6 +47,5 @@ export default function Home() {
         </h2>
       </div>
     </div>
-    
   );
 }

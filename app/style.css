@@ -11,5 +11,10 @@
 }
 
 .dis {
-    animation: rainbow 3s infinite;
+    animation: rainbow 10s ease-in-out infinite;
+}
+
+.dis-container {
+    display: flex;
+    flex-direction: row;
 }

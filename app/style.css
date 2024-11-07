@@ -1,34 +1,31 @@
-/* Add this to your CSS file */
-@keyframes rainbow {
-    0% { color: red; }
-    14% { color: orange; }
-    28% { color: yellow; }
-    42% { color: green; }
-    57% { color: blue; }
-    71% { color: indigo; }
-    85% { color: violet; }
-    100% { color: red; }
+@keyframes expandShadow {
+    0% {
+        text-shadow: -4px 4px #ef3550,
+                    -8px 8px #f48fb1,
+                    -12px 12px #7e57c2,
+                    -16px 16px #2196f3,
+                    -20px 20px #26c6da,
+                    -24px 24px #43a047,
+                    -28px 28px #eeff41,
+                    -32px 32px #f9a825,
+                    -36px 36px #ff5722;
+    }
+    100% {
+        text-shadow: -8px 8px #ef3550,
+                    -16px 16px #f48fb1,
+                    -24px 24px #7e57c2,
+                    -32px 32px #2196f3,
+                    -40px 40px #26c6da,
+                    -48px 48px #43a047,
+                    -56px 56px #eeff41,
+                    -64px 64px #f9a825,
+                    -72px 72px #ff5722;
+    }
 }
 
 .dis {
-    /* animation: rainbow 10s ease-in-out infinite; */
-    /* margin-top: 0px; */
-    /* margin-bottom: 50px; */
-    /* text-align: center; */
-    /* font-family: sans-serif; */
-    /* font-size: 3rem; */
-    /* letter-spacing: 0.15rem; */
-    /* text-transform: uppercase; */
     color: #fff;
-    text-shadow: -4px 4px #ef3550,
-                -8px 8px #f48fb1,
-                -12px 12px #7e57c2,
-                -16px 16px #2196f3,
-                -20px 20px #26c6da,
-                -24px 24px #43a047,
-                -28px 28px #eeff41,
-                -32px 32px #f9a825,
-                -36px 36px #ff5722;
+    animation: expandShadow 2s infinite alternate;
 }
 
 .dis-container {

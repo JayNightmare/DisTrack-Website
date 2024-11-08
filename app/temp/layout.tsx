@@ -9,7 +9,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 export const metadata: Metadata = {
   title: {
     default: "Coming Soon!",
-    template: "%s | https://distrack-website.vercel.app",
+    template: "%s",
   },
   description: "VSCode Plugin that tracks your duration on vscode, posting it on discord",
   openGraph: {

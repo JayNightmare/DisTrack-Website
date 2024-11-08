@@ -19,10 +19,19 @@ export default function ComingSoon() {
                 Sadly, the plugin hasn’t finished development yet!
             </p>
             <p className="text-lg text-zinc-400 mb-8">
-                Sadly, the plugin hasn’t finished development yet! To keep up
-                with the progress, follow Jay on GitHub and star the repo. To help
+                To keep up with the progress, follow Jay on GitHub and star the repo. To help
                 fund the project, consider sponsoring me on GitHub!
             </p>
+            <br />
+            <p className="text-lg text-zinc-400 mb-8">
+                Wish to keep notified? Add the discord bot to your server and it will send you a message when the extension is public!
+            </p>
+            <Link
+                href="/"
+                className="inline-block px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-500 transition-transform duration-300"
+            >
+                Invite Bot
+            </Link>
 
             <div className="flex gap-4">
                 {/* Link to GitHub Profile */}

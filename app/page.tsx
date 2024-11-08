@@ -47,9 +47,9 @@ export default function Home() {
       </div>
       <div className="my-4">
         <Link
-          href="./temp/page.tsx" // replace with actual plugin URL
+          href="./temp" // replace with actual plugin URL
           // target="_blank"
-          className="inline-block px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-500 hover:scale-105 transition-transform duration-300"
+          className="fade-in-custom inline-block px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-500 hover:scale-105 transition-transform duration-300"
         >
           Add to VSCode
         </Link>

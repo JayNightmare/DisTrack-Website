@@ -23,6 +23,15 @@
     }
 }
 
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 .dis {
     color: #fff;
     animation: expandShadow 2s 1 forwards;
@@ -32,4 +41,9 @@
 .dis-container {
     display: flex;
     flex-direction: row;
+}
+
+.fade-in-custom {
+    animation: fadeIn 2 1 forwards;
+    animation-delay: 3s;
 }

@@ -8,6 +8,9 @@ export default function ComingSoon() {
                 Thank you for expressing your interest!
             </h1>
             <p className="text-lg text-zinc-400 mb-8">
+                Sadly, the plugin hasn’t finished development yet!
+            </p>
+            <p className="text-lg text-zinc-400 mb-8">
                 Sadly, the plugin hasn’t finished development yet! To keep up
                 with the progress, follow Jay on GitHub and star the repo. To help
                 fund the project, consider sponsoring me on GitHub!
@@ -22,11 +25,12 @@ export default function ComingSoon() {
                 >
                     Follow on GitHub
                 </Link>
+                
                 {/* Link to GitHub Sponsors */}
                 <Link
                     href="https://github.com/sponsors/JayNightmare"
                     target="_blank"
-                    className="inline-block px-6 py-3 text-base font-semibold text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-500 transition-transform duration-300"
+                    className="inline-block px-6 py-3 text-base font-semibold text-white bg-pink-600 rounded-lg shadow-md hover:bg-pink-500 transition-transform duration-300"
                 >
                     Sponsor on GitHub
                 </Link>
@@ -40,6 +44,7 @@ export default function ComingSoon() {
                     Star the Repo
                 </Link>
             </div>
+
         </div>
     );
 }

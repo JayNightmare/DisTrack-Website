@@ -3,6 +3,8 @@ import React from "react";
 import { Navigation } from "../components/nav";
 import Particles from "../components/particles";
 
+import "./style.css";
+
 export default function ComingSoon() {
     return (
         <div className="flex flex-col items-center justify-center w-screen h-screen bg-gradient-to-tl from-black via-zinc-600/20 to-black text-center px-6">

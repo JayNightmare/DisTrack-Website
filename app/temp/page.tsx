@@ -33,7 +33,7 @@ export default function ComingSoon() {
                 Wish to keep notified? Add the discord bot to your server and it will send you a message when the extension is public!
             </p>
             <Link
-                href="/"
+                href="https://distrack-website.vercel.app"
                 className="inline-block px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-500 hover:scale-105 transition-transform duration-300"
             >
                 Invite Bot

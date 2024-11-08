@@ -11,10 +11,11 @@ export default function ComingSoon() {
                 className="absolute inset-0 -z-10 animate-fade-in"
                 quantity={100}
             />
-            
-            <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
-                Thank you for expressing your interest!
+
+            <h1 className="dis-container py-3.5 px-0.5 z-10 text-3xl text-transparent duration-1000 bg-white cursor-default text-edge-outline animate-title font-display sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text ">
+                <p className='dis'>Thank you</p> for expressing your interest!
             </h1>
+
             <p className="text-lg text-zinc-400 mb-8">
                 Sadly, the plugin hasn’t finished development yet!
             </p>

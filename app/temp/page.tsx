@@ -1,9 +1,15 @@
 import Link from "next/link";
 import React from "react";
+import Particles from "../components/particles";
 
 export default function ComingSoon() {
     return (
         <div className="flex flex-col items-center justify-center w-screen h-screen bg-gradient-to-tl from-black via-zinc-600/20 to-black text-center px-6">
+            <Particles
+                className="absolute inset-0 -z-10 animate-fade-in"
+                quantity={100}
+            />
+            
             <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
                 Thank you for expressing your interest!
             </h1>

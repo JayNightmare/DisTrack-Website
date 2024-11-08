@@ -15,8 +15,11 @@ export default function ComingSoon() {
             />
 
             <h1 className="dis-container text-3xl md:text-5xl font-bold text-white mb-4">
-                <p className='dis'>Thank you </p>for expressing your interest!
+                <span className="dis">Thank you</span>
+                <span className="mr-2"></span> {/* Adding margin here to create space */}
+                for expressing your interest!
             </h1>
+
 
             <p className="text-lg text-zinc-400 mb-8">
                 Sadly, the plugin hasn’t finished development yet!

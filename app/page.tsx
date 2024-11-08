@@ -45,11 +45,11 @@ export default function Home() {
           </Link> will track your time on VSCode, and will allow you to share that with your friends on Discord
         </h2>
       </div>
-      <div className="my-4">
+      <div className="my-4 fade-in-custom">
         <Link
           href="./temp" // replace with actual plugin URL
           // target="_blank"
-          className="fade-in-custom inline-block px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-500 hover:scale-105 transition-transform duration-300"
+          className=" inline-block px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-500 hover:scale-105 transition-transform duration-300"
         >
           Add to VSCode
         </Link>

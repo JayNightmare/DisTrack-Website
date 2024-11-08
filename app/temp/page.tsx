@@ -28,10 +28,13 @@ export default function ComingSoon() {
             </p>
             <Link
                 href="/"
-                className="inline-block px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-500 transition-transform duration-300"
+                className="inline-block px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-500 hover:scale-105 transition-transform duration-300"
             >
                 Invite Bot
             </Link>
+            <br />
+            <br />
+            <br />
 
             <div className="flex gap-4">
                 {/* Link to GitHub Profile */}

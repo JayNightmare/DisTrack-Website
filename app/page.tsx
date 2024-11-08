@@ -36,14 +36,13 @@ export default function Home() {
       <div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
       <div className="my-16 text-center animate-fade-in">
         <h2 className="text-sm text-zinc-500 ">
-          I'm building{" "}
           <Link
             target="_blank"
             href="https://github.com/JayNightmare/DisTrack"
             className="underline duration-500 hover:text-zinc-300"
           >
             Dis.Track
-          </Link> to track and distribute VSCode Session durations to discord users.
+          </Link> will track your time on VSCode, and will allow you to share that with your friends on Discord
         </h2>
       </div>
     </div>

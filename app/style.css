@@ -24,11 +24,9 @@
 }
 
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
+    to {
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -44,6 +42,7 @@
 }
 
 .fade-in-custom {
-    animation: fadeIn 2 1 forwards;
-    animation-delay: 3s;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeIn 0.5s ease-out 3s forwards; /* 0.5s fade-in after 3 seconds */
 }

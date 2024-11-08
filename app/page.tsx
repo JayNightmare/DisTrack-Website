@@ -49,7 +49,7 @@ export default function Home() {
         <Link
           href="./temp" // replace with actual plugin URL
           // target="_blank"
-          className=" inline-block px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-500 hover:scale-105 transition-transform duration-300"
+          className="inline-block px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-500 hover:scale-105 transition-transform duration-300"
         >
           Add to VSCode
         </Link>

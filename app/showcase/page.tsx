@@ -1,9 +1,7 @@
-import Link from "next/link";
 import React from "react";
 import { Navigation } from "../components/nav";
 import { Card } from "../components/card";
 import { Redis } from "@upstash/redis";
-import { Eye } from "lucide-react";
 
 import "./style.css";
 

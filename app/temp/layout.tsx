@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     description:
       "VSCode Plugin that tracks your duration on vscode, posting it on discord",
     url: "https://distrack-website.vercel.app",
-    siteName: "chronark.com",
+    siteName: "https://distrack-website.vercel.app",
     images: [
       {
         url: "https://distrack-website.vercel.app/og.png",

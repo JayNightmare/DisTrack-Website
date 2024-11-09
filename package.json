@@ -1,5 +1,5 @@
 {
-  "name": "https://distrack.vercel.app",
+  "name": "https://distrack-website.vercel.app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,7 +15,7 @@
     "@vercel/analytics": "^1.3.2",
     "@vercel/speed-insights": "^1.0.14",
     "contentlayer": "^0.3.4",
-    "https://distrack.vercel.app": "file:",
+    "https://distrack-website.vercel.app": "file:",
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.284.0",
     "markdown-wasm": "^1.2.0",

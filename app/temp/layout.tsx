@@ -17,11 +17,11 @@ export const metadata: Metadata = {
         title: "dis.track",
         description:
             "VSCode Plugin that tracks your duration on vscode, posting it on discord",
-        url: "distrack.vercel.app",
-        siteName: "distrack.vercel.app",
+        url: "https://distrack.vercel.app",
+        siteName: "https://distrack.vercel.app",
         images: [
             {
-                url: "distrack.vercel.app/og.png",
+                url: "https://distrack.vercel.app/og.png",
                 width: 1920,
                 height: 1080,
             },

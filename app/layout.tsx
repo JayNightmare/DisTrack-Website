@@ -9,7 +9,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 export const metadata: Metadata = {
     title: {
         default: "Dis.Track",
-        template: "%s | https://distrack.vercel.app",
+        template: "%s | https://distrack-website.vercel.app",
     },
     description:
         "VSCode Plugin that tracks your duration on vscode, posting it on discord",
@@ -17,11 +17,11 @@ export const metadata: Metadata = {
         title: "dis.track",
         description:
             "VSCode Plugin that tracks your duration on vscode, posting it on discord",
-        url: "https://distrack.vercel.app",
-        siteName: "https://distrack.vercel.app",
+        url: "https://distrack-website.vercel.app",
+        siteName: "https://distrack-website.vercel.app",
         images: [
             {
-                url: "https://distrack.vercel.app/og.png",
+                url: "https://distrack-website.vercel.app/og.png",
                 width: 1920,
                 height: 1080,
             },

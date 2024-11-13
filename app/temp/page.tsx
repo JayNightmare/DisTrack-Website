@@ -21,6 +21,7 @@ export default function ComingSoon() {
                 Extension
             </h1>
 
+            <br />
             <p className="text-lg text-zinc-400 mb-8">
                 Download the plugin on your VSCode IDE now! Search
             </p>

@@ -12,8 +12,8 @@ My personal website, built with [Next.js](https://nextjs.org/), [Tailwind CSS](h
 ## Running Locally
 
 ```sh-session
-git clone https://github.com/JayNightmare/https://distrack-website.vercel.app.git
-cd https://distrack-website.vercel.app
+git clone https://github.com/JayNightmare/distrack-website.git
+cd distrack-website
 ```
 
 Create a `.env` file similar to [`.env.example`](https://github.com/JayNightmare/https://distrack-website.vercel.app/blob/main/.env.example).

@@ -22,17 +22,12 @@ export default function ComingSoon() {
             </h1>
 
             <p className="text-lg text-zinc-400 mb-8">
-                Download the plugin on your VSCode IDE now! Search `Discord VSCode Tracker` in the extensions directory and it's the first result.
+                Download the plugin on your VSCode IDE now! Search <br>Discord VSCode Tracker</br> in the extensions directory and it's the first result.
             </p>
             <p className="text-lg text-zinc-400 mb-8">
                 To keep up with the progress, follow Jay on GitHub and star the
                 repo. To help fund the project, consider sponsoring me on
                 GitHub!
-            </p>
-            <br />
-            <p className="text-lg text-zinc-400 mb-8">
-                Wish to keep notified? Add the discord bot to your server and it
-                will send you a message when the extension is public!
             </p>
             <div className="flex gap-4">
                 <Link

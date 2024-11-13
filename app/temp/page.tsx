@@ -57,7 +57,7 @@ export default function ComingSoon() {
                 <Link
                     href="https://github.com/JayNightmare"
                     target="_blank"
-                    className="inline-block px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-500 transition-transform duration-300"
+                    className="inline-block px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-500 hover:scale-105 transition-transform duration-300"
                 >
                     Follow on GitHub
                 </Link>
@@ -66,7 +66,7 @@ export default function ComingSoon() {
                 <Link
                     href="https://github.com/sponsors/JayNightmare"
                     target="_blank"
-                    className="inline-block px-6 py-3 text-base font-semibold text-white bg-pink-600 rounded-lg shadow-md hover:bg-pink-500 transition-transform duration-300"
+                    className="inline-block px-6 py-3 text-base font-semibold text-white bg-pink-600 rounded-lg shadow-md hover:bg-pink-500 hover:scale-105 transition-transform duration-300"
                 >
                     Sponsor on GitHub
                 </Link>
@@ -75,7 +75,7 @@ export default function ComingSoon() {
                 <Link
                     href="https://github.com/JayNightmare/DisTrack"
                     target="_blank"
-                    className="inline-block px-6 py-3 text-base font-semibold text-white bg-purple-600 rounded-lg shadow-md hover:bg-purple-500 transition-transform duration-300"
+                    className="inline-block px-6 py-3 text-base font-semibold text-white bg-purple-600 rounded-lg shadow-md hover:bg-purple-500 hover:scale-105 transition-transform duration-300"
                 >
                     Star the Repo
                 </Link>

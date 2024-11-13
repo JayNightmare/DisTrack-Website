@@ -34,18 +34,20 @@ export default function ComingSoon() {
                 Wish to keep notified? Add the discord bot to your server and it
                 will send you a message when the extension is public!
             </p>
-            <Link
-                href="https://discord.com/oauth2/authorize?client_id=1305258645906526328"
-                className="inline-block px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-500 hover:scale-105 transition-transform duration-300"
-            >
-                Invite Bot
-            </Link>
-            <Link
-                href="https://marketplace.visualstudio.com/items?itemName=JayNightmare.dis-track"
-                className="inline-block px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-500 hover:scale-105 transition-transform duration-300"
-            >
-                Download Extension
-            </Link>
+            <div className="flex gap-4">
+                <Link
+                    href="https://discord.com/oauth2/authorize?client_id=1305258645906526328"
+                    className="inline-block px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-500 hover:scale-105 transition-transform duration-300"
+                >
+                    Invite Bot
+                </Link>
+                <Link
+                    href="https://marketplace.visualstudio.com/items?itemName=JayNightmare.dis-track"
+                    className="inline-block px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-500 hover:scale-105 transition-transform duration-300"
+                >
+                    Download Extension
+                </Link>
+            </div>
             <br />
             <br />
             <br />

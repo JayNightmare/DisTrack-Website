@@ -15,14 +15,14 @@ export default function ComingSoon() {
             />
 
             <h1 className="dis-container text-3xl md:text-5xl font-bold text-white mb-4">
-                <span className="dis">Thank you</span>
+                <span className="dis">Dis.Track</span>
                 <span className="mr-2"></span>{" "}
                 {/* Adding margin here to create space */}
-                for expressing your interest!
+                Extension
             </h1>
 
             <p className="text-lg text-zinc-400 mb-8">
-                Sadly, the plugin hasn’t finished development yet!
+                Download the plugin on your VSCode IDE now! Search `Discord VSCode Tracker` in the extensions directory and it's the first result.
             </p>
             <p className="text-lg text-zinc-400 mb-8">
                 To keep up with the progress, follow Jay on GitHub and star the
@@ -35,10 +35,16 @@ export default function ComingSoon() {
                 will send you a message when the extension is public!
             </p>
             <Link
-                href="/"
+                href="https://discord.com/oauth2/authorize?client_id=1305258645906526328"
                 className="inline-block px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-500 hover:scale-105 transition-transform duration-300"
             >
                 Invite Bot
+            </Link>
+            <Link
+                href="https://marketplace.visualstudio.com/items?itemName=JayNightmare.dis-track"
+                className="inline-block px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-500 hover:scale-105 transition-transform duration-300"
+            >
+                Download Extension
             </Link>
             <br />
             <br />

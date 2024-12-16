@@ -3,7 +3,7 @@
         <h1 align="center">https://distrack-website.vercel.app</h1>
     </a>
 </div>
-
+ 
 My personal website, built with [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/), [Upstash](https://upstash.com?ref=https://distrack-website.vercel.app), [Contentlayer](https://www.contentlayer.dev/) and deployed to [Vercel](https://vercel.com/).
 
 </div>

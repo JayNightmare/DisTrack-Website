@@ -8,7 +8,7 @@
 </div>
 
 <h1 align="center">
-    <a href="https://https://distrack-website.vercel.app">
+    <a href="https://distrack-website.vercel.app">
         https://distrack-website.vercel.app
     </a>
 </h1>

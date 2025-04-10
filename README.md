@@ -1,8 +1,17 @@
-<div align="center">
-    <a href="https://https://distrack-website.vercel.app">
-        <h1 align="center">https://distrack-website.vercel.app</h1>
-    </a>
+<div align=center>
+  <img src="https://github.com/JayNightmare/DisTrack-Endpoint-Server/blob/main/images/New%20Distrack.jpg" width=225 radius=10 />
 </div>
+
+<div align=center>
+  <h1>Dis.Track</h1>
+  <h2>Discord Website Deployment Repo</h2>
+</div>
+
+<h1 align="center">
+    <a href="https://https://distrack-website.vercel.app">
+        https://distrack-website.vercel.app
+    </a>
+</h1>
  
 My personal website, built with [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/), [Upstash](https://upstash.com?ref=https://distrack-website.vercel.app), [Contentlayer](https://www.contentlayer.dev/) and deployed to [Vercel](https://vercel.com/).
 

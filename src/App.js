@@ -1,14 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Routes, Route } from "react-router-dom";
 import "./styles/home.css";
 import Particles from "./components/particles";
+import Contact from "./pages/contact";
+import Dashboard from "./pages/dashboard";
+import Extension from "./pages/extension";
+import Leaderboard from "./pages/leaderboard";
+import Showcase from "./pages/showcase";
 
 const navigation = [
     { name: "Explore", href: "/showcase" },
     { name: "Leaderboard", href: "/leaderboard" },
+    { name: "Dashboard", href: "/dashboard" },
+    { name: "Extension", href: "/extension" },
+    { name: "Contact", href: "/contact" },
 ];
 
-export default function Home() {
+function HomePage() {
     return (
         <div className="flex flex-col items-center justify-center w-screen h-screen overflow-hidden bg-gradient-to-tl via-zinc-600/20 to-black from-black">
             <nav className="my-16 animate-fade-in">
@@ -62,5 +70,18 @@ export default function Home() {
                 </Link>
             </div>
         </div>
+    );
+}
+
+export default function App() {
+    return (
+        <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/extension" element={<Extension />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/showcase" element={<Showcase />} />
+        </Routes>
     );
 }

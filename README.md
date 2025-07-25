@@ -1,16 +1,37 @@
+<div align=center>
+
+<img src="./public/images/New Distrack.jpg" width="128" />
+
 # DisTrack Website
 
-A modern React web application for the DisTrack Discord bot, featuring user dashboards, leaderboards, showcase pages, and extension downloads. Built with React, Tailwind CSS, and React Router.
+</div>
+
+
+A modern React web application for DisTrack, featuring user dashboards, leaderboards, showcase pages, and extension downloads. Built with React, Tailwind CSS, and React Router.
 
 ## Features
 
 - 🏠 **Home Page** - Clean landing page with navigation
 - 📊 **Dashboard** - User statistics and data visualization
 - 🏆 **Leaderboard** - User rankings and competitive stats
-- 🎨 **Showcase** - Feature highlights and demonstrations
-- 🔗 **Extension** - Download page for browser extensions
+- 🎨 **Showcase** - Features highlights and demonstrations
+- 🔗 **Extension** - Download page for extensions for platforms and IDE's
 - 📞 **Contact** - Get in touch page
-- ✨ **Particle Effects** - Interactive background animations
+
+## Currently In Development
+
+<div align=center>
+
+| Feature | Status | Branch |
+| :--- | :---: | ---: |
+| User Authentication | Planned | feat-user-auth |
+| Real-time Leaderboard Updates | Planned | feat-lead |
+| Responsive Design | In Progress | feat-responsive |
+| Dashboard Stats | Planned | feat-dashboard |
+| Contact Info | Planned | patch-contact |
+
+</div>
+
 
 ## Tech Stack
 
@@ -100,3 +121,14 @@ This project uses:
 ## License
 
 This project is licensed under the CC0-1.0 License.
+
+<div align=center>
+
+| **Allowed** ✅ | **Not Allowed** ❌ |
+| :---: | :---: |
+| Commercial use | Liability |
+| Distribution | Warranty |
+| Modification | Trademark Use |
+| Private use | Patent Use |
+
+</div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Navbar from "../components/navbar";
 
 const filters = ["All Time", "This Month", "This Week", "Today"];
 
@@ -14,13 +15,17 @@ export default function Leaderboard() {
 
     return (
         <div className="min-h-screen bg-zinc-900 text-white p-8 space-y-6">
+            {/* Nav Bar */}
+            <Navbar />
             <h1 className="text-2xl font-bold">Leaderboard</h1>
             <div className="flex gap-4">
                 {filters.map((f) => (
                     <button
                         key={f}
                         onClick={() => setFilter(f)}
-                        className={`px-3 py-1 rounded ${filter === f ? "bg-indigo-600" : "bg-zinc-800"}`}
+                        className={`px-3 py-1 rounded ${
+                            filter === f ? "bg-indigo-600" : "bg-zinc-800"
+                        }`}
                     >
                         {f}
                     </button>
@@ -38,15 +43,24 @@ export default function Leaderboard() {
                     {sampleData.map((row) => (
                         <tr key={row.username}>
                             <td className="py-2">
-                                <Link to={`/users/${row.username}`} className="text-indigo-400 hover:underline">
+                                <Link
+                                    to={`/user/${row.username}`}
+                                    className="text-indigo-400 hover:underline"
+                                >
                                     {row.username}
                                 </Link>
                             </td>
                             <td className="py-2">{row.time}</td>
                             <td className="py-2">
-                                {row.change > 0 && <span className="text-green-500">↑</span>}
-                                {row.change < 0 && <span className="text-red-500">↓</span>}
-                                {row.change === 0 && <span className="text-gray-500">-</span>}
+                                {row.change > 0 && (
+                                    <span className="text-green-500">↑</span>
+                                )}
+                                {row.change < 0 && (
+                                    <span className="text-red-500">↓</span>
+                                )}
+                                {row.change === 0 && (
+                                    <span className="text-gray-500">-</span>
+                                )}
                             </td>
                         </tr>
                     ))}

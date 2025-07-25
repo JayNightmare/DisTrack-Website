@@ -7,6 +7,7 @@ import Dashboard from "./pages/dashboard";
 import Extension from "./pages/extension";
 import Leaderboard from "./pages/leaderboard";
 import Showcase from "./pages/showcase";
+import User from "./pages/user";
 
 const navigation = [
     { name: "Explore", href: "/showcase" },
@@ -82,6 +83,7 @@ export default function App() {
             <Route path="/extension" element={<Extension />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/showcase" element={<Showcase />} />
+            <Route path="/user/:id" element={<User />} />
         </Routes>
     );
 }

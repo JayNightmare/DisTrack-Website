@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Navbar from "../components/navbar";
 
 export default function Dashboard() {
     const [data, setData] = useState(null);
@@ -15,6 +16,7 @@ export default function Dashboard() {
 
     return (
         <div className="min-h-screen bg-zinc-900 text-white p-8 space-y-6">
+            <Navbar />
             <h1 className="text-2xl font-bold">Dashboard</h1>
             <div className="grid gap-6 md:grid-cols-3">
                 <div className="bg-zinc-800 rounded p-4">

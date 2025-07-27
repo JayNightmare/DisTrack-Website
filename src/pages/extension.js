@@ -1,4 +1,5 @@
 import React from "react";
+import Navbar from "../components/navbar";
 
 export default function Extension() {
     const links = [
@@ -9,6 +10,7 @@ export default function Extension() {
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-zinc-900 text-white space-y-4 p-8">
+            <Navbar />
             {links.map((l) => (
                 <a
                     key={l.label}

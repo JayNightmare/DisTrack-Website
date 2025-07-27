@@ -1,4 +1,5 @@
 import React from "react";
+import Navbar from "../components/navbar";
 
 export default function Showcase() {
     const sections = [
@@ -18,6 +19,7 @@ export default function Showcase() {
 
     return (
         <div className="min-h-screen bg-zinc-900 text-white p-8 space-y-12">
+            <Navbar />
             {sections.map((s, i) => (
                 <div
                     key={s.title}

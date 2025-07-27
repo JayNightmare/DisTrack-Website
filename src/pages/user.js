@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import Navbar from "../components/navbar";
 
 const users = {
     1: {
@@ -31,6 +32,7 @@ export default function User() {
 
     return (
         <div className="p-4 space-y-2">
+            <Navbar />
             <h1 className="text-2xl font-bold">{user.name}</h1>
             <p> Coding Time: {user.codingTime} </p>
             <p> Habits: {user.habits} </p>

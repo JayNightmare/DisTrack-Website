@@ -43,25 +43,25 @@ const Navbar = () => {
                         Dashboard
                     </Link>
                     <Link
-                        to="/servers"
+                        to="/leaderboard"
                         className="navbar-link"
                         onClick={() => setIsMenuOpen(false)}
                     >
-                        Servers
+                        Leaderboard
                     </Link>
                     <Link
-                        to="/features"
+                        to="/extension"
                         className="navbar-link"
                         onClick={() => setIsMenuOpen(false)}
                     >
-                        Features
+                        Download
                     </Link>
                     <Link
-                        to="/about"
+                        to="/contact"
                         className="navbar-link"
                         onClick={() => setIsMenuOpen(false)}
                     >
-                        About
+                        Contact
                     </Link>
                 </div>
 

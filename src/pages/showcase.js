@@ -18,7 +18,7 @@ export default function Showcase() {
     ];
 
     return (
-        <div className="min-h-screen bg-zinc-900 text-white p-8 space-y-12">
+        <div className="min-h-screen bg-zinc-900 text-white p-8 space-y-6">
             <Navbar />
             {sections.map((s, i) => (
                 <div

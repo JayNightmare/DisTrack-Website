@@ -9,7 +9,7 @@ export default function Extension() {
     ];
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-zinc-900 text-white space-y-4 p-8">
+        <div className="min-h-screen bg-zinc-900 text-white p-8 space-y-6">
             <Navbar />
             {links.map((l) => (
                 <a

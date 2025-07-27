@@ -31,7 +31,7 @@ export default function User() {
     }
 
     return (
-        <div className="p-4 space-y-2">
+        <div className="min-h-screen bg-zinc-900 text-white p-8 space-y-6">
             <Navbar />
             <h1 className="text-2xl font-bold">{user.name}</h1>
             <p> Coding Time: {user.codingTime} </p>

@@ -21,7 +21,7 @@ export default function Contact() {
     ];
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-zinc-900 py-10 text-white">
+        <div className="min-h-screen bg-zinc-900 text-white p-8 space-y-6">
             <Navbar />
             <div className="grid gap-6 sm:grid-cols-3 px-4">
                 {contacts.map((c) => (

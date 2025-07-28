@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/navbar";
+import Particles from "../components/particles";
 
 const filters = ["All Time", "This Month", "This Week", "Today"];
 
@@ -14,9 +15,10 @@ export default function Leaderboard() {
     const [filter, setFilter] = useState(filters[0]);
 
     return (
-        <div className="min-h-screen bg-zinc-900 text-white p-8 space-y-6">
+        <div className="min-h-screen text-white p-8 space-y-6 bg-gradient-to-tl via-zinc-600/20 to-black from-black">
             {/* Nav Bar */}
             <Navbar />
+            <Particles className="absolute inset-0 -z-10" quantity={100} />
             <h1 className="text-2xl font-bold">Leaderboard</h1>
             <div className="flex gap-4">
                 {filters.map((f) => (

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
+import Particles from "../components/particles";
 
 export default function Dashboard() {
     const [data, setData] = useState(null);
@@ -15,8 +16,9 @@ export default function Dashboard() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-zinc-900 text-white p-8 space-y-6">
+        <div className="min-h-screen text-white p-8 space-y-6 bg-gradient-to-tl via-zinc-600/20 to-black from-black">
             <Navbar />
+            <Particles className="absolute inset-0 -z-10" quantity={100} />
             <h1 className="text-2xl font-bold">Dashboard</h1>
             <div className="grid gap-6 md:grid-cols-3">
                 <div className="bg-zinc-800 rounded p-4">

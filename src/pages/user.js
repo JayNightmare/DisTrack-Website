@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/navbar";
+import Particles from "../components/particles";
 
 const users = {
     1: {
@@ -31,8 +32,9 @@ export default function User() {
     }
 
     return (
-        <div className="min-h-screen bg-zinc-900 text-white p-8 space-y-6">
+        <div className="min-h-screen text-white p-8 space-y-6 bg-gradient-to-tl via-zinc-600/20 to-black from-black">
             <Navbar />
+            <Particles className="absolute inset-0 -z-10" quantity={100} />
             <h1 className="text-2xl font-bold">{user.name}</h1>
             <p> Coding Time: {user.codingTime} </p>
             <p> Habits: {user.habits} </p>

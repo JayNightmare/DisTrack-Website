@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../components/navbar";
+import Particles from "../components/particles";
 
 export default function Contact() {
     const contacts = [
@@ -21,8 +22,9 @@ export default function Contact() {
     ];
 
     return (
-        <div className="min-h-screen bg-zinc-900 text-white p-8 space-y-6">
+        <div className="min-h-screen text-white p-8 space-y-6 bg-gradient-to-tl via-zinc-600/20 to-black from-black">
             <Navbar />
+            <Particles className="absolute inset-0 -z-10" quantity={100} />
             <div className="grid gap-6 sm:grid-cols-3 px-4">
                 {contacts.map((c) => (
                     <a

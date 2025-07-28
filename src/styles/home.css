@@ -4,10 +4,21 @@
             0px 0px #2196f3, 0px 0px #26c6da, 0px 0px #43a047, 0px 0px #eeff41,
             0px 0px #f9a825, 0px 0px #ff5722;
     }
+
     100% {
         text-shadow: -4px 4px #ef3550, -8px 8px #f48fb1, -12px 12px #7e57c2,
             -16px 16px #2196f3, -20px 20px #26c6da, -24px 24px #43a047,
             -28px 28px #eeff41, -32px 32px #f9a825, -36px 36px #ff5722;
+    }
+}
+
+@keyframes expandShadow-alt {
+    0% {
+        text-shadow: 0px 0px #ef3550, 0px 0px #f48fb1, 0px 0px #7e57c2
+    }
+
+    100% {
+        text-shadow: -2px 2px #ef3550, -4px 4px #f48fb1, -6px 6px #7e57c2
     }
 }
 
@@ -19,8 +30,12 @@
 }
 
 .dis {
-    color: #fff;
     animation: expandShadow 2s 1 forwards;
+    animation-delay: 2s;
+}
+
+.dis-alt {
+    animation: expandShadow-alt 2s 1 forwards;
     animation-delay: 2s;
 }
 
@@ -32,5 +47,6 @@
 .fade-in-custom {
     opacity: 0;
     transform: translateY(10px);
-    animation: fadeIn 0.5s ease-out 3s forwards; /* 0.5s fade-in after 3 seconds */
+    animation: fadeIn 0.5s ease-out 3s forwards;
+    /* 0.5s fade-in after 3 seconds */
 }

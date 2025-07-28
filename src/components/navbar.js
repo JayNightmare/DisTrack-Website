@@ -27,6 +27,12 @@ const Navbar = () => {
                     DisTrack
                 </Link>
 
+                <div className="navbar-toggle" onClick={toggleMenu}>
+                    <span className="bar"></span>
+                    <span className="bar"></span>
+                    <span className="bar"></span>
+                </div>
+
                 <div className={`navbar-menu ${isMenuOpen ? "active" : ""}`}>
                     <Link
                         to="/"
@@ -81,12 +87,6 @@ const Navbar = () => {
                             Login with Discord
                         </button>
                     )}
-                </div>
-
-                <div className="navbar-toggle" onClick={toggleMenu}>
-                    <span className="bar"></span>
-                    <span className="bar"></span>
-                    <span className="bar"></span>
                 </div>
             </div>
         </nav>

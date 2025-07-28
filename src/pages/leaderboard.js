@@ -1,15 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import Navbar from "../components/navbar";
 import Particles from "../components/particles";
+import LeaderboardTable from "../components/LeaderboardTable";
 
 const filters = ["All Time", "This Month", "This Week", "Today"];
-
-const sampleData = [
-    { username: "alice", time: "10h", change: 1 },
-    { username: "bob", time: "8h", change: 0 },
-    { username: "carol", time: "7h", change: -1 },
-];
 
 export default function Leaderboard() {
     const [filter, setFilter] = useState(filters[0]);
@@ -19,55 +13,32 @@ export default function Leaderboard() {
             {/* Nav Bar */}
             <Navbar />
             <Particles className="absolute inset-0 -z-10" quantity={100} />
-            <h1 className="text-2xl font-bold">Leaderboard</h1>
-            <div className="flex gap-4">
-                {filters.map((f) => (
-                    <button
-                        key={f}
-                        onClick={() => setFilter(f)}
-                        className={`px-3 py-1 rounded ${
-                            filter === f ? "bg-indigo-600" : "bg-zinc-800"
-                        }`}
-                    >
-                        {f}
-                    </button>
-                ))}
-            </div>
-            <table className="min-w-full divide-y divide-zinc-700">
-                <thead>
-                    <tr className="text-left">
-                        <th className="py-2">User</th>
-                        <th className="py-2">Time</th>
-                        <th className="py-2" />
-                    </tr>
-                </thead>
-                <tbody className="divide-y divide-zinc-800">
-                    {sampleData.map((row) => (
-                        <tr key={row.username}>
-                            <td className="py-2">
-                                <Link
-                                    to={`/user/${row.username}`}
-                                    className="text-indigo-400 hover:underline"
-                                >
-                                    {row.username}
-                                </Link>
-                            </td>
-                            <td className="py-2">{row.time}</td>
-                            <td className="py-2">
-                                {row.change > 0 && (
-                                    <span className="text-green-500">↑</span>
-                                )}
-                                {row.change < 0 && (
-                                    <span className="text-red-500">↓</span>
-                                )}
-                                {row.change === 0 && (
-                                    <span className="text-gray-500">-</span>
-                                )}
-                            </td>
-                        </tr>
+
+            <div className="max-w-6xl mx-auto">
+                <h1 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+                    Leaderboard
+                </h1>
+
+                <div className="flex gap-4 mb-8 justify-center flex-wrap">
+                    {filters.map((f) => (
+                        <button
+                            key={f}
+                            onClick={() => setFilter(f)}
+                            className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
+                                filter === f
+                                    ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/50"
+                                    : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-white"
+                            }`}
+                        >
+                            {f}
+                        </button>
                     ))}
-                </tbody>
-            </table>
+                </div>
+
+                <div className="bg-zinc-900/50 backdrop-blur-sm rounded-lg border border-zinc-800 p-6">
+                    <LeaderboardTable filter={filter} />
+                </div>
+            </div>
         </div>
     );
 }

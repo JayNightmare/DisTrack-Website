@@ -1,14 +1,23 @@
 import axios from "axios";
-// require("dotenv").config();
 
-const endpointUrl = process.env.API_ENDPOINT || "http://localhost:3000";
-const apiToken = process.env.API_KEY;
+const endpointUrl = process.env.REACT_APP_API_ENDPOINT;
+const apiToken = process.env.REACT_APP_API_KEY;
 
 export async function getLeaderboard() {
+    if (!endpointUrl || !apiToken) {
+        console.error(
+            "API endpoint or token is not set in environment variables."
+        );
+        console.log(`API Endpoint: ${endpointUrl}`);
+        console.log(`API Token: ${apiToken}`);
+        return [];
+    }
     try {
-        const response = await axios.get(`${endpointUrl}/leaderboard`, {
+        const response = await axios.get(
+            `${endpointUrl}/leaderboard` /* {
             headers: { Authorization: `${apiToken}` },
-        });
+        } */
+        );
         return response.data;
     } catch (error) {
         console.error("<< Failed to fetch leaderboard:", error);

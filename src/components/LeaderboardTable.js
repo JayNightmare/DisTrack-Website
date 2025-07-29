@@ -49,6 +49,23 @@ const LeaderboardTable = ({ filter }) => {
         );
     }
 
+    const formatTime = (totalSeconds) => {
+        if (!totalSeconds) return "N/A";
+
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor((totalSeconds % 86400) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        const parts = [];
+        if (days > 0) parts.push(`${days}d`);
+        if (hours > 0) parts.push(`${hours}h`);
+        if (minutes > 0) parts.push(`${minutes}m`);
+        if (seconds > 0 || parts.length === 0) parts.push(`${seconds}s`);
+
+        return parts.join(" ");
+    };
+
     return (
         <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-zinc-700">
@@ -86,7 +103,7 @@ const LeaderboardTable = ({ filter }) => {
                                 </Link>
                             </td>
                             <td className="py-3 px-4 text-zinc-300 font-mono">
-                                {row.time}
+                                {formatTime(row.totalTime)}
                             </td>
                             <td className="py-3 px-4">
                                 {row.change > 0 && (

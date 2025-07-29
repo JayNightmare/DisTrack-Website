@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getLeaderboard } from "../api/leaderboardApi";
+import { getTrendIcon } from "./trendIcon";
 
 const LeaderboardTable = ({ filter }) => {
     const [leaderboardData, setLeaderboardData] = useState([]);
@@ -55,7 +56,8 @@ const LeaderboardTable = ({ filter }) => {
         const days = Math.floor(totalSeconds / 86400);
         const hours = Math.floor((totalSeconds % 86400) / 3600);
         const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const seconds = totalSeconds % 60;
+        let seconds = totalSeconds % 60;
+        seconds = Math.ceil(seconds);
 
         const parts = [];
         if (days > 0) parts.push(`${days}d`);
@@ -103,12 +105,12 @@ const LeaderboardTable = ({ filter }) => {
                                 </Link>
                             </td>
                             <td className="py-3 px-4 text-zinc-300 font-mono">
-                                {formatTime(row.totalTime)}
+                                {formatTime(row.totalCodingTime)}
                             </td>
                             <td className="py-3 px-4">
-                                {row.change > 0 && (
+                                {/* {row.change > 0 && (
                                     <span className="text-green-400 flex items-center">
-                                        <span className="text-lg">↗</span>
+                                        <getTrendIcon trend="up" />
                                         <span className="ml-1 text-sm">
                                             +{row.change}
                                         </span>
@@ -116,7 +118,7 @@ const LeaderboardTable = ({ filter }) => {
                                 )}
                                 {row.change < 0 && (
                                     <span className="text-red-400 flex items-center">
-                                        <span className="text-lg">↘</span>
+                                        <getTrendIcon trend="down" />
                                         <span className="ml-1 text-sm">
                                             {row.change}
                                         </span>
@@ -124,10 +126,30 @@ const LeaderboardTable = ({ filter }) => {
                                 )}
                                 {row.change === 0 && (
                                     <span className="text-gray-500 flex items-center">
-                                        <span className="text-lg">→</span>
+                                        <getTrendIcon trend="neutral" />
                                         <span className="ml-1 text-sm">0</span>
                                     </span>
-                                )}
+                                )} */}
+
+                                {() => {
+                                    const { icon, color } = getTrendIcon(
+                                        row.trend
+                                    );
+                                    return (
+                                        <span
+                                            className={`flex items-center ${color}`}
+                                        >
+                                            <span className="text-lg">
+                                                {icon}
+                                            </span>
+                                            <span className="ml-1 text-sm">
+                                                {row.trend === "up"
+                                                    ? `+${row.delta}`
+                                                    : row.delta}
+                                            </span>
+                                        </span>
+                                    );
+                                }}
                             </td>
                         </tr>
                     ))}

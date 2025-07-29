@@ -24,3 +24,26 @@ export async function getLeaderboard() {
         return [];
     }
 }
+
+export async function getLeaderboardByFilter(filter) {
+    if (!endpointUrl || !apiToken) {
+        console.error(
+            "API endpoint or token is not set in environment variables."
+        );
+        return [];
+    }
+    try {
+        const response = await axios.get(
+            `${endpointUrl}/leaderboard/${filter}` /* {
+            headers: { Authorization: `${apiToken}` },
+        } */
+        );
+        return response.data;
+    } catch (error) {
+        console.error(
+            `<< Failed to fetch leaderboard for filter ${filter}:`,
+            error
+        );
+        return [];
+    }
+}

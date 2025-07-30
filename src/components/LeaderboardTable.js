@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getLeaderboard, getLeaderboardByFilter } from "../api/leaderboardApi";
+import { getLeaderboardByFilter } from "../api/leaderboardApi";
 import { getTrendIcon } from "./trendIcon";
 import { calculateDeltaRankings } from "../util/deltaRankings";
 

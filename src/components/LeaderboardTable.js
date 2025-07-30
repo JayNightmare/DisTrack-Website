@@ -1,20 +1,71 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getLeaderboard } from "../api/leaderboardApi";
+import { getLeaderboard, getLeaderboardByFilter } from "../api/leaderboardApi";
 import { getTrendIcon } from "./trendIcon";
+import { calculateDeltaRankings } from "../util/deltaRankings";
 
 const LeaderboardTable = ({ filter }) => {
     const [leaderboardData, setLeaderboardData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    if (filter === "All Time") {
+        filter = "allTime";
+    } else if (filter === "This Month") {
+        filter = "month";
+    } else if (filter === "This Week") {
+        filter = "week";
+    } else if (filter === "Today") {
+        filter = "day";
+    }
+
     useEffect(() => {
         const fetchLeaderboard = async () => {
             setLoading(true);
             setError(null);
             try {
-                const data = await getLeaderboard();
-                setLeaderboardData(data);
+                const currentData = await getLeaderboardByFilter(filter);
+
+                // Fetch previous period data for comparison
+                let previousFilter = null;
+                switch (filter) {
+                    case "day":
+                        previousFilter = "day"; // Could be yesterday's data
+                        break;
+                    case "week":
+                        previousFilter = "week"; // Could be previous week's data
+                        break;
+                    case "month":
+                        previousFilter = "month"; // Could be previous month's data
+                        break;
+                    case "allTime":
+                        previousFilter = null; // No previous data for all time
+                        break;
+                    default:
+                        previousFilter = null;
+                }
+
+                let previousData = null;
+                if (previousFilter && previousFilter !== filter) {
+                    try {
+                        previousData = await getLeaderboardByFilter(
+                            previousFilter
+                        );
+                    } catch (err) {
+                        console.warn(
+                            "Could not fetch previous period data:",
+                            err
+                        );
+                    }
+                }
+
+                // Calculate delta rankings to show trends
+                const dataWithTrends = calculateDeltaRankings(
+                    currentData,
+                    previousData
+                );
+
+                setLeaderboardData(dataWithTrends);
             } catch (err) {
                 setError("Failed to load leaderboard data");
                 console.error(err);
@@ -44,14 +95,14 @@ const LeaderboardTable = ({ filter }) => {
             <div className="bg-red-900/20 border border-red-500/50 rounded-lg p-4 text-red-300">
                 <p>{error}</p>
                 <p className="text-sm text-zinc-400 mt-2">
-                    Showing sample data instead.
+                    Please check your internet connection or try again later.
                 </p>
             </div>
         );
     }
 
     const formatTime = (totalSeconds) => {
-        if (!totalSeconds) return "N/A";
+        if (!totalSeconds) return "No Time Recorded";
 
         const days = Math.floor(totalSeconds / 86400);
         const hours = Math.floor((totalSeconds % 86400) / 3600);
@@ -105,33 +156,10 @@ const LeaderboardTable = ({ filter }) => {
                                 </Link>
                             </td>
                             <td className="py-3 px-4 text-zinc-300 font-mono">
-                                {formatTime(row.totalCodingTime)}
+                                {formatTime(row.totalTime)}
                             </td>
                             <td className="py-3 px-4">
-                                {/* {row.change > 0 && (
-                                    <span className="text-green-400 flex items-center">
-                                        <getTrendIcon trend="up" />
-                                        <span className="ml-1 text-sm">
-                                            +{row.change}
-                                        </span>
-                                    </span>
-                                )}
-                                {row.change < 0 && (
-                                    <span className="text-red-400 flex items-center">
-                                        <getTrendIcon trend="down" />
-                                        <span className="ml-1 text-sm">
-                                            {row.change}
-                                        </span>
-                                    </span>
-                                )}
-                                {row.change === 0 && (
-                                    <span className="text-gray-500 flex items-center">
-                                        <getTrendIcon trend="neutral" />
-                                        <span className="ml-1 text-sm">0</span>
-                                    </span>
-                                )} */}
-
-                                {() => {
+                                {(() => {
                                     const { icon, color } = getTrendIcon(
                                         row.trend
                                     );
@@ -143,13 +171,17 @@ const LeaderboardTable = ({ filter }) => {
                                                 {icon}
                                             </span>
                                             <span className="ml-1 text-sm">
-                                                {row.trend === "up"
+                                                {row.trend === "new"
+                                                    ? "NEW"
+                                                    : row.trend === "same"
+                                                    ? "0"
+                                                    : row.trend === "up"
                                                     ? `+${row.delta}`
-                                                    : row.delta}
+                                                    : row.delta || "0"}
                                             </span>
                                         </span>
                                     );
-                                }}
+                                })()}
                             </td>
                         </tr>
                     ))}

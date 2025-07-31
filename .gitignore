@@ -3,3 +3,4 @@ build/
 .env
 .env.*
 !.env.example
+generate-sitemap.mjs

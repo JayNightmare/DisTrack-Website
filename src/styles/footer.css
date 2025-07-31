@@ -1,0 +1,17 @@
+footer {
+    padding: 20px;
+    text-align: center;
+
+    /* stick position to the bottom of the page */
+    position: relative;
+    bottom: 0;
+    color: #ffffff;
+
+    margin-top: auto;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}

@@ -42,11 +42,11 @@ const Navbar = () => {
                         Home
                     </Link>
                     <Link
-                        to="/dashboard"
+                        to="/faq"
                         className="navbar-link"
                         onClick={() => setIsMenuOpen(false)}
                     >
-                        Dashboard
+                        FAQ
                     </Link>
                     <Link
                         to="/leaderboard"

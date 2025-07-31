@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../components/navbar";
 import Particles from "../components/particles";
+import Footer from "../components/footer";
 
 export default function Showcase() {
     const sections = [
@@ -32,6 +33,7 @@ export default function Showcase() {
                     <p className="text-zinc-300">{s.content}</p>
                 </div>
             ))}
+            <Footer className="mt-8" />
         </div>
     );
 }

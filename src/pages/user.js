@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/navbar";
+import Footer from "../components/footer";
 import Particles from "../components/particles";
 
 const users = {
@@ -55,6 +56,7 @@ export default function User() {
                     ))}
                 </ul>
             </div>
+            <Footer className="mt-8" />
         </div>
     );
 }

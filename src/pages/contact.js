@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../components/navbar";
+import Footer from "../components/footer";
 import Particles from "../components/particles";
 
 export default function Contact() {
@@ -39,6 +40,7 @@ export default function Contact() {
                     </a>
                 ))}
             </div>
+            <Footer />
         </div>
     );
 }

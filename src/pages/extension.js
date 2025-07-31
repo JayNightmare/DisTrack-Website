@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../components/navbar";
+import Footer from "../components/footer";
 import Particles from "../components/particles";
 import { Link } from "react-router-dom";
 
@@ -101,6 +102,7 @@ export default function Extension() {
                     </div>
                 </div>
             </div>
+            <Footer className="mt-8" />
         </div>
     );
 }

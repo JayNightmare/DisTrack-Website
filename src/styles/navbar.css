@@ -9,7 +9,7 @@
     border: 1px solid #333;
 
     position: sticky;
-    top: 0;
+    top: 10px;
 
     @media (max-width: 768px) {
         flex-direction: column;
@@ -83,5 +83,20 @@
         background-color: white;
         margin: 5px auto;
         transition: all 0.3s ease-in-out;
+    }
+}
+
+.login-btn {
+    background-color: #7289da;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #5b6eae;
     }
 }

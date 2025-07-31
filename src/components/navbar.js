@@ -1,23 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/navbar.css";
+import { HamburgerButton } from "../styles/m-nb-style";
+import MobileNavbar from "./mobileNavbar";
 
 const Navbar = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const isLoggedIn = false; // Replace with actual login state logic
 
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
+    // Handle body scroll locking for mobile menu
+    useEffect(() => {
+        if (isMobileMenuOpen) {
+            document.body.classList.add("mobile-menu-open");
+        } else {
+            document.body.classList.remove("mobile-menu-open");
+        }
+
+        // Cleanup on component unmount
+        return () => {
+            document.body.classList.remove("mobile-menu-open");
+        };
+    }, [isMobileMenuOpen]);
+
+    const handleLogout = () => {
+        // signOut(auth);
+        setIsMobileMenuOpen(false); // Close mobile menu after logout
     };
 
     const handleLogin = () => {
-        // Add login logic here
-        setIsLoggedIn(true);
+        // signIn(auth);
+        setIsMobileMenuOpen(false); // Close mobile menu after login
     };
 
-    const handleLogout = () => {
-        // Add logout logic here
-        setIsLoggedIn(false);
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
+    const closeMobileMenu = () => {
+        setIsMobileMenuOpen(false);
     };
 
     return (
@@ -27,45 +47,56 @@ const Navbar = () => {
                     DisTrack
                 </Link>
 
-                <div className="navbar-toggle" onClick={toggleMenu}>
-                    <span className="bar"></span>
-                    <span className="bar"></span>
-                    <span className="bar"></span>
-                </div>
+                <HamburgerButton
+                    onClick={toggleMobileMenu}
+                    $isOpen={isMobileMenuOpen}
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </HamburgerButton>
 
-                <div className={`navbar-menu ${isMenuOpen ? "active" : ""}`}>
+                {/* Mobile Navbar */}
+                <MobileNavbar
+                    isMobileMenuOpen={isMobileMenuOpen}
+                    closeMobileMenu={closeMobileMenu}
+                />
+
+                <div
+                    className={`navbar-menu ${isMobileMenuOpen ? "open" : ""}`}
+                >
                     <Link
                         to="/"
                         className="navbar-link"
-                        onClick={() => setIsMenuOpen(false)}
+                        onClick={closeMobileMenu}
                     >
                         Home
                     </Link>
                     <Link
                         to="/faq"
                         className="navbar-link"
-                        onClick={() => setIsMenuOpen(false)}
+                        onClick={closeMobileMenu}
                     >
                         FAQ
                     </Link>
                     <Link
                         to="/leaderboard"
                         className="navbar-link"
-                        onClick={() => setIsMenuOpen(false)}
+                        onClick={closeMobileMenu}
                     >
                         Leaderboard
                     </Link>
                     <Link
                         to="/downloads"
                         className="navbar-link"
-                        onClick={() => setIsMenuOpen(false)}
+                        onClick={closeMobileMenu}
                     >
                         Download
                     </Link>
                     <Link
                         to="/contact"
                         className="navbar-link"
-                        onClick={() => setIsMenuOpen(false)}
+                        onClick={closeMobileMenu}
                     >
                         Contact
                     </Link>
@@ -84,7 +115,7 @@ const Navbar = () => {
                         </div>
                     ) : (
                         <button onClick={handleLogin} className="login-btn">
-                            Login with Discord
+                            Login
                         </button>
                     )}
                 </div>

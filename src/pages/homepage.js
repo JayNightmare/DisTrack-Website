@@ -8,7 +8,7 @@ const navigation = [
     { name: "Explore", href: "/showcase" },
     { name: "Leaderboard", href: "/leaderboard" },
     { name: "FAQ", href: "/faq" },
-    { name: "Extension", href: "/extension" },
+    { name: "Extension", href: "/downloads" },
     { name: "Contact", href: "/contact" },
 ];
 
@@ -59,14 +59,14 @@ export default function HomePage() {
 
             <div className="my-4 fade-in-custom">
                 <Link
-                    to="/extension" // replace with actual plugin URL
+                    to="/downloads" // replace with actual plugin URL
                     className="inline-block px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-500 hover:scale-105 transition-transform duration-300"
                 >
                     Add to VSCode
                 </Link>
             </div>
             <div className="text-center mt-8 text-indigo-400 fade-in-custom">
-                <p className="text-sm">
+                <div className="text-sm">
                     <ul>
                         Coming soon:{" "}
                         <li>
@@ -93,8 +93,11 @@ export default function HomePage() {
                                 FAQ
                             </Link>
                         </li>
+                        <li>
+                            <p className="text-indigo-400">User Profiles</p>
+                        </li>
                     </ul>
-                </p>
+                </div>
             </div>
             <Footer className="mt-8" />
         </div>

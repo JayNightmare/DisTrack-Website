@@ -2,9 +2,8 @@ import React from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import Particles from "../components/particles";
-import { Link } from "react-router-dom";
 
-export default function Extension() {
+export default function Downloads() {
     return (
         <div className="min-h-screen text-white p-8 space-y-6 bg-gradient-to-tl via-zinc-600/20 to-black from-black">
             <Navbar />
@@ -40,7 +39,7 @@ export default function Extension() {
 
                 <div className="space-y-4 flex items-center flex-col">
                     <div className="flex gap-4">
-                        <Link
+                        <a
                             href="https://discord.com/oauth2/authorize?client_id=1305258645906526328"
                             className="inline-block px-6 py-3 text-base
                             font-semibold text-white bg-black
@@ -49,9 +48,9 @@ export default function Extension() {
                             border border-zinc-600 hover:border-indigo-600"
                         >
                             Invite Bot
-                        </Link>
+                        </a>
 
-                        <Link
+                        <a
                             href="https://marketplace.visualstudio.com/items?itemName=JayNightmare.dis-track"
                             className="inline-block px-6 py-3 text-base
                             font-semibold text-white bg-black
@@ -60,7 +59,7 @@ export default function Extension() {
                             border border-zinc-600 hover:border-pink-600"
                         >
                             Download Extension
-                        </Link>
+                        </a>
                     </div>
 
                     <div className="flex gap-4 flex-col">
@@ -71,33 +70,36 @@ export default function Extension() {
                         <div className="flex gap-4">
                             {/* Link to GitHub Profile */}
 
-                            <Link
+                            <a
                                 href="https://github.com/JayNightmare"
                                 target="_blank"
+                                rel="noopener noreferrer"
                                 className="inline-block px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-500 hover:scale-105 transition duration-300"
                             >
                                 Follow on GitHub
-                            </Link>
+                            </a>
 
                             {/* Link to GitHub Sponsors */}
 
-                            <Link
+                            <a
                                 href="https://github.com/sponsors/JayNightmare"
                                 target="_blank"
+                                rel="noopener noreferrer"
                                 className="inline-block px-6 py-3 text-base font-semibold text-white bg-pink-600 rounded-lg shadow-md hover:bg-pink-500 hover:scale-105 transition duration-300"
                             >
                                 Sponsor on GitHub
-                            </Link>
+                            </a>
 
                             {/* Link to Repository */}
 
-                            <Link
-                                href="https://github.com/JayNightmare/DisTrack"
+                            <a
+                                href="https://github.com/users/JayNightmare/projects/4"
                                 target="_blank"
+                                rel="noopener noreferrer"
                                 className="inline-block px-6 py-3 text-base font-semibold text-white bg-purple-600 rounded-lg shadow-md hover:bg-purple-500 hover:scale-105 transition duration-300"
                             >
-                                Star the Repo
-                            </Link>
+                                Follow The Project
+                            </a>
                         </div>
                     </div>
                 </div>

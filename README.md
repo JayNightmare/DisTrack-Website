@@ -7,7 +7,7 @@
 </div>
 
 
-A modern React web application for DisTrack, featuring user dashboards, leaderboards, showcase pages, and extension downloads. Built with React, Tailwind CSS, and React Router.
+A modern React web application for DisTrack, featuring user dashboards, leaderboards, showcase pages, and downloads downloads. Built with React, Tailwind CSS, and React Router.
 
 ## Features
 
@@ -79,7 +79,7 @@ To get started with this project, follow these steps:
   - `pages/`: Page components for different routes.
     - `contact.js`: Contact page component.
     - `dashboard.js`: User dashboard component.
-    - `extension.js`: Extension download page.
+    - `downloads.js`: Extension download page.
     - `leaderboard.js`: Leaderboard display component.
     - `showcase.js`: Feature showcase component.
   - `styles/`: CSS stylesheets.

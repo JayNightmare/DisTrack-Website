@@ -4,7 +4,7 @@ import "../styles/footer.css";
 const Footer = () => {
     return (
         <footer className="footer fade-in-custom">
-            <div className="container">
+            <div className="footer-container">
                 <p className="text-center text-gray-500">
                     &copy; {new Date().getFullYear()} DisTrack. All rights
                     reserved.

@@ -21,7 +21,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="navbar">
+        <nav className="navbar z-50">
             <div className="navbar-container">
                 <Link to="/" className="navbar-logo">
                     DisTrack
@@ -56,7 +56,7 @@ const Navbar = () => {
                         Leaderboard
                     </Link>
                     <Link
-                        to="/extension"
+                        to="/downloads"
                         className="navbar-link"
                         onClick={() => setIsMenuOpen(false)}
                     >

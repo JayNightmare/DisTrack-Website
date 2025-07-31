@@ -47,9 +47,7 @@ jobs:
                   GENERATE_SOURCEMAP: false
 
             - name: Sitemap Generation
-              run: cd src
-                  cd util
-                  node generate-sitemap.mjs
+              run: cd src/util && node generate-sitemap.mjs
 
             - name: Setup Pages
               uses: actions/configure-pages@v4

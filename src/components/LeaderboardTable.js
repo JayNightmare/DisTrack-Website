@@ -138,11 +138,11 @@ const LeaderboardTable = ({ filter }) => {
                                                 {icon}
                                             </span>
                                             <span className="ml-1 text-sm">
-                                                {row.rankDelta === "new"
+                                                {row.trend === "new"
                                                     ? "NEW"
-                                                    : row.rankDelta === "same"
+                                                    : row.trend === "same"
                                                     ? "0"
-                                                    : row.rankDelta === "up"
+                                                    : row.trend === "up"
                                                     ? `+${row.rankDelta}`
                                                     : row.rankDelta || "0"}
                                             </span>

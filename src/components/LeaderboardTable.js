@@ -26,43 +26,10 @@ const LeaderboardTable = ({ filter }) => {
             try {
                 const currentData = await getLeaderboardByFilter(filter);
 
-                // Fetch previous period data for comparison
-                let previousFilter = null;
-                switch (filter) {
-                    case "day":
-                        previousFilter = "day"; // Could be yesterday's data
-                        break;
-                    case "week":
-                        previousFilter = "week"; // Could be previous week's data
-                        break;
-                    case "month":
-                        previousFilter = "month"; // Could be previous month's data
-                        break;
-                    case "allTime":
-                        previousFilter = null; // No previous data for all time
-                        break;
-                    default:
-                        previousFilter = null;
-                }
-
-                let previousData = null;
-                if (previousFilter && previousFilter !== filter) {
-                    try {
-                        previousData = await getLeaderboardByFilter(
-                            previousFilter
-                        );
-                    } catch (err) {
-                        console.warn(
-                            "Could not fetch previous period data:",
-                            err
-                        );
-                    }
-                }
-
-                // Calculate delta rankings to show trends
+                // Calculate delta rankings to show trends (without previous data for now)
                 const dataWithTrends = calculateDeltaRankings(
                     currentData,
-                    previousData
+                    null
                 );
 
                 setLeaderboardData(dataWithTrends);
@@ -171,13 +138,13 @@ const LeaderboardTable = ({ filter }) => {
                                                 {icon}
                                             </span>
                                             <span className="ml-1 text-sm">
-                                                {row.trend === "new"
+                                                {row.rankDelta === "new"
                                                     ? "NEW"
-                                                    : row.trend === "same"
+                                                    : row.rankDelta === "same"
                                                     ? "0"
-                                                    : row.trend === "up"
-                                                    ? `+${row.delta}`
-                                                    : row.delta || "0"}
+                                                    : row.rankDelta === "up"
+                                                    ? `+${row.rankDelta}`
+                                                    : row.rankDelta || "0"}
                                             </span>
                                         </span>
                                     );

@@ -2,7 +2,7 @@
   "name": "distrack",
   "version": "0.0.4",
   "private": true,
-  "homepage": "https://jaynightmare.github.io/DisTrack-Website/",
+  "homepage": "https://distrack.endpoint-system.uk/DisTrack-Website/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

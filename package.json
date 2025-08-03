@@ -2,7 +2,7 @@
   "name": "distrack",
   "version": "0.0.4",
   "private": true,
-  "homepage": "https://distrack.endpoint-system.uk/DisTrack-Website/",
+  "homepage": "https://distrack.endpoint-system.uk/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

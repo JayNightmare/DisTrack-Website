@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jaynightmare.github.io/DisTrack-Website/sitemap.xml
+Sitemap: https://distrack.endpoint-system.uk/DisTrack-Website/sitemap.xml

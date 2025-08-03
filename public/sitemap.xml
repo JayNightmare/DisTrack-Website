@@ -1,44 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset 
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
   <url>
-    <loc>https://jaynightmare.github.io/DisTrack-Website/</loc>
+    <loc>https://distrack.endpoint-system.uk/DisTrack-Website/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://jaynightmare.github.io/DisTrack-Website/contact</loc>
+    <loc>https://distrack.endpoint-system.uk/DisTrack-Website/contact</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://jaynightmare.github.io/DisTrack-Website/dashboard</loc>
+    <loc>https://distrack.endpoint-system.uk/DisTrack-Website/dashboard</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://jaynightmare.github.io/DisTrack-Website/downloads</loc>
+    <loc>https://distrack.endpoint-system.uk/DisTrack-Website/downloads</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://jaynightmare.github.io/DisTrack-Website/faq</loc>
+    <loc>https://distrack.endpoint-system.uk/DisTrack-Website/faq</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://jaynightmare.github.io/DisTrack-Website/leaderboard</loc>
+    <loc>https://distrack.endpoint-system.uk/DisTrack-Website/leaderboard</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://jaynightmare.github.io/DisTrack-Website/showcase</loc>
+    <loc>https://distrack.endpoint-system.uk/DisTrack-Website/showcase</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://jaynightmare.github.io/DisTrack-Website/user</loc>
+    <loc>https://distrack.endpoint-system.uk/DisTrack-Website/user</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

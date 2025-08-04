@@ -2,42 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://distrack.endpoint-system.uk/DisTrack-Website/</loc>
+    <loc>https://distrack.endpoint-system.uk/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://distrack.endpoint-system.uk/DisTrack-Website/contact</loc>
+    <loc>https://distrack.endpoint-system.uk/contact</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://distrack.endpoint-system.uk/DisTrack-Website/dashboard</loc>
+    <loc>https://distrack.endpoint-system.uk/dashboard</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://distrack.endpoint-system.uk/DisTrack-Website/downloads</loc>
+    <loc>https://distrack.endpoint-system.uk/downloads</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://distrack.endpoint-system.uk/DisTrack-Website/faq</loc>
+    <loc>https://distrack.endpoint-system.uk/faq</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://distrack.endpoint-system.uk/DisTrack-Website/leaderboard</loc>
+    <loc>https://distrack.endpoint-system.uk/leaderboard</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://distrack.endpoint-system.uk/DisTrack-Website/showcase</loc>
+    <loc>https://distrack.endpoint-system.uk/showcase</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://distrack.endpoint-system.uk/DisTrack-Website/user</loc>
+    <loc>https://distrack.endpoint-system.uk/user</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

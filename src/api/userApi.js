@@ -14,7 +14,7 @@ export async function getUserProfile(userId) {
         const response = await axios.get(
             `${endpointUrl}/user-profile/${userId}`,
             {
-                headers: { Authorization: `${apiToken}` },
+                headers: { Authorization: `Bearer ${apiToken}` },
             }
         );
         return response.data;
@@ -39,7 +39,7 @@ export async function updateUserProfile(userId, userData) {
             `${endpointUrl}/user-profile/${userId}`,
             userData,
             {
-                headers: { Authorization: `${apiToken}` },
+                headers: { Authorization: `Bearer ${apiToken}` },
             }
         );
         return response.data;

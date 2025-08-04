@@ -100,3 +100,8 @@
         background-color: #5b6eae;
     }
 }
+
+.profile-dropdown-container {
+    display: flex;
+    justify-content: flex-end;
+}

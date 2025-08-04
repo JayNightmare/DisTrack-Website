@@ -116,7 +116,7 @@ const LeaderboardTable = ({ filter }) => {
                             </td>
                             <td className="py-3 px-4">
                                 <Link
-                                    to={`/user/${row.username}`}
+                                    to={`/user/${row.userId}`}
                                     className="text-indigo-400 hover:text-indigo-300 hover:underline font-medium"
                                 >
                                     {row.username}

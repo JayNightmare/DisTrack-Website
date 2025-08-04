@@ -15,7 +15,6 @@
       // When the single page app is loaded further down in this file,
       // the correct url will be waiting in the browser's history for
       // the single page app to route accordingly.
-      /*
       (function(l) {
         if (l.search[1] === '/' ) {
           var decoded = l.search.slice(1).split('&').map(function(s) { 
@@ -26,7 +25,6 @@
           );
         }
       }(window.location))
-      */
     </script>
   </head>
   <body>
@@ -48,7 +46,6 @@
       // For example: https://username.github.io/repo-name/one/two?a=b&c=d#qwe becomes
       // https://username.github.io/repo-name/?/one/two&a=b~and~c=d#qwe
       // Otherwise, leave pathSegmentsToKeep as 0.
-      /*
       var pathSegmentsToKeep = 1;
 
       var l = window.location;
@@ -59,7 +56,6 @@
         (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
         l.hash
       );
-      */
     </script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import {
     checkUserExists,
@@ -239,6 +239,14 @@ const DashboardCallback = () => {
                         </p>
                     </div>
                 </div>
+            )}
+
+            {/* If user has a display name already and is the currentUser, send to user profile */}
+            {currentUser && currentUser.displayName && (
+                <Navigate
+                    to={`/user/${currentUser.userId || currentUser.id}`}
+                    replace
+                />
             )}
 
             {/* Modals */}

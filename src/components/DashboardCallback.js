@@ -104,7 +104,7 @@ const DashboardCallback = () => {
                 }
 
                 // Check if user exists in our database
-                const userCheck = await checkUserExists(userData.id);
+                const userCheck = await checkUserExists(userData.userId);
 
                 if (userCheck.exists) {
                     const existingUser = userCheck.user;
@@ -153,7 +153,7 @@ const DashboardCallback = () => {
     const handleWelcomeModalUpdateDisplayName = async (displayName) => {
         try {
             const updatedUser = await updateUserDisplayName(
-                currentUser.id,
+                currentUser.userId,
                 displayName
             );
             login(updatedUser);

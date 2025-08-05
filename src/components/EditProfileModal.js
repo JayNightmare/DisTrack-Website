@@ -7,7 +7,7 @@ const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
         bio: user?.bio || "",
         socials: user?.socials || {},
         avatarUrl: user?.avatarUrl || "",
-        isPublic: user?.isPublic || true,
+        isPublic: user?.isPublic || false,
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);

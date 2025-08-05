@@ -7,16 +7,16 @@ import Footer from "../components/footer";
 import Particles from "../components/particles";
 
 const Login = () => {
-    const { isLoggedIn } = useAuth();
+    const { user, isLoggedIn } = useAuth();
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         // Redirect if already logged in
-        if (isLoggedIn) {
-            navigate("/dashboard");
+        if (isLoggedIn && user) {
+            navigate(`/user/${user.userId || user.id}`);
         }
-    }, [isLoggedIn, navigate]);
+    }, [isLoggedIn, user, navigate]);
 
     const handleDiscordLogin = () => {
         setIsLoading(true);

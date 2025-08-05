@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const DISCORD_CLIENT_ID = process.env.REACT_APP_DISCORD_CLIENT_ID;
+// const DISCORD_CLIENT_ID = process.env.REACT_APP_DISCORD_CLIENT_ID;
 const DISCORD_REDIRECT_URI = process.env.REACT_APP_DISCORD_REDIRECT_URI;
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -14,21 +14,21 @@ const generateRandomState = () => {
 };
 
 export const generateDiscordAuthUrl = () => {
-    const scope = "identify";
     const state = generateRandomState();
 
     // Store state in sessionStorage for verification
     sessionStorage.setItem("discord_auth_state", state);
 
-    const params = new URLSearchParams({
-        client_id: DISCORD_CLIENT_ID,
-        redirect_uri: DISCORD_REDIRECT_URI,
-        response_type: "code",
-        scope: scope,
-        state: state,
-    });
+    // const params = new URLSearchParams({
+    //     client_id: DISCORD_CLIENT_ID,
+    //     redirect_uri: DISCORD_REDIRECT_URI,
+    //     response_type: "code",
+    //     scope: scope,
+    //     state: state,
+    // });
 
-    return `https://discord.com/api/oauth2/authorize?${params.toString()}`;
+    // return `https://discord.com/api/oauth2/authorize?${params.toString()}`;
+    return DISCORD_REDIRECT_URI;
 };
 
 export const handleDiscordCallback = async (code, state) => {

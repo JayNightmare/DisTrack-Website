@@ -93,13 +93,26 @@ const DashboardCallback = () => {
                     console.warn("Could not store JWT token:", storageError);
                 }
 
+                // Store the distrack_user
+                try {
+                    localStorage.setItem(
+                        "distrack_user",
+                        JSON.stringify(userData)
+                    );
+                } catch (storageError) {
+                    console.warn("Could not store user data:", storageError);
+                }
+
                 // Check if user exists in our database
                 const userCheck = await checkUserExists(userData.userId);
                 console.log("User check result:", userCheck);
 
                 if (userCheck.exists) {
                     const existingUser = userCheck.user;
-                    setCurrentUser(existingUser);
+
+                    const userExists = userCheck.exists;
+                    console.log("User exists:", userExists);
+                    setCurrentUser(userExists);
 
                     // Check if user needs to set display name
                     const needsDisplayName =

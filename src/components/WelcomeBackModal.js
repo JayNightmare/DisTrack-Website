@@ -41,8 +41,12 @@ const WelcomeBackModal = ({ isOpen, onClose, user, onUpdateDisplayName }) => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             {showConfetti && (
                 <Confetti
-                    width={window.innerWidth}
-                    height={window.innerHeight}
+                    width={
+                        typeof window !== "undefined" ? window.innerWidth : 1200
+                    }
+                    height={
+                        typeof window !== "undefined" ? window.innerHeight : 800
+                    }
                     recycle={false}
                     numberOfPieces={200}
                 />

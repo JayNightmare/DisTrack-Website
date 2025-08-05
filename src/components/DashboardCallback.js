@@ -243,6 +243,7 @@ const DashboardCallback = () => {
             {/* Modals */}
             {showWelcomeModal && currentUser && (
                 <WelcomeBackModal
+                    isOpen={showWelcomeModal}
                     user={currentUser}
                     onUpdateDisplayName={handleWelcomeModalUpdateDisplayName}
                     onClose={handleWelcomeModalClose}

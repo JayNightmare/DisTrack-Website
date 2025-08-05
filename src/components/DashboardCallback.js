@@ -18,7 +18,7 @@ const DashboardCallback = () => {
     const { login } = useAuth();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [hasProcessed, setHasProcessed] = useState(false);
+    // const [hasProcessed, setHasProcessed] = useState(false);
 
     // Modal states
     const [showWelcomeModal, setShowWelcomeModal] = useState(false);
@@ -26,9 +26,6 @@ const DashboardCallback = () => {
     const [currentUser, setCurrentUser] = useState(null);
 
     useEffect(() => {
-        // Prevent multiple executions
-        if (hasProcessed) return;
-
         const handleAuth = async () => {
             try {
                 const token = searchParams.get("token");
@@ -48,7 +45,6 @@ const DashboardCallback = () => {
                 if (error) {
                     setError("Discord authentication was cancelled or failed");
                     setLoading(false);
-                    setHasProcessed(true);
                     return;
                 }
 
@@ -57,19 +53,16 @@ const DashboardCallback = () => {
                         "Legacy OAuth flow is no longer supported. Please use the login button to authenticate."
                     );
                     setLoading(false);
-                    setHasProcessed(true);
                     return;
                 }
 
                 // No valid parameters
                 setError("Invalid authentication response");
                 setLoading(false);
-                setHasProcessed(true);
             } catch (err) {
                 console.error("Auth error:", err);
                 setError("Authentication failed. Please try again.");
                 setLoading(false);
-                setHasProcessed(true);
             }
         };
 
@@ -84,7 +77,6 @@ const DashboardCallback = () => {
                     console.error("Failed to parse user data:", parseError);
                     setError("Invalid user data format");
                     setLoading(false);
-                    setHasProcessed(true);
                     return;
                 }
 
@@ -92,7 +84,6 @@ const DashboardCallback = () => {
                 if (!userData || !userData.userId) {
                     setError("Invalid user data structure");
                     setLoading(false);
-                    setHasProcessed(true);
                     return;
                 }
 
@@ -119,11 +110,9 @@ const DashboardCallback = () => {
                     if (needsDisplayName) {
                         setShowWelcomeModal(true);
                         setLoading(false);
-                        setHasProcessed(true);
                     } else {
                         // User is all set, log them in
                         login(existingUser);
-                        setHasProcessed(true);
                         setTimeout(() => {
                             navigate(
                                 `/user/${
@@ -137,18 +126,16 @@ const DashboardCallback = () => {
                     // New user - show setup modal
                     setShowNewUserModal(true);
                     setLoading(false);
-                    setHasProcessed(true);
                 }
             } catch (error) {
                 console.error("Token auth error:", error);
                 setError("Authentication failed. Please try again.");
                 setLoading(false);
-                setHasProcessed(true);
             }
         };
 
         handleAuth();
-    }, [searchParams, navigate, login, hasProcessed]);
+    }, [searchParams, navigate, login]);
 
     const handleWelcomeModalUpdateDisplayName = async (displayName) => {
         try {

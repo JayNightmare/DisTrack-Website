@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect /* useState */ } from "react";
 import Navbar from "../components/navbar";
 import Particles from "../components/particles";
 
 export default function Dashboard() {
-    const [data, setData] = useState(null);
+    // const [data, setData] = useState(null);
 
     useEffect(() => {
         // Placeholder API call to demonstrate MongoDB connection
-        fetch("/api/dashboard")
-            .then((res) => res.json())
-            .then((json) => setData(json))
-            .catch(() => {
-                // ignore errors for placeholder
-            });
+        // fetch("/api/dashboard")
+        //     .then((res) => res.json())
+        //     .then((json) => setData(json))
+        //     .catch(() => {
+        //         // ignore errors for placeholder
+        //     });
     }, []);
 
     return (
@@ -23,7 +23,7 @@ export default function Dashboard() {
             <div className="grid gap-6 md:grid-cols-3">
                 <div className="bg-zinc-800 rounded p-4">
                     <h2 className="font-semibold mb-2">Coding Time</h2>
-                    <p>{data?.codingTime || "Loading..."}</p>
+                    <p>{/* data?.codingTime ||  */ "Loading..."}</p>
                 </div>
                 <div className="bg-zinc-800 rounded p-4">
                     <h2 className="font-semibold mb-2">Commit Graph</h2>
@@ -31,7 +31,7 @@ export default function Dashboard() {
                 </div>
                 <div className="bg-zinc-800 rounded p-4">
                     <h2 className="font-semibold mb-2">Leaderboard Status</h2>
-                    <p>{data?.leaderboard || "Loading..."}</p>
+                    <p>{/* data?.leaderboard || */ "Loading..."}</p>
                 </div>
             </div>
         </div>

@@ -112,7 +112,7 @@ const DashboardCallback = () => {
 
                     const userExists = userCheck.exists;
                     console.log("User exists:", userExists);
-                    setCurrentUser(userExists);
+                    setCurrentUser(existingUser);
 
                     // Check if user needs to set display name
                     const needsDisplayName =

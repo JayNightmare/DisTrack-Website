@@ -8,7 +8,7 @@ import { useAuth } from "../contexts/AuthContext";
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
-    const { isLoggedIn, user, logout } = useAuth();
+    const { isLoggedIn, user, logout, loading } = useAuth();
 
     // Handle body scroll locking for mobile menu
     useEffect(() => {
@@ -40,6 +40,11 @@ const Navbar = () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [isProfileDropdownOpen]);
+
+    // Don't render until auth context is loaded
+    if (loading) {
+        return null;
+    }
 
     const handleLogout = () => {
         logout();

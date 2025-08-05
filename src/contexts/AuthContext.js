@@ -19,7 +19,8 @@ export const AuthProvider = ({ children }) => {
         const storedUser = localStorage.getItem("distrack_user");
         if (storedUser) {
             try {
-                setUser(JSON.parse(storedUser));
+                const parsedUser = JSON.parse(storedUser);
+                setUser(parsedUser);
             } catch (error) {
                 console.error("Error parsing stored user data:", error);
                 localStorage.removeItem("distrack_user");
@@ -62,10 +63,6 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("distrack_user", JSON.stringify(updatedUser));
     };
 
-    const isLoggedIn = () => {
-        return user !== null;
-    };
-
     const isOwnProfile = (userId) => {
         return user && (user.userId === userId || user.id === userId);
     };
@@ -76,7 +73,7 @@ export const AuthProvider = ({ children }) => {
         login,
         logout,
         updateUser,
-        isLoggedIn: isLoggedIn(),
+        isLoggedIn: user !== null,
         isOwnProfile,
     };
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getLeaderboardByFilter } from "../api/leaderboardApi";
 import { getTrendIcon } from "./trendIcon";
-import { calculateDeltaRankings } from "../util/deltaRankings";
+import { calculateDeltaRankings } from "../utils/deltaRankings";
 
 const LeaderboardTable = ({ filter }) => {
     const [leaderboardData, setLeaderboardData] = useState([]);

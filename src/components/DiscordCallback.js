@@ -120,6 +120,7 @@ const DiscordCallback = () => {
             const newUser = await createUser(discordUser, displayName);
             setCurrentUser(newUser);
             login(newUser);
+            // Navigation should happen after modal closes
         } catch (error) {
             throw error;
         }

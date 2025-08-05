@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useCallback } from "react";
-import { useMousePosition } from "../util/mouse";
+import { useMousePosition } from "../utils/mouse";
 
 export default function Particles({
     className = "",

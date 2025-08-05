@@ -7,16 +7,15 @@ import {
     MobileOverlay,
     MobileLogoutButton,
 } from "../styles/m-nb-style";
+import { useAuth } from "../contexts/AuthContext";
 
 const MobileNavbar = ({ isMobileMenuOpen, closeMobileMenu }) => {
+    const { user, logout } = useAuth();
+
     const handleLogout = () => {
-        // Handle logout logic here
-        console.log("User logged out");
+        logout();
         closeMobileMenu();
     };
-
-    // For now, we'll use a mock user state. You can replace this with actual user state later
-    const user = null; // Set to null for now, or replace with actual user state
 
     return (
         <>
@@ -58,11 +57,20 @@ const MobileNavbar = ({ isMobileMenuOpen, closeMobileMenu }) => {
                             Contact
                         </MobileNavLink>
                     </MobileNavItem>
-                    {user && (
+                    {user ? (
                         <MobileNavItem>
                             <MobileLogoutButton onClick={handleLogout}>
                                 Logout
                             </MobileLogoutButton>
+                        </MobileNavItem>
+                    ) : (
+                        <MobileNavItem>
+                            <MobileNavLink
+                                to="/login"
+                                onClick={closeMobileMenu}
+                            >
+                                Login
+                            </MobileNavLink>
                         </MobileNavItem>
                     )}
                 </MobileNavList>

@@ -29,8 +29,26 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const login = (userData) => {
-        setUser(userData);
-        localStorage.setItem("distrack_user", JSON.stringify(userData));
+        // Ensure consistent user data structure
+        const normalizedUserData = {
+            id: userData.id,
+            userId: userData.userId || userData.id,
+            discordId: userData.discordId,
+            username: userData.username,
+            displayName: userData.displayName || userData.username,
+            bio: userData.bio,
+            avatarUrl: userData.avatarUrl,
+            socials: userData.socials || {},
+            email: userData.email,
+            createdAt: userData.createdAt,
+            updatedAt: userData.updatedAt,
+        };
+
+        setUser(normalizedUserData);
+        localStorage.setItem(
+            "distrack_user",
+            JSON.stringify(normalizedUserData)
+        );
     };
 
     const logout = () => {

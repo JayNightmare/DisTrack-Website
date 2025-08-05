@@ -10,6 +10,7 @@ import Leaderboard from "./pages/leaderboard";
 import Showcase from "./pages/showcase";
 import User from "./pages/user";
 import Login from "./pages/login";
+import DiscordCallback from "./components/DiscordCallback";
 
 export default function App() {
     return (
@@ -24,6 +25,10 @@ export default function App() {
                 <Route path="/showcase" element={<Showcase />} />
                 <Route path="/user/:id" element={<User />} />
                 <Route path="/login" element={<Login />} />
+                <Route
+                    path="/auth/discord/callback"
+                    element={<DiscordCallback />}
+                />
             </Routes>
         </AuthProvider>
     );

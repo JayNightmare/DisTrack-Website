@@ -177,6 +177,25 @@ const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
                             />
                         </div>
 
+                        {/* Display Name Section */}
+                        <div>
+                            <label className="block text-white font-semibold mb-2">
+                                Display Name
+                            </label>
+                            <input
+                                type="text"
+                                value={formData.displayName}
+                                onChange={(e) =>
+                                    handleInputChange(
+                                        "displayName",
+                                        e.target.value
+                                    )
+                                }
+                                className="w-full p-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder-zinc-400 focus:outline-none focus:border-indigo-500"
+                                placeholder="Enter your display name"
+                            />
+                        </div>
+
                         {/* Bio Section */}
                         <div>
                             <label className="block text-white font-semibold mb-2">

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 const NewUserSetupModal = ({ isOpen, onClose, discordUser, onCreateUser }) => {
+    console.log("NewUserSetupModal rendered with discordUser", discordUser);
     const [displayName, setDisplayName] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [step, setStep] = useState(1); // 1: display name, 2: extension guide

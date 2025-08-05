@@ -18,7 +18,6 @@ const DashboardCallback = () => {
     const { login } = useAuth();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    // const [hasProcessed, setHasProcessed] = useState(false);
 
     // Modal states
     const [showWelcomeModal, setShowWelcomeModal] = useState(false);
@@ -96,6 +95,7 @@ const DashboardCallback = () => {
 
                 // Check if user exists in our database
                 const userCheck = await checkUserExists(userData.userId);
+                console.log("User check result:", userCheck);
 
                 if (userCheck.exists) {
                     const existingUser = userCheck.user;

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Confetti from "react-confetti";
 
 const WelcomeBackModal = ({ isOpen, onClose, user, onUpdateDisplayName }) => {
+    console.log("WelcomeBackModal rendered with user:", user);
     const [displayName, setDisplayName] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [showConfetti, setShowConfetti] = useState(false);

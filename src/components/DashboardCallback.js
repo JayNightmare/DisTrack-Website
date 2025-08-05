@@ -11,76 +11,34 @@ const DashboardCallback = () => {
     const { login } = useAuth();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [hasProcessed, setHasProcessed] = useState(false);
 
     useEffect(() => {
-        if (hasProcessed) return;
-
         const handleTokenAuth = async () => {
+            const token = searchParams.get("token");
+            const userParam = searchParams.get("user");
+
+            if (!token || !userParam) {
+                setError("Invalid authentication response");
+                setLoading(false);
+                return;
+            }
+
             try {
-                const token = searchParams.get("token");
-                const userParam = searchParams.get("user");
-
-                if (!token || !userParam) {
-                    setError("Invalid authentication response");
-                    setLoading(false);
-                    setHasProcessed(true);
-                    return;
-                }
-
-                // More secure parsing with error handling
-                let userData;
-                try {
-                    // First decode the URI component
-                    const decodedUser = decodeURIComponent(userParam);
-                    // Then parse JSON
-                    userData = JSON.parse(decodedUser);
-                } catch (parseError) {
-                    console.error("Failed to parse user data:", parseError);
-                    setError("Invalid user data format");
-                    setLoading(false);
-                    setHasProcessed(true);
-                    return;
-                }
-
-                // Validate userData structure
-                if (!userData || !userData.id) {
-                    setError("Invalid user data structure");
-                    setLoading(false);
-                    setHasProcessed(true);
-                    return;
-                }
-
-                // Store JWT token securely
-                try {
-                    localStorage.setItem("distrack_jwt", token);
-                } catch (storageError) {
-                    console.warn("Could not store JWT token:", storageError);
-                    // Continue anyway as this might not be critical
-                }
-
-                // Log the user in with the provided data
+                const userData = JSON.parse(decodeURIComponent(userParam));
+                localStorage.setItem("distrack_jwt", token);
                 login(userData);
-
-                // Mark as processed before navigation
-                setHasProcessed(true);
-
-                // Small delay to ensure login completes
-                setTimeout(() => {
-                    navigate(`/user/${userData.userId || userData.id}`, {
-                        replace: true,
-                    });
-                }, 100);
+                navigate(`/user/${userData.userId || userData.id}`, {
+                    replace: true,
+                });
             } catch (error) {
                 console.error("Token auth error:", error);
                 setError("Authentication failed. Please try again.");
                 setLoading(false);
-                setHasProcessed(true);
             }
         };
 
         handleTokenAuth();
-    }, [searchParams, navigate, login, hasProcessed]);
+    }, []);
 
     if (error) {
         return (

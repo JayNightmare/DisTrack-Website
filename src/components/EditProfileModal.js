@@ -3,6 +3,7 @@ import { updateUserProfile } from "../api/userApi";
 
 const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
     const [formData, setFormData] = useState({
+        displayName: user?.displayName || "",
         bio: user?.bio || "",
         socials: user?.socials || {},
         avatarUrl: user?.avatarUrl || "",

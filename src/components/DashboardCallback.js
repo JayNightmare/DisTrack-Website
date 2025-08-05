@@ -26,10 +26,12 @@ const DashboardCallback = () => {
             try {
                 const userData = JSON.parse(decodeURIComponent(userParam));
                 localStorage.setItem("distrack_jwt", token);
-                login(userData);
-                navigate(`/user/${userData.userId || userData.id}`, {
-                    replace: true,
-                });
+                await login(userData);
+                setTimeout(() => {
+                    navigate(`/user/${userData.userId || userData.id}`, {
+                        replace: true,
+                    });
+                }, 3000);
             } catch (error) {
                 console.error("Token auth error:", error);
                 setError("Authentication failed. Please try again.");

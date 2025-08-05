@@ -38,7 +38,7 @@ const DashboardCallback = () => {
         };
 
         handleTokenAuth();
-    }, []);
+    }, [login, navigate, searchParams]);
 
     if (error) {
         return (

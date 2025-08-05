@@ -77,7 +77,7 @@ const DashboardCallback = () => {
                     <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-700/50 rounded-lg p-8 w-full max-w-md text-center">
                         <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-indigo-500 mx-auto mb-4"></div>
                         <h1 className="text-2xl font-bold mb-4">
-                            Authenticating...
+                            Authenticating Dashboard Callback...
                         </h1>
                         <p className="text-zinc-300">
                             Please wait while we set up your account.

@@ -31,7 +31,11 @@ const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
     };
 
     const handleAddSocial = () => {
-        if (newSocialPlatform && newSocialUrl) {
+        if (
+            newSocialPlatform &&
+            newSocialUrl &&
+            Object.keys(formData.socials).length < 5
+        ) {
             handleSocialChange(newSocialPlatform, newSocialUrl);
             setNewSocialPlatform("");
             setNewSocialUrl("");
@@ -93,6 +97,8 @@ const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
     };
 
     if (!isOpen) return null;
+
+    const socialCount = Object.keys(formData.socials).length;
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
@@ -193,9 +199,14 @@ const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
 
                         {/* Social Links Section */}
                         <div>
-                            <h3 className="text-lg font-semibold text-white mb-4">
-                                Social Links
-                            </h3>
+                            <div className="flex justify-between items-center mb-4">
+                                <h3 className="text-lg font-semibold text-white">
+                                    Social Links
+                                </h3>
+                                <span className="text-zinc-400 text-sm">
+                                    {socialCount}/5
+                                </span>
+                            </div>
 
                             {/* Existing socials */}
                             <div className="space-y-3 mb-4">
@@ -238,33 +249,42 @@ const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
                             </div>
 
                             {/* Add new social */}
-                            <div className="flex items-center space-x-2">
-                                <input
-                                    type="text"
-                                    value={newSocialPlatform}
-                                    onChange={(e) =>
-                                        setNewSocialPlatform(e.target.value)
-                                    }
-                                    className="w-1/3 p-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder-zinc-400 focus:outline-none focus:border-indigo-500"
-                                    placeholder="Platform name"
-                                />
-                                <input
-                                    type="url"
-                                    value={newSocialUrl}
-                                    onChange={(e) =>
-                                        setNewSocialUrl(e.target.value)
-                                    }
-                                    className="flex-1 p-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder-zinc-400 focus:outline-none focus:border-indigo-500"
-                                    placeholder="https://..."
-                                />
-                                <button
-                                    type="button"
-                                    onClick={handleAddSocial}
-                                    className="px-3 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
-                                >
-                                    Add
-                                </button>
-                            </div>
+                            {socialCount < 5 && (
+                                <div className="flex items-center space-x-2">
+                                    <input
+                                        type="text"
+                                        value={newSocialPlatform}
+                                        onChange={(e) =>
+                                            setNewSocialPlatform(e.target.value)
+                                        }
+                                        className="w-1/3 p-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder-zinc-400 focus:outline-none focus:border-indigo-500"
+                                        placeholder="Platform name"
+                                    />
+                                    <input
+                                        type="url"
+                                        value={newSocialUrl}
+                                        onChange={(e) =>
+                                            setNewSocialUrl(e.target.value)
+                                        }
+                                        className="flex-1 p-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder-zinc-400 focus:outline-none focus:border-indigo-500"
+                                        placeholder="https://..."
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={handleAddSocial}
+                                        className="px-3 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
+                                    >
+                                        Add
+                                    </button>
+                                </div>
+                            )}
+
+                            {socialCount >= 5 && (
+                                <p className="text-zinc-400 text-sm">
+                                    Maximum of 5 social links allowed. Remove
+                                    one to add another.
+                                </p>
+                            )}
                         </div>
 
                         {/* Action Buttons */}

@@ -7,9 +7,8 @@ import Footer from "../components/footer";
 import Particles from "../components/particles";
 
 const Login = () => {
-    const { login, isLoggedIn } = useAuth();
+    const { isLoggedIn } = useAuth();
     const navigate = useNavigate();
-    const [username, setUsername] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -23,31 +22,6 @@ const Login = () => {
         setIsLoading(true);
         const authUrl = generateDiscordAuthUrl();
         window.location.href = authUrl;
-    };
-
-    const handleDemoSubmit = async (e) => {
-        e.preventDefault();
-        if (!username.trim()) return;
-
-        setIsLoading(true);
-
-        // Mock login - for demo purposes only
-        const mockUser = {
-            id: `demo_${username.toLowerCase()}`,
-            userId: `demo_${username.toLowerCase()}`,
-            username: username,
-            displayName: username,
-            bio: `Hello! I'm ${username}`,
-            avatarUrl: `https://avatar.iran.liara.run/public/${Math.floor(
-                Math.random() * 100
-            )}`,
-            socials: {},
-        };
-
-        setTimeout(() => {
-            login(mockUser);
-            navigate(`/user/${mockUser.userId}`);
-        }, 1000);
     };
 
     return (

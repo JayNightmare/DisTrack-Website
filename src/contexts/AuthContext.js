@@ -55,6 +55,7 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         setUser(null);
         localStorage.removeItem("distrack_user");
+        localStorage.removeItem("distrack_jwt"); // Clear JWT token
     };
 
     const updateUser = (updatedData) => {

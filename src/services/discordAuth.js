@@ -1,79 +1,26 @@
 import axios from "axios";
 
-// const DISCORD_CLIENT_ID = process.env.REACT_APP_DISCORD_CLIENT_ID;
-const DISCORD_REDIRECT_URI = process.env.REACT_APP_DISCORD_REDIRECT_URI;
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 const API_KEY = process.env.REACT_APP_API_KEY;
-const JWT_SECRET = process.env.REACT_APP_JWT_SECRET;
-
-const generateRandomState = () => {
-    return (
-        Math.random().toString(36).substring(2, 15) +
-        Math.random().toString(36).substring(2, 15)
-    );
-};
 
 export const generateDiscordAuthUrl = () => {
-    const state = generateRandomState();
-
-    // Store state in sessionStorage for verification
-    sessionStorage.setItem("discord_auth_state", state);
-
-    // const params = new URLSearchParams({
-    //     client_id: DISCORD_CLIENT_ID,
-    //     redirect_uri: DISCORD_REDIRECT_URI,
-    //     response_type: "code",
-    //     scope: scope,
-    //     state: state,
-    // });
-
-    // return `https://discord.com/api/oauth2/authorize?${params.toString()}`;
-    return DISCORD_REDIRECT_URI;
+    // Since your backend handles the entire OAuth flow,
+    // redirect directly to your backend's Discord OAuth initiation endpoint
+    return `${API_ENDPOINT}/auth/discord`;
 };
 
-export const handleDiscordCallback = async (code, state) => {
-    try {
-        // Verify state parameter
-        const storedState = sessionStorage.getItem("discord_auth_state");
-        if (state !== storedState) {
-            throw new Error("Invalid state parameter");
-        }
+// NOTE: The following functions are kept for potential future use with the DiscordCallback component
+// but are not needed for the new token-based flow
 
-        // Clear stored state
-        sessionStorage.removeItem("discord_auth_state");
-
-        // Exchange code for access token via our backend
-        const response = await axios.post(
-            `${API_ENDPOINT}/auth/discord/callback`,
-            {
-                code,
-                redirect_uri: DISCORD_REDIRECT_URI,
-            },
-            {
-                headers: { Authorization: `Bearer ${JWT_SECRET}` },
-            }
-        );
-
-        const { access_token, user } = response.data;
-
-        if (!access_token || !user) {
-            throw new Error("Invalid response from Discord auth");
-        }
-
-        return { success: true, user, access_token };
-    } catch (error) {
-        console.error("Discord auth error:", error);
-        return {
-            success: false,
-            error: error.response?.data?.message || error.message,
-        };
-    }
-};
+// export const handleDiscordCallback = async (code, state) => {
+//     // This function is no longer used with the new backend flow
+//     // Your backend now handles the OAuth callback and redirects to /dashboard with token and user data
+// };
 
 export const checkUserExists = async (discordUserId) => {
     try {
         const response = await axios.get(
-            `${API_ENDPOINT}/user/discord/${discordUserId}`,
+            `${API_ENDPOINT}/auth/discord/user/${discordUserId}`,
             {
                 headers: { Authorization: `Bearer ${API_KEY}` },
             }
@@ -90,7 +37,7 @@ export const checkUserExists = async (discordUserId) => {
 export const createUser = async (discordUser, displayName) => {
     try {
         const response = await axios.post(
-            `${API_ENDPOINT}/user/create`,
+            `${API_ENDPOINT}/auth/discord/user`,
             {
                 discordId: discordUser.id,
                 username: discordUser.username,

@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import {
-    handleDiscordCallback,
-    checkUserExists,
-    createUser,
-    updateUserDisplayName,
-} from "../services/discordAuth";
+import { createUser, updateUserDisplayName } from "../services/discordAuth";
 import WelcomeBackModal from "./WelcomeBackModal";
 import NewUserSetupModal from "./NewUserSetupModal";
 import Navbar from "./navbar";
@@ -23,7 +18,6 @@ const DiscordCallback = () => {
     const [showWelcomeModal, setShowWelcomeModal] = useState(false);
     const [showNewUserModal, setShowNewUserModal] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
-    const [discordUserData, setDiscordUserData] = useState(null);
 
     useEffect(() => {
         const handleAuth = async () => {
@@ -38,57 +32,19 @@ const DiscordCallback = () => {
             }
 
             if (!code || !state) {
-                setError("Invalid authentication response");
+                setError(
+                    "Invalid authentication response. This route may not be used with the current backend configuration."
+                );
                 setLoading(false);
                 return;
             }
 
-            try {
-                // Handle Discord callback
-                const authResult = await handleDiscordCallback(code, state);
-
-                if (!authResult.success) {
-                    setError(authResult.error);
-                    setLoading(false);
-                    return;
-                }
-
-                const { user: discordUser } = authResult;
-                setDiscordUserData(discordUser);
-
-                // Check if user exists in our database
-                const userCheck = await checkUserExists(discordUser.id);
-
-                if (userCheck.exists) {
-                    const existingUser = userCheck.user;
-                    setCurrentUser(existingUser);
-
-                    // Check if user needs to set display name
-                    const needsDisplayName =
-                        !existingUser.displayName ||
-                        existingUser.displayName === "Anonymous" ||
-                        existingUser.displayName.includes("Anonymous");
-
-                    if (needsDisplayName) {
-                        setShowWelcomeModal(true);
-                    } else {
-                        // User is all set, log them in
-                        login(existingUser);
-                        navigate(
-                            `/user/${existingUser.userId || existingUser.id}`
-                        );
-                    }
-                } else {
-                    // New user - show setup modal
-                    setShowNewUserModal(true);
-                }
-
-                setLoading(false);
-            } catch (err) {
-                console.error("Auth error:", err);
-                setError("Authentication failed. Please try again.");
-                setLoading(false);
-            }
+            // Since the backend now handles OAuth directly and redirects to /dashboard,
+            // this callback route may not be used anymore
+            setError(
+                "This authentication route is deprecated. Please use the login button to authenticate."
+            );
+            setLoading(false);
         };
 
         handleAuth();
@@ -191,7 +147,7 @@ const DiscordCallback = () => {
             <NewUserSetupModal
                 isOpen={showNewUserModal}
                 onClose={handleNewUserModalClose}
-                discordUser={discordUserData}
+                discordUser={null}
                 onCreateUser={handleNewUserCreate}
             />
 

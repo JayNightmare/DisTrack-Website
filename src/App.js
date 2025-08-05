@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import HomePage from "./pages/homepage";
 import Contact from "./pages/contact";
-import Dashboard from "./pages/dashboard";
 import FAQ from "./pages/faq";
 import Downloads from "./pages/downloads";
 import Leaderboard from "./pages/leaderboard";
@@ -12,6 +11,7 @@ import User from "./pages/user";
 import Login from "./pages/login";
 import Debug from "./pages/debug";
 import DiscordCallback from "./components/DiscordCallback";
+import DashboardCallback from "./components/DashboardCallback";
 
 // Import test auth for debugging
 import "./utils/testAuth";
@@ -22,7 +22,7 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/dashboard" element={<DashboardCallback />} />
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/downloads" element={<Downloads />} />
                 <Route path="/leaderboard" element={<Leaderboard />} />

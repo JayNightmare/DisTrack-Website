@@ -27,6 +27,7 @@ const DashboardCallback = () => {
                 const userData = JSON.parse(decodeURIComponent(userParam));
                 localStorage.setItem("distrack_jwt", token);
                 await login(userData);
+                // refresh page
                 setTimeout(() => {
                     navigate(`/user/${userData.userId || userData.id}`, {
                         replace: true,
@@ -51,7 +52,7 @@ const DashboardCallback = () => {
                     <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-700/50 rounded-lg p-8 w-full max-w-md text-center">
                         <div className="text-6xl mb-4">❌</div>
                         <h1 className="text-2xl font-bold text-red-400 mb-4">
-                            Authentication Failed
+                            Authentication Failed - Dashboard Callback
                         </h1>
                         <p className="text-zinc-300 mb-6">{error}</p>
                         <Link

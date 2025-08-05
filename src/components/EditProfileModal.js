@@ -7,6 +7,7 @@ const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
         bio: user?.bio || "",
         socials: user?.socials || {},
         avatarUrl: user?.avatarUrl || "",
+        isPublic: user?.isPublic || true,
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -72,6 +73,10 @@ const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
             Math.random() * 100
         )}`;
         handleInputChange("avatarUrl", discordAvatarUrl);
+    };
+
+    const handleTogglePublic = () => {
+        handleInputChange("isPublic", !formData.isPublic);
     };
 
     const handleSubmit = async (e) => {
@@ -176,6 +181,19 @@ const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
                                 onChange={handleAvatarUpload}
                                 className="hidden"
                             />
+                        </div>
+
+                        {/* Public Profile Toggle */}
+                        <div className="flex items-center mb-4">
+                            <input
+                                type="checkbox"
+                                checked={formData.isPublic}
+                                onChange={handleTogglePublic}
+                                className="h-4 w-4 text-indigo-600 border-zinc-600 rounded focus:ring-indigo-500"
+                            />
+                            <label className="ml-2 text-white">
+                                Make my profile public
+                            </label>
                         </div>
 
                         {/* Display Name Section */}

@@ -112,6 +112,9 @@ export default function User() {
         );
     }
 
+    // Check if profile is private and user doesn't own it
+    const isPrivateProfile = !user.isPublic && !isOwnProfile(id);
+
     return (
         <div className="min-h-screen text-white p-8 space-y-6 bg-gradient-to-tl via-zinc-600/20 to-black from-black">
             <Navbar />
@@ -161,86 +164,120 @@ export default function User() {
                             )}
                         </div>
 
-                        {/* Bio */}
-                        <div className="space-y-2">
-                            <h3 className="text-lg font-semibold text-zinc-300 mb-2">
-                                Bio
-                            </h3>
-                            <p className="text-zinc-400">
-                                {user.bio || "No bio set"}
-                            </p>
-                        </div>
-
-                        {user.socials &&
-                            Object.keys(user.socials).length > 0 && (
-                                <div className="space-y-2">
-                                    <h2 className="text-lg font-semibold text-zinc-300 mb-2">
-                                        Social Links
-                                    </h2>
-                                    <ul className="space-y-2">
-                                        {Object.entries(user.socials).map(
-                                            ([label, url]) => (
-                                                <li key={label}>
-                                                    <a
-                                                        href={url}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="text-indigo-400 hover:text-indigo-300 hover:underline transition-colors inline-flex items-center"
-                                                    >
-                                                        <span className="capitalize">
-                                                            {label}
-                                                        </span>
-                                                        <svg
-                                                            className="w-4 h-4 ml-1"
-                                                            fill="none"
-                                                            stroke="currentColor"
-                                                            viewBox="0 0 24 24"
-                                                        >
-                                                            <path
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                                strokeWidth={2}
-                                                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                                                            />
-                                                        </svg>
-                                                    </a>
-                                                </li>
-                                            )
-                                        )}
-                                    </ul>
+                        {isPrivateProfile ? (
+                            <div className="text-center py-8">
+                                <div className="bg-zinc-800/50 border border-zinc-600/50 rounded-lg p-6">
+                                    <svg
+                                        className="w-12 h-12 text-zinc-500 mx-auto mb-4"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                                        />
+                                    </svg>
+                                    <h3 className="text-lg font-semibold text-zinc-300 mb-2">
+                                        Private Profile
+                                    </h3>
+                                    <p className="text-zinc-400">
+                                        This user has set their profile to
+                                        private.
+                                    </p>
                                 </div>
-                            )}
+                            </div>
+                        ) : (
+                            <>
+                                {/* Bio */}
+                                <div className="space-y-2">
+                                    <h3 className="text-lg font-semibold text-zinc-300 mb-2">
+                                        Bio
+                                    </h3>
+                                    <p className="text-zinc-400">
+                                        {user.bio || "No bio set"}
+                                    </p>
+                                </div>
+
+                                {user.socials &&
+                                    Object.keys(user.socials).length > 0 && (
+                                        <div className="space-y-2">
+                                            <h2 className="text-lg font-semibold text-zinc-300 mb-2">
+                                                Social Links
+                                            </h2>
+                                            <ul className="space-y-2">
+                                                {Object.entries(
+                                                    user.socials
+                                                ).map(([label, url]) => (
+                                                    <li key={label}>
+                                                        <a
+                                                            href={url}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="text-indigo-400 hover:text-indigo-300 hover:underline transition-colors inline-flex items-center"
+                                                        >
+                                                            <span className="capitalize">
+                                                                {label}
+                                                            </span>
+                                                            <svg
+                                                                className="w-4 h-4 ml-1"
+                                                                fill="none"
+                                                                stroke="currentColor"
+                                                                viewBox="0 0 24 24"
+                                                            >
+                                                                <path
+                                                                    strokeLinecap="round"
+                                                                    strokeLinejoin="round"
+                                                                    strokeWidth={
+                                                                        2
+                                                                    }
+                                                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                                                />
+                                                            </svg>
+                                                        </a>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
+                            </>
+                        )}
                     </div>
                 </div>
-                <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-700/50 rounded-lg p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-4">
-                        <div>
-                            <h2 className="text-lg font-semibold text-zinc-300 mb-2">
-                                Coding Statistics
-                            </h2>
-                            <div className="space-y-2">
-                                <p className="text-zinc-400">
-                                    <span className="font-medium">
-                                        Total Coding Time:
-                                    </span>
-                                    <span className="text-indigo-300 ml-2 font-mono">
-                                        {formatTime(user.totalCodingTime)}
-                                    </span>
-                                </p>
-                                {user.habits && (
+
+                {!isPrivateProfile && (
+                    <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-700/50 rounded-lg p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-4">
+                            <div>
+                                <h2 className="text-lg font-semibold text-zinc-300 mb-2">
+                                    Coding Statistics
+                                </h2>
+                                <div className="space-y-2">
                                     <p className="text-zinc-400">
                                         <span className="font-medium">
-                                            Habits:
+                                            Total Coding Time:
                                         </span>
-                                        <span className="text-zinc-300 ml-2">
-                                            {user.habits}
+                                        <span className="text-indigo-300 ml-2 font-mono">
+                                            {formatTime(user.totalCodingTime)}
                                         </span>
                                     </p>
-                                )}
+                                    {user.habits && (
+                                        <p className="text-zinc-400">
+                                            <span className="font-medium">
+                                                Habits:
+                                            </span>
+                                            <span className="text-zinc-300 ml-2">
+                                                {user.habits}
+                                            </span>
+                                        </p>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                )}
             </div>
 
             <Footer className="mt-8" />

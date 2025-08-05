@@ -89,7 +89,7 @@ const DashboardCallback = () => {
                 }
 
                 // Validate userData structure
-                if (!userData || !userData.id) {
+                if (!userData || !userData.userId) {
                     setError("Invalid user data structure");
                     setLoading(false);
                     setHasProcessed(true);
@@ -131,7 +131,7 @@ const DashboardCallback = () => {
                                 }`,
                                 { replace: true }
                             );
-                        }, 100);
+                        }, 3000);
                     }
                 } else {
                     // New user - show setup modal
@@ -206,7 +206,7 @@ const DashboardCallback = () => {
                     <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-700/50 rounded-lg p-8 w-full max-w-md text-center">
                         <div className="text-6xl mb-4">❌</div>
                         <h1 className="text-2xl font-bold text-red-400 mb-4">
-                            Authentication Failed - Dashboard Callback
+                            Authentication Failed
                         </h1>
                         <p className="text-zinc-300 mb-6">{error}</p>
                         <Link
@@ -231,7 +231,7 @@ const DashboardCallback = () => {
                     <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-700/50 rounded-lg p-8 w-full max-w-md text-center">
                         <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-indigo-500 mx-auto mb-4"></div>
                         <h1 className="text-2xl font-bold mb-4">
-                            Authenticating Dashboard Callback...
+                            Authenticating...
                         </h1>
                         <p className="text-zinc-300">
                             Please wait while we set up your account.

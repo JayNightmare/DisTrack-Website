@@ -116,10 +116,8 @@ export default function User() {
     const isPrivateProfile = !user.isPublic && !isOwnProfile(id);
 
     const handleShareProfile = () => {
-        const url = window.location.href;
-        navigator.clipboard.writeText(url);
-        alert(
-            "Profile link copied! Paste it in Discord or social media to share your profile."
+        navigator.clipboard.writeText(
+            `https://share.endpoint-system.uk/user/${id}`
         );
     };
 

@@ -250,7 +250,7 @@ const DashboardCallback = () => {
             )}
 
             {/* Modals */}
-            {showWelcomeModal && currentUser && (
+            {showWelcomeModal && !currentUser.displayName && (
                 <WelcomeBackModal
                     isOpen={showWelcomeModal}
                     user={currentUser}

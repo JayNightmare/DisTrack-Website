@@ -1,6 +1,6 @@
 <div align=center>
 
-<img src="./public/images/New Distrack.jpg" width="128" />
+<img src="./public/images/color-d.jpg" width="128" />
 
 # DisTrack Website
 

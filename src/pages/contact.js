@@ -7,18 +7,18 @@ export default function Contact() {
     const contacts = [
         {
             title: "GitHub",
-            description: "View our code on GitHub",
+            description: "Contact via GitHub",
             href: "https://www.github.com/JayNightmare",
         },
         {
             title: "Email",
-            description: "Send us an email",
+            description: "Send an Email",
             href: "mailto:jn3.enquiries@gmail.com",
         },
         {
             title: "Discord",
-            description: "Join our Discord server",
-            href: "#",
+            description: "Join the Discord Community server",
+            href: "https://discord.gg/Zx45G4pZ3J",
         },
     ];
 

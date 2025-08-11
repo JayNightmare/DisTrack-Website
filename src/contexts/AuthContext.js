@@ -43,6 +43,8 @@ export const AuthProvider = ({ children }) => {
             email: userData.email,
             createdAt: userData.createdAt,
             updatedAt: userData.updatedAt,
+            linkCode: userData.linkCode || null,
+            linkCodeExpiresAt: userData.linkCodeExpiresAt || null,
         };
 
         setUser(normalizedUserData);

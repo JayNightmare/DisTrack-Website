@@ -51,3 +51,43 @@ export async function updateUserProfile(userId, userData) {
         return null;
     }
 }
+
+// Generate a new link code (alphanumeric) via backend; backend should return { linkCode, expiresAt, cooldownSeconds }
+export async function generateLinkCode() {
+    if (!endpointUrl || !apiToken) {
+        console.error(
+            "API endpoint or token is not set in environment variables."
+        );
+        return null;
+    }
+    try {
+        const response = await axios.post(
+            `${endpointUrl}/user/link-code`,
+            {},
+            { headers: { Authorization: `Bearer ${apiToken}` } }
+        );
+        return response.data; // Expecting { linkCode, expiresAt, cooldownSeconds }
+    } catch (error) {
+        console.error("<< Failed to generate link code:", error);
+        return null;
+    }
+}
+
+// Clear existing link code
+export async function clearLinkCode() {
+    if (!endpointUrl || !apiToken) {
+        console.error(
+            "API endpoint or token is not set in environment variables."
+        );
+        return null;
+    }
+    try {
+        const response = await axios.delete(`${endpointUrl}/user/link-code`, {
+            headers: { Authorization: `Bearer ${apiToken}` },
+        });
+        return response.data; // Expecting success flag
+    } catch (error) {
+        console.error("<< Failed to clear link code:", error);
+        return null;
+    }
+}

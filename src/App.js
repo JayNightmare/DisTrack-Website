@@ -13,6 +13,7 @@ import Debug from "./pages/debug";
 // import DiscordCallback from "./components/DiscordCallback";
 import Dashboard from "./pages/dashboard";
 import DashboardCallback from "./components/DashboardCallback";
+import LinkAccount from "./pages/linkAccount";
 
 // Import test auth for debugging
 import "./utils/testAuth";
@@ -32,6 +33,7 @@ export default function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/debug" element={<Debug />} />
                 <Route path="/auth/distrack" element={<DashboardCallback />} />
+                <Route path="/link-account" element={<LinkAccount />} />
             </Routes>
         </AuthProvider>
     );

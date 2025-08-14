@@ -55,7 +55,7 @@ export default function LinkAccount() {
         setLoading(true);
         setError(null);
         setSuccess(null);
-        const data = await generateLinkCode();
+        const data = await generateLinkCode(user.userId);
         if (data?.linkCode) {
             setLinkCode(data.linkCode);
             if (data.expiresAt) setExpiresAt(data.expiresAt);
@@ -76,7 +76,7 @@ export default function LinkAccount() {
         setLoading(true);
         setError(null);
         setSuccess(null);
-        const data = await clearLinkCode();
+        const data = await clearLinkCode(user.userId);
         if (data?.success) {
             setLinkCode(null);
             updateUser({ linkCode: null });

@@ -22,6 +22,10 @@ export default function LinkAccount() {
     const [copied, setCopied] = useState(false);
     const navigate = useNavigate();
 
+    // set a userId variable
+    const userId = user?.userId;
+    console.log(userId);
+
     useEffect(() => {
         if (isLoggedIn && user?.linkCode) {
             setLinkCode(user.linkCode);
@@ -55,7 +59,7 @@ export default function LinkAccount() {
         setLoading(true);
         setError(null);
         setSuccess(null);
-        const data = await generateLinkCode();
+        const data = await generateLinkCode(userId);
         if (data?.linkCode) {
             setLinkCode(data.linkCode);
             if (data.expiresAt) setExpiresAt(data.expiresAt);
@@ -76,7 +80,7 @@ export default function LinkAccount() {
         setLoading(true);
         setError(null);
         setSuccess(null);
-        const data = await clearLinkCode();
+        const data = await clearLinkCode(userId);
         if (data?.success) {
             setLinkCode(null);
             updateUser({ linkCode: null });

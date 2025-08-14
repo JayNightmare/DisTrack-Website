@@ -53,7 +53,7 @@ export async function updateUserProfile(userId, userData) {
 }
 
 // Generate a new link code (alphanumeric) via backend; backend should return { linkCode, expiresAt, cooldownSeconds }
-export async function generateLinkCode() {
+export async function generateLinkCode(userId) {
     if (!endpointUrl || !apiToken) {
         console.error(
             "API endpoint or token is not set in environment variables."
@@ -62,7 +62,7 @@ export async function generateLinkCode() {
     }
     try {
         const response = await axios.post(
-            `${endpointUrl}/user/link-code`,
+            `${endpointUrl}/user/link-code/${userId}`,
             {},
             { headers: { Authorization: `Bearer ${apiToken}` } }
         );
@@ -74,7 +74,7 @@ export async function generateLinkCode() {
 }
 
 // Clear existing link code
-export async function clearLinkCode() {
+export async function clearLinkCode(userId) {
     if (!endpointUrl || !apiToken) {
         console.error(
             "API endpoint or token is not set in environment variables."
@@ -82,9 +82,12 @@ export async function clearLinkCode() {
         return null;
     }
     try {
-        const response = await axios.delete(`${endpointUrl}/user/link-code`, {
-            headers: { Authorization: `Bearer ${apiToken}` },
-        });
+        const response = await axios.delete(
+            `${endpointUrl}/user/link-code/${userId}`,
+            {
+                headers: { Authorization: `Bearer ${apiToken}` },
+            }
+        );
         return response.data; // Expecting success flag
     } catch (error) {
         console.error("<< Failed to clear link code:", error);

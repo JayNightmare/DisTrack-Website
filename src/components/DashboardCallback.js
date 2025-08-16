@@ -14,6 +14,17 @@ const DashboardCallback = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    // Capture optional redirect target (e.g., coming from /link-account)
+    const [redirectPath] = useState(() => {
+        const qp = searchParams.get("redirect");
+        if (qp) return qp.startsWith("/") ? qp : `/${qp}`; // normalize
+        try {
+            return localStorage.getItem("post_login_redirect");
+        } catch (_) {
+            return null;
+        }
+    });
+
     // Modal states
     const [showNewUserModal, setShowNewUserModal] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
@@ -111,13 +122,13 @@ const DashboardCallback = () => {
 
                     login(existingUser.user);
                     setTimeout(() => {
-                        navigate(
+                        const dest =
+                            redirectPath ||
                             `/user/${
                                 existingUser.user.userId || existingUser.id
-                            }`,
-                            { replace: true }
-                        );
-                    }, 3000);
+                            }`;
+                        navigate(dest, { replace: true });
+                    }, 1500);
                 } else {
                     // New user - show setup modal
                     setShowNewUserModal(true);
@@ -131,7 +142,7 @@ const DashboardCallback = () => {
         };
 
         handleAuth();
-    }, [searchParams, navigate, login]);
+    }, [searchParams, navigate, login, redirectPath]);
 
     const handleNewUserCreate = async (discordUser, displayName) => {
         try {
@@ -147,11 +158,12 @@ const DashboardCallback = () => {
     const handleNewUserModalClose = () => {
         setShowNewUserModal(false);
         if (currentUser) {
-            navigate(`/user/${currentUser.userId || currentUser.id}`, {
-                replace: true,
-            });
+            const dest =
+                redirectPath || `/user/${currentUser.userId || currentUser.id}`;
+            navigate(dest, { replace: true });
         } else {
-            navigate("/login", { replace: true });
+            const dest = redirectPath || "/login";
+            navigate(dest, { replace: true });
         }
     };
 

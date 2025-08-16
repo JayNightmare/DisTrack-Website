@@ -65,40 +65,6 @@ export default function HomePage() {
                     Add to VSCode
                 </Link>
             </div>
-            <div className="text-center mt-8 text-indigo-400 fade-in-custom">
-                <div className="text-sm">
-                    <ul>
-                        Coming soon:{" "}
-                        <li>
-                            <Link
-                                to="/showcase"
-                                className="underline text-indigo-400 hover:text-indigo-300"
-                            >
-                                Showcase
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to="/leaderboard"
-                                className="underline text-indigo-400 hover:text-indigo-300"
-                            >
-                                Leaderboard
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to="/faq"
-                                className="underline text-indigo-400 hover:text-indigo-300"
-                            >
-                                FAQ
-                            </Link>
-                        </li>
-                        <li>
-                            <p className="text-indigo-400">User Profiles</p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
             <Footer className="mt-8" />
         </div>
     );

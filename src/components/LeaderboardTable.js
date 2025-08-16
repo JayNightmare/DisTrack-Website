@@ -71,14 +71,12 @@ const LeaderboardTable = ({ filter }) => {
     const formatTime = (totalSeconds) => {
         if (!totalSeconds) return "No Time Recorded";
 
-        const days = Math.floor(totalSeconds / 86400);
         const hours = Math.floor((totalSeconds % 86400) / 3600);
         const minutes = Math.floor((totalSeconds % 3600) / 60);
         let seconds = totalSeconds % 60;
         seconds = Math.ceil(seconds);
 
         const parts = [];
-        if (days > 0) parts.push(`${days}d`);
         if (hours > 0) parts.push(`${hours}h`);
         if (minutes > 0) parts.push(`${minutes}m`);
         if (seconds > 0 || parts.length === 0) parts.push(`${seconds}s`);
@@ -119,7 +117,7 @@ const LeaderboardTable = ({ filter }) => {
                                     to={`/user/${row.userId}`}
                                     className="text-indigo-400 hover:text-indigo-300 hover:underline font-medium"
                                 >
-                                    {row.username}
+                                    {row.displayName || row.username}
                                 </Link>
                             </td>
                             <td className="py-3 px-4 text-zinc-300 font-mono">

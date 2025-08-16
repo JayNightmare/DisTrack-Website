@@ -241,31 +241,51 @@ const DashboardCallback = () => {
                 </div>
             )}
 
-            {/* If user has a display name already and is the currentUser, send to user profile */}
-            {currentUser && currentUser.displayName && (
-                <Navigate
-                    to={`/user/${currentUser.userId || currentUser.id}`}
-                    replace
-                />
-            )}
+            {/* Check linkedAt vs lastLinkedAt for navigation logic */}
+            {currentUser &&
+                currentUser.linkedAt &&
+                currentUser.lastLinkedAt && (
+                    <>
+                        {/* If linkedAt > lastLinkedAt and user has proper displayName, go to profile */}
+                        {currentUser.linkedAt > currentUser.lastLinkedAt &&
+                            currentUser.displayName &&
+                            currentUser.displayName !==
+                                currentUser.username && (
+                                <Navigate
+                                    to={`/user/${
+                                        currentUser.userId || currentUser.id
+                                    }`}
+                                    replace
+                                />
+                            )}
+                    </>
+                )}
 
             {/* Modals */}
-            {showWelcomeModal && !currentUser.displayName && (
-                <WelcomeBackModal
-                    isOpen={showWelcomeModal}
-                    user={currentUser}
-                    onUpdateDisplayName={handleWelcomeModalUpdateDisplayName}
-                    onClose={handleWelcomeModalClose}
-                />
-            )}
+            {showWelcomeModal &&
+                currentUser &&
+                currentUser.linkedAt > currentUser.lastLinkedAt &&
+                (!currentUser.displayName ||
+                    currentUser.displayName === currentUser.username) && (
+                    <WelcomeBackModal
+                        isOpen={showWelcomeModal}
+                        user={currentUser}
+                        onUpdateDisplayName={
+                            handleWelcomeModalUpdateDisplayName
+                        }
+                        onClose={handleWelcomeModalClose}
+                    />
+                )}
 
-            {showNewUserModal && (
-                <NewUserSetupModal
-                    user={currentUser}
-                    onCreate={handleNewUserCreate}
-                    onClose={handleNewUserModalClose}
-                />
-            )}
+            {showNewUserModal &&
+                currentUser &&
+                currentUser.linkedAt === currentUser.lastLinkedAt && (
+                    <NewUserSetupModal
+                        user={currentUser}
+                        onCreate={handleNewUserCreate}
+                        onClose={handleNewUserModalClose}
+                    />
+                )}
 
             <Footer />
         </div>

@@ -45,12 +45,35 @@ export default function Contact() {
             return;
         }
 
-        const content =
-            `**New Contact Submission**\n` +
-            `**Name:** ${form.name || "N/A"}\n` +
-            `**Discord ID:** ${form.discord}\n` +
-            `**Email:** ${form.email || "N/A"}\n` +
-            `**Reason:** ${form.reason}`;
+        const embed = {
+            title: "New Contact Submission",
+            color: 0x3b82f6, // Blue color
+            fields: [
+                {
+                    name: "Name",
+                    value: form.name || "N/A",
+                    inline: true,
+                },
+                {
+                    name: "Discord ID",
+                    value: form.discord,
+                    inline: true,
+                },
+                {
+                    name: "Email",
+                    value: form.email || "N/A",
+                    inline: true,
+                },
+                {
+                    name: "Reason",
+                    value: form.reason,
+                    inline: false,
+                },
+            ],
+            timestamp: new Date().toISOString(),
+        };
+
+        const content = { embeds: [embed] };
 
         try {
             await fetch(webhookUrl, {
@@ -78,7 +101,9 @@ export default function Contact() {
                         href={c.href}
                         className="bg-zinc-800 rounded-lg shadow p-6 hover:shadow-lg transition duration-300"
                     >
-                        <h3 className="text-lg font-semibold mb-2">{c.title}</h3>
+                        <h3 className="text-lg font-semibold mb-2">
+                            {c.title}
+                        </h3>
                         <p className="text-sm text-zinc-300">{c.description}</p>
                     </a>
                 ))}
@@ -129,7 +154,9 @@ export default function Contact() {
                         Send
                     </button>
                     {status && (
-                        <p className="text-sm text-center text-zinc-300">{status}</p>
+                        <p className="text-sm text-center text-zinc-300">
+                            {status}
+                        </p>
                     )}
                 </form>
             </div>

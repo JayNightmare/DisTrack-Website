@@ -33,6 +33,22 @@ export default function LinkAccount() {
         }
     }, [isLoggedIn, user]);
 
+    // Persist desired redirect if user is not logged in
+    useEffect(() => {
+        try {
+            if (!isLoggedIn) {
+                localStorage.setItem("post_login_redirect", "/link-account");
+            } else {
+                const stored = localStorage.getItem("post_login_redirect");
+                if (stored === "/link-account") {
+                    localStorage.removeItem("post_login_redirect");
+                }
+            }
+        } catch (e) {
+            console.warn("Redirect persistence unavailable", e);
+        }
+    }, [isLoggedIn]);
+
     // Countdown timers for expiry & cooldown
     useEffect(() => {
         if (!expiresAt && cooldown <= 0) return;
@@ -109,7 +125,15 @@ export default function LinkAccount() {
                             extension.
                         </p>
                         <button
-                            onClick={() => navigate("/login")}
+                            onClick={() => {
+                                try {
+                                    localStorage.setItem(
+                                        "post_login_redirect",
+                                        "/link-account"
+                                    );
+                                } catch (_) {}
+                                navigate("/login?redirect=/link-account");
+                            }}
                             className="px-5 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-md font-semibold"
                         >
                             Login with Discord

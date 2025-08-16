@@ -127,6 +127,11 @@ const DashboardCallback = () => {
                             `/user/${
                                 existingUser.user.userId || existingUser.id
                             }`;
+                        try {
+                            if (redirectPath) {
+                                localStorage.removeItem("post_login_redirect");
+                            }
+                        } catch (_) {}
                         navigate(dest, { replace: true });
                     }, 1500);
                 } else {
@@ -157,14 +162,15 @@ const DashboardCallback = () => {
 
     const handleNewUserModalClose = () => {
         setShowNewUserModal(false);
-        if (currentUser) {
-            const dest =
-                redirectPath || `/user/${currentUser.userId || currentUser.id}`;
-            navigate(dest, { replace: true });
-        } else {
-            const dest = redirectPath || "/login";
-            navigate(dest, { replace: true });
-        }
+        const dest = currentUser
+            ? redirectPath || `/user/${currentUser.userId || currentUser.id}`
+            : redirectPath || "/login";
+        try {
+            if (redirectPath) {
+                localStorage.removeItem("post_login_redirect");
+            }
+        } catch (_) {}
+        navigate(dest, { replace: true });
     };
 
     if (error) {

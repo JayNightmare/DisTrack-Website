@@ -6,7 +6,6 @@ import {
     createUser,
     updateUserDisplayName,
 } from "../services/discordAuth";
-import WelcomeBackModal from "./WelcomeBackModal";
 import NewUserSetupModal from "./NewUserSetupModal";
 import Navbar from "./navbar";
 import Footer from "./footer";
@@ -260,17 +259,6 @@ const DashboardCallback = () => {
                             )}
                     </>
                 )}
-
-            {/* Modals */}
-            {/* Welcome back modal (existing user missing proper display name) */}
-            {showWelcomeModal && currentUser && (
-                <WelcomeBackModal
-                    isOpen={showWelcomeModal}
-                    user={currentUser}
-                    onUpdateDisplayName={handleWelcomeModalUpdateDisplayName}
-                    onClose={handleWelcomeModalClose}
-                />
-            )}
 
             {/* New user setup modal */}
             {showNewUserModal && currentUser && (

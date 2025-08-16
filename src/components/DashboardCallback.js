@@ -262,30 +262,25 @@ const DashboardCallback = () => {
                 )}
 
             {/* Modals */}
-            {showWelcomeModal &&
-                currentUser &&
-                currentUser.linkedAt > currentUser.lastLinkedAt &&
-                (!currentUser.displayName ||
-                    currentUser.displayName === currentUser.username) && (
-                    <WelcomeBackModal
-                        isOpen={showWelcomeModal}
-                        user={currentUser}
-                        onUpdateDisplayName={
-                            handleWelcomeModalUpdateDisplayName
-                        }
-                        onClose={handleWelcomeModalClose}
-                    />
-                )}
+            {/* Welcome back modal (existing user missing proper display name) */}
+            {showWelcomeModal && currentUser && (
+                <WelcomeBackModal
+                    isOpen={showWelcomeModal}
+                    user={currentUser}
+                    onUpdateDisplayName={handleWelcomeModalUpdateDisplayName}
+                    onClose={handleWelcomeModalClose}
+                />
+            )}
 
-            {showNewUserModal &&
-                currentUser &&
-                currentUser.linkedAt === currentUser.lastLinkedAt && (
-                    <NewUserSetupModal
-                        user={currentUser}
-                        onCreate={handleNewUserCreate}
-                        onClose={handleNewUserModalClose}
-                    />
-                )}
+            {/* New user setup modal */}
+            {showNewUserModal && currentUser && (
+                <NewUserSetupModal
+                    isOpen={showNewUserModal}
+                    discordUser={currentUser}
+                    onCreateUser={handleNewUserCreate}
+                    onClose={handleNewUserModalClose}
+                />
+            )}
 
             <Footer />
         </div>

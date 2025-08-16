@@ -81,7 +81,7 @@ const faqData = [
                     Contact Support
                 </Link>
                 <a
-                    href="https://discord.gg/"
+                    href="https://discord.gg/Zx45G4pZ3J"
                     className="inline-block px-2 py-1 mt-3 text-base
                                 font-semibold text-white bg-black
                                 rounded-lg shadow-md
@@ -169,7 +169,7 @@ const faqData = [
                     Contact Support
                 </Link>
                 <a
-                    href="https://discord.gg/"
+                    href="https://discord.gg/Zx45G4pZ3J"
                     className="inline-block px-2 py-1 mt-3 text-base
                                 font-semibold text-white bg-black
                                 rounded-lg shadow-md
@@ -197,7 +197,7 @@ const faqData = [
                     Contact Support
                 </Link>
                 <a
-                    href="https://discord.gg/"
+                    href="https://discord.gg/Zx45G4pZ3J"
                     className="inline-block px-2 py-1 mt-3 text-base
                                 font-semibold text-white bg-black
                                 rounded-lg shadow-md

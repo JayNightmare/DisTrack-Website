@@ -19,7 +19,7 @@ const Footer = () => {
                     <span className="mx-2">|</span>
                     <a
                         className="text-white-500 hover:text-indigo transition duration-300"
-                        href="https://discord.gg/"
+                        href="https://discord.gg/Zx45G4pZ3J"
                     >
                         Discord
                     </a>

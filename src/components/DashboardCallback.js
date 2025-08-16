@@ -74,7 +74,7 @@ const DashboardCallback = () => {
                 }
 
                 // Validate userData structure
-                if (!userData || !userData.userId) {
+                if (!userData || !userData.user.userId) {
                     setError("Invalid user data structure");
                     setLoading(false);
                     return;
@@ -98,7 +98,7 @@ const DashboardCallback = () => {
                 }
 
                 // Check if user exists in our database
-                const userCheck = await checkUserExists(userData.userId);
+                const userCheck = await checkUserExists(userData.user.userId);
                 console.log("User check result:", userCheck);
 
                 if (userCheck.exists) {

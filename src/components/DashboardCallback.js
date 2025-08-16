@@ -112,7 +112,9 @@ const DashboardCallback = () => {
                     login(existingUser);
                     setTimeout(() => {
                         navigate(
-                            `/user/${existingUser.userId || existingUser.id}`,
+                            `/user/${
+                                existingUser.user.userId || existingUser.id
+                            }`,
                             { replace: true }
                         );
                     }, 3000);
@@ -196,15 +198,24 @@ const DashboardCallback = () => {
                 </div>
             )}
 
-            {/* Navigate to user profile if user is properly set up */}
+            {/* Check linkedAt vs lastLinkedAt for navigation logic */}
             {currentUser &&
-                !showNewUserModal &&
-                !loading &&
-                currentUser.displayName && (
-                    <Navigate
-                        to={`/user/${currentUser.userId || currentUser.id}`}
-                        replace
-                    />
+                currentUser.linkedAt &&
+                currentUser.lastLinkedAt && (
+                    <>
+                        {/* If lastLinkedAt > linkedAt and user has proper displayName, go to profile */}
+                        {currentUser.lastLinkedAt > currentUser.linkedAt &&
+                            currentUser.displayName &&
+                            currentUser.displayName !==
+                                currentUser.username && (
+                                <Navigate
+                                    to={`/user/${
+                                        currentUser.userId || currentUser.id
+                                    }`}
+                                    replace
+                                />
+                            )}
+                    </>
                 )}
 
             {/* New user setup modal */}

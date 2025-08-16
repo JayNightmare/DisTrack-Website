@@ -109,7 +109,7 @@ const DashboardCallback = () => {
                     console.log("Existing user:", existingUser.user);
                     setCurrentUser(existingUser.user);
 
-                    login(existingUser.user.userId);
+                    login(existingUser.user);
                     setTimeout(() => {
                         navigate(
                             `/user/${

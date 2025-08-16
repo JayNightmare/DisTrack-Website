@@ -68,20 +68,14 @@ const LeaderboardTable = ({ filter }) => {
         );
     }
 
-    const formatTime = (totalSeconds) => {
-        if (!totalSeconds) return "No Time Recorded";
-
-        const hours = Math.floor((totalSeconds % 86400) / 3600);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        let seconds = totalSeconds % 60;
-        seconds = Math.ceil(seconds);
-
+    // * Format the time (seconds) to hours and minutes
+    const formatTime = (seconds) => {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
         const parts = [];
         if (hours > 0) parts.push(`${hours}h`);
         if (minutes > 0) parts.push(`${minutes}m`);
-        if (seconds > 0 || parts.length === 0) parts.push(`${seconds}s`);
-
-        return parts.join(" ");
+        return parts.length > 0 ? parts.join(" ") : "0m";
     };
 
     return (

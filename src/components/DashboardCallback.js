@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import {
-    checkUserExists,
-    createUser,
-    updateUserDisplayName,
-} from "../services/discordAuth";
+import { checkUserExists, createUser } from "../services/discordAuth";
 import NewUserSetupModal from "./NewUserSetupModal";
 import Navbar from "./navbar";
 import Footer from "./footer";
@@ -19,7 +15,6 @@ const DashboardCallback = () => {
     const [error, setError] = useState(null);
 
     // Modal states
-    const [showWelcomeModal, setShowWelcomeModal] = useState(false);
     const [showNewUserModal, setShowNewUserModal] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
 
@@ -114,27 +109,13 @@ const DashboardCallback = () => {
                     console.log("Existing user:", existingUser.user);
                     setCurrentUser(existingUser.user);
 
-                    // Check if user needs to set display name
-                    const needsDisplayName =
-                        !existingUser.displayName ||
-                        existingUser.displayName === "Anonymous" ||
-                        existingUser.displayName.includes("Anonymous");
-
-                    if (needsDisplayName) {
-                        setShowWelcomeModal(true);
-                        setLoading(false);
-                    } else {
-                        // User is all set, log them in
-                        login(existingUser);
-                        setTimeout(() => {
-                            navigate(
-                                `/user/${
-                                    existingUser.userId || existingUser.id
-                                }`,
-                                { replace: true }
-                            );
-                        }, 3000);
-                    }
+                    login(existingUser);
+                    setTimeout(() => {
+                        navigate(
+                            `/user/${existingUser.userId || existingUser.id}`,
+                            { replace: true }
+                        );
+                    }, 3000);
                 } else {
                     // New user - show setup modal
                     setShowNewUserModal(true);
@@ -149,31 +130,6 @@ const DashboardCallback = () => {
 
         handleAuth();
     }, [searchParams, navigate, login]);
-
-    const handleWelcomeModalUpdateDisplayName = async (displayName) => {
-        try {
-            const updatedUser = await updateUserDisplayName(
-                currentUser.userId,
-                displayName
-            );
-            login(updatedUser);
-            setShowWelcomeModal(false);
-            navigate(`/user/${updatedUser.userId || updatedUser.id}`, {
-                replace: true,
-            });
-        } catch (error) {
-            throw error;
-        }
-    };
-
-    const handleWelcomeModalClose = () => {
-        // User skipped display name update
-        login(currentUser);
-        setShowWelcomeModal(false);
-        navigate(`/user/${currentUser.userId || currentUser.id}`, {
-            replace: true,
-        });
-    };
 
     const handleNewUserCreate = async (discordUser, displayName) => {
         try {

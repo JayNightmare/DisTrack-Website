@@ -1,12 +1,13 @@
 /*
 Object Returned from the Leaderboard API 
 {
-  "userId": "373097473553727488",
-  "username": "jaynightmare",
-  "rank": 1,
-  "totalTime": 6976616.682999989,
-  "rankDelta": 0,
-  "previousRank": 1
+    "userId": "373097473553727488",
+    "username": "jaynightmare",
+    "displayName": "Jay",
+    "rank": 1,
+    "totalTime": 6976616.682999989,
+    "rankDelta": 0,
+    "previousRank": 1
 }
 */
 

@@ -57,21 +57,3 @@ export const createUser = async (discordUser, displayName) => {
         throw error;
     }
 };
-
-export const updateUserDisplayName = async (userId, displayName) => {
-    try {
-        const response = await axios.put(
-            `${API_ENDPOINT}/user/${userId}`,
-            {
-                displayName: displayName,
-            },
-            {
-                headers: { Authorization: `Bearer ${API_KEY}` },
-            }
-        );
-        return response.data;
-    } catch (error) {
-        console.error("Update display name error:", error);
-        throw error;
-    }
-};

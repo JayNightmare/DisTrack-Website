@@ -8,6 +8,7 @@ const LeaderboardTable = ({ filter }) => {
     const [leaderboardData, setLeaderboardData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [timeUntilReset, setTimeUntilReset] = useState(null);
 
     if (filter === "All Time") {
         filter = "allTime";
@@ -43,6 +44,23 @@ const LeaderboardTable = ({ filter }) => {
 
         fetchLeaderboard();
     }, [filter]); // Refetch when filter changes
+
+    // Add this useEffect to update the countdown every second
+    useEffect(() => {
+        const updateCountdown = () => {
+            const timeLeft = getTimeUntilNextReset(filter);
+            setTimeUntilReset(timeLeft);
+        };
+
+        // Update immediately
+        updateCountdown();
+
+        // Set up interval to update every second
+        const interval = setInterval(updateCountdown, 1000);
+
+        // Cleanup interval on component unmount or filter change
+        return () => clearInterval(interval);
+    }, [filter]);
 
     const displayData = leaderboardData.length > 0 ? leaderboardData : null;
 
@@ -105,13 +123,14 @@ const LeaderboardTable = ({ filter }) => {
     return (
         <div className="overflow-x-auto">
             {/* Display the time till next reset based on the filter selected */}
-            <div className="py-4 px-6 text-zinc-400">
-                Time until next reset:{" "}
-                <span className="font-mono">
-                    Time till next reset:{" "}
-                    {formatTime(getTimeUntilNextReset(filter))}
-                </span>
-            </div>
+            {timeUntilReset !== null && filter !== "allTime" && (
+                <div className="py-4 px-6 text-zinc-400">
+                    Time until next reset:{" "}
+                    <span className="font-mono text-indigo-400">
+                        {formatTime(timeUntilReset)}
+                    </span>
+                </div>
+            )}
             <table className="min-w-full divide-y divide-zinc-700">
                 <thead>
                     <tr className="text-left">
@@ -178,7 +197,6 @@ const LeaderboardTable = ({ filter }) => {
                     ))}
                 </tbody>
             </table>
-
             {displayData.length === 0 && !loading && (
                 <div className="text-center py-8 text-zinc-400">
                     <p>No leaderboard data available</p>

@@ -2,42 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://distrack.endpoint-system.uk/</loc>
+    <loc>https://distrack.nexusgit.info/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://distrack.endpoint-system.uk/contact</loc>
+    <loc>https://distrack.nexusgit.info/contact</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://distrack.endpoint-system.uk/dashboard</loc>
+    <loc>https://distrack.nexusgit.info/dashboard</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://distrack.endpoint-system.uk/downloads</loc>
+    <loc>https://distrack.nexusgit.info/downloads</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://distrack.endpoint-system.uk/faq</loc>
+    <loc>https://distrack.nexusgit.info/faq</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://distrack.endpoint-system.uk/leaderboard</loc>
+    <loc>https://distrack.nexusgit.info/leaderboard</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://distrack.endpoint-system.uk/showcase</loc>
+    <loc>https://distrack.nexusgit.info/showcase</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://distrack.endpoint-system.uk/user</loc>
+    <loc>https://distrack.nexusgit.info/user</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

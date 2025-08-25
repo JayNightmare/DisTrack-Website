@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://distrack.endpoint-system.uk/sitemap.xml
+Sitemap: https://distrack.nexusgit.info/sitemap.xml

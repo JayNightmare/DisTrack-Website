@@ -7,7 +7,7 @@ import { writeFile } from "fs/promises";
 import { resolve } from "path";
 import { readdir } from "fs/promises";
 
-const BASE_URL = "https://distrack.endpoint-system.uk/DisTrack-Website";
+const BASE_URL = "https://distrack.nexusgit.info/DisTrack-Website";
 
 const pagesDir = resolve("../pages");
 const pageFiles = await readdir(pagesDir);

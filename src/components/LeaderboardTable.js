@@ -10,22 +10,28 @@ const LeaderboardTable = ({ filter }) => {
     const [error, setError] = useState(null);
     const [timeUntilReset, setTimeUntilReset] = useState(null);
 
-    if (filter === "All Time") {
-        filter = "allTime";
-    } else if (filter === "This Month") {
-        filter = "month";
-    } else if (filter === "This Week") {
-        filter = "week";
-    } else if (filter === "Today") {
-        filter = "day";
-    }
+    // Normalize the incoming filter prop to internal keys without mutating the prop
+    const period = (function mapFilter(f) {
+        switch (f) {
+            case "All Time":
+                return "allTime";
+            case "This Month":
+                return "month";
+            case "This Week":
+                return "week";
+            case "Today":
+                return "day";
+            default:
+                return f; // assume already normalized
+        }
+    })(filter);
 
     useEffect(() => {
         const fetchLeaderboard = async () => {
             setLoading(true);
             setError(null);
             try {
-                const currentData = await getLeaderboardByFilter(filter);
+                const currentData = await getLeaderboardByFilter(period);
 
                 // Calculate delta rankings to show trends (without previous data for now)
                 const dataWithTrends = calculateDeltaRankings(
@@ -43,48 +49,66 @@ const LeaderboardTable = ({ filter }) => {
         };
 
         fetchLeaderboard();
-    }, [filter]); // Refetch when filter changes
+    }, [period]); // Refetch when filter changes
 
     // Add this useEffect to update the countdown every second
     useEffect(() => {
-        const getTimeUntilNextReset = (filter) => {
-            const now = Date.now();
-            const resetTime = new Date();
+        // Calculate seconds until the NEXT boundary of the selected period.
+        // Assumptions:
+        //  - Day resets at local midnight
+        //  - Week resets Monday 00:00 local time (change WEEK_RESET_DAY if needed: 1=Mon, 0=Sun)
+        //  - Month resets on the 1st of next month 00:00 local time
+        const WEEK_RESET_DAY = 1; // 1 = Monday. Set to 0 for Sunday resets if desired.
 
-            switch (filter) {
-                case "allTime":
-                    // No reset for all time
-                    return null;
-                case "month":
-                    resetTime.setMonth(resetTime.getMonth() + 1);
+        const getTimeUntilNextReset = (p) => {
+            if (p === "allTime") return null;
+            const now = new Date();
+            let target;
+
+            switch (p) {
+                case "day": {
+                    target = new Date(now);
+                    target.setDate(now.getDate() + 1);
+                    target.setHours(0, 0, 0, 0);
                     break;
-                case "week":
-                    resetTime.setDate(resetTime.getDate() + 7);
+                }
+                case "week": {
+                    const dayOfWeek = now.getDay(); // 0=Sun ... 6=Sat
+                    let daysUntilReset = (WEEK_RESET_DAY - dayOfWeek + 7) % 7;
+                    if (daysUntilReset === 0) daysUntilReset = 7; // if already at reset day, go to next week
+                    target = new Date(now);
+                    target.setDate(now.getDate() + daysUntilReset);
+                    target.setHours(0, 0, 0, 0);
                     break;
-                case "day":
-                    resetTime.setDate(resetTime.getDate() + 1);
+                }
+                case "month": {
+                    target = new Date(
+                        now.getFullYear(),
+                        now.getMonth() + 1,
+                        1,
+                        0,
+                        0,
+                        0,
+                        0
+                    );
                     break;
+                }
                 default:
                     return null;
             }
 
-            return Math.max(0, Math.floor((resetTime - now) / 1000));
+            const diffMs = target - now;
+            return diffMs <= 0 ? 0 : Math.floor(diffMs / 1000);
         };
 
         const updateCountdown = () => {
-            const timeLeft = getTimeUntilNextReset(filter);
-            setTimeUntilReset(timeLeft);
+            setTimeUntilReset(getTimeUntilNextReset(period));
         };
 
-        // Update immediately
         updateCountdown();
-
-        // Set up interval to update every second
         const interval = setInterval(updateCountdown, 1000);
-
-        // Cleanup interval on component unmount or filter change
         return () => clearInterval(interval);
-    }, [filter]);
+    }, [period]);
 
     const displayData = leaderboardData.length > 0 ? leaderboardData : null;
 
@@ -112,18 +136,19 @@ const LeaderboardTable = ({ filter }) => {
 
     // * Format the time (seconds) to hours and minutes
     const formatTime = (seconds) => {
+        if (seconds == null) return "";
         const hours = Math.floor(seconds / 3600);
-        const minutes = Math.floor((seconds % 3600) / 60);
+        const minutes = Math.floor(seconds / 60);
         const parts = [];
         if (hours > 0) parts.push(`${hours}h`);
-        if (minutes > 0) parts.push(`${minutes}m`);
-        return parts.length > 0 ? parts.join(" ") : "0m";
+        if (minutes > 0 || parts.length === 0) parts.push(`${minutes}m`);
+        return parts.join(" ");
     };
 
     return (
         <div className="overflow-x-auto">
             {/* Display the time till next reset based on the filter selected */}
-            {timeUntilReset !== null && filter !== "allTime" && (
+            {timeUntilReset !== null && period !== "allTime" && (
                 <div className="py-4 px-6 text-zinc-400">
                     Time until next reset:{" "}
                     <span className="font-mono text-indigo-400">

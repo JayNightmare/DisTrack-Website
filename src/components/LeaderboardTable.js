@@ -78,8 +78,40 @@ const LeaderboardTable = ({ filter }) => {
         return parts.length > 0 ? parts.join(" ") : "0m";
     };
 
+    const getTimeUntilNextReset = (filter) => {
+        const now = Date.now();
+        const resetTime = new Date();
+
+        switch (filter) {
+            case "allTime":
+                // No reset for all time
+                return null;
+            case "month":
+                resetTime.setMonth(resetTime.getMonth() + 1);
+                break;
+            case "week":
+                resetTime.setDate(resetTime.getDate() + 7);
+                break;
+            case "day":
+                resetTime.setDate(resetTime.getDate() + 1);
+                break;
+            default:
+                return null;
+        }
+
+        return Math.max(0, Math.floor((resetTime - now) / 1000));
+    };
+
     return (
         <div className="overflow-x-auto">
+            {/* Display the time till next reset based on the filter selected */}
+            <div className="py-4 px-6 text-zinc-400">
+                Time until next reset:{" "}
+                <span className="font-mono">
+                    Time till next reset:{" "}
+                    {formatTime(getTimeUntilNextReset(filter))}
+                </span>
+            </div>
             <table className="min-w-full divide-y divide-zinc-700">
                 <thead>
                     <tr className="text-left">

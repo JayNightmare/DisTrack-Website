@@ -47,6 +47,30 @@ const LeaderboardTable = ({ filter }) => {
 
     // Add this useEffect to update the countdown every second
     useEffect(() => {
+        const getTimeUntilNextReset = (filter) => {
+            const now = Date.now();
+            const resetTime = new Date();
+
+            switch (filter) {
+                case "allTime":
+                    // No reset for all time
+                    return null;
+                case "month":
+                    resetTime.setMonth(resetTime.getMonth() + 1);
+                    break;
+                case "week":
+                    resetTime.setDate(resetTime.getDate() + 7);
+                    break;
+                case "day":
+                    resetTime.setDate(resetTime.getDate() + 1);
+                    break;
+                default:
+                    return null;
+            }
+
+            return Math.max(0, Math.floor((resetTime - now) / 1000));
+        };
+
         const updateCountdown = () => {
             const timeLeft = getTimeUntilNextReset(filter);
             setTimeUntilReset(timeLeft);
@@ -94,30 +118,6 @@ const LeaderboardTable = ({ filter }) => {
         if (hours > 0) parts.push(`${hours}h`);
         if (minutes > 0) parts.push(`${minutes}m`);
         return parts.length > 0 ? parts.join(" ") : "0m";
-    };
-
-    const getTimeUntilNextReset = (filter) => {
-        const now = Date.now();
-        const resetTime = new Date();
-
-        switch (filter) {
-            case "allTime":
-                // No reset for all time
-                return null;
-            case "month":
-                resetTime.setMonth(resetTime.getMonth() + 1);
-                break;
-            case "week":
-                resetTime.setDate(resetTime.getDate() + 7);
-                break;
-            case "day":
-                resetTime.setDate(resetTime.getDate() + 1);
-                break;
-            default:
-                return null;
-        }
-
-        return Math.max(0, Math.floor((resetTime - now) / 1000));
     };
 
     return (

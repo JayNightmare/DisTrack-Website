@@ -378,13 +378,19 @@ export default function UserStats({ userId, languageData }) {
                     getUserFilterStats(userId, startDate, endDate),
                 ]);
                 if (cancelled) return;
+
+                const langStats = normalizeLanguages(l);
+
                 setHeatmap(normalizeHeatmap(h));
-                setLanguages(normalizeLanguages(l));
+                setLanguages(
+                    Object.entries(langStats.totals)
+                        .map(([name, seconds]) => ({ name, seconds }))
+                        .sort((a, b) => b.seconds - a.seconds)
+                );
                 setSeries30(normalizeDailySeries(s));
 
                 // Log Results for Debugging
                 console.log("Heatmap Data:", h);
-                console.log("Language Data:", l);
                 console.log("30-Day Series Data:", s);
             } catch (e) {
                 if (!cancelled) setError("Failed to load user stats");

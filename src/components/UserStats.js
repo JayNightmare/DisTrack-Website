@@ -282,7 +282,7 @@ const LanguageBars = ({ items }) => {
     const total = items.reduce((a, b) => a + b.seconds, 0) || 1;
     return (
         <div className="space-y-2">
-            {items.slice(0, 6).map((l) => {
+            {items.slice(0, 5).map((l) => {
                 const pct = Math.round((l.seconds / total) * 100);
                 return (
                     <div key={l.name} className="space-y-1">
@@ -314,7 +314,7 @@ const LanguageBars = ({ items }) => {
 const Heatmap = ({ series }) => {
     // We'll render last 28 weeks (~7 months) to keep it compact
     const weeks = 28;
-    const days = 7;
+    const days = 14;
     const grid = [];
     const byDate = new Map(series.map((d) => [d.date, d.seconds]));
     const today = new Date();

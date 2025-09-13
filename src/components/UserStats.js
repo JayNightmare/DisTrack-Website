@@ -301,7 +301,7 @@ const LanguageBars = ({ items }) => {
                         </div>
                         {/* Time spent */}
                         <div className="text-xs text-zinc-400">
-                            {secondsToShort(l.seconds)}
+                            Time Spent: {secondsToShort(l.seconds)}
                         </div>
                     </div>
                 );

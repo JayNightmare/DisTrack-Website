@@ -280,7 +280,13 @@ const Heatmap = ({ series }) => {
         for (let d = 0; d < days; d++) {
             const cell = new Date(today);
             cell.setDate(today.getDate() - (w * 7 + (days - 1 - d)));
-            const iso = toISODate(cell);
+            // Ensure date is formatted as YYYY-MM-DD
+            const iso =
+                cell.getFullYear() +
+                "-" +
+                String(cell.getMonth() + 1).padStart(2, "0") +
+                "-" +
+                String(cell.getDate()).padStart(2, "0");
             const seconds = byDate.get(iso) || 0;
             col.push({ iso, seconds });
         }

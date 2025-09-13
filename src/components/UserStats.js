@@ -265,7 +265,7 @@ const Heatmap = ({ series }) => {
 export default function UserStats({ userId, languageData }) {
     const [loading, setLoading] = useState(true);
     const [heatmap, setHeatmap] = useState([]);
-    const [languages, setLanguages] = useState(languageData || []);
+    const [languages, setLanguages] = useState([]);
     const [series30, setSeries30] = useState([]);
     const [error, setError] = useState(null);
 

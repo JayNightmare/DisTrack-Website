@@ -435,7 +435,7 @@ export default function UserStats({ userId, languageData }) {
     }
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 hl-grid gap-6">
             {/* Heatmap */}
             <div className="bg-zinc-900/50 border border-zinc-700/50 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-2">

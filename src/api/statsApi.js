@@ -62,7 +62,7 @@ export const getUserLanguageStats = async (userId, startDate, endDate) => {
     }
     try {
         const response = await axios.get(
-            `${endpointUrl}/stats/${userId}/languages/filter`,
+            `${endpointUrl}/stats/${userId}/languages`,
             {
                 headers: { Authorization: `Bearer ${apiToken}` },
                 params: { startDate, endDate },

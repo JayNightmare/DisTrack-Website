@@ -305,7 +305,10 @@ export default function User() {
                             </div>
                         </div>
                         <div className="md:col-span-2">
-                            <UserStats userId={id} />
+                            <UserStats
+                                userId={id}
+                                languageData={user.languages}
+                            />
                         </div>
                     </div>
                 )}

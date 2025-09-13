@@ -57,27 +57,27 @@ const normalizeDailySeries = (payload) => {
 
 const normalizeHeatmap = (payload) => normalizeDailySeries(payload);
 
-const normalizeLanguages = (payload) => {
-    // expected: [{ language: 'X', seconds: n }]
-    if (!payload) return [];
-    if (Array.isArray(payload)) {
-        return payload
-            .map((l) => {
-                const name = l.language || l.name || l.lang || l.key;
-                const seconds =
-                    l.seconds ?? l.totalSeconds ?? l.duration ?? l.time ?? 0;
-                return name ? { name, seconds } : null;
-            })
-            .filter(Boolean)
-            .sort((a, b) => b.seconds - a.seconds);
-    }
-    if (typeof payload === "object") {
-        return Object.entries(payload)
-            .map(([name, seconds]) => ({ name, seconds: Number(seconds) || 0 }))
-            .sort((a, b) => b.seconds - a.seconds);
-    }
-    return [];
-};
+// const normalizeLanguages = (payload) => {
+//     // expected: [{ language: 'X', seconds: n }]
+//     if (!payload) return [];
+//     if (Array.isArray(payload)) {
+//         return payload
+//             .map((l) => {
+//                 const name = l.language || l.name || l.lang || l.key;
+//                 const seconds =
+//                     l.seconds ?? l.totalSeconds ?? l.duration ?? l.time ?? 0;
+//                 return name ? { name, seconds } : null;
+//             })
+//             .filter(Boolean)
+//             .sort((a, b) => b.seconds - a.seconds);
+//     }
+//     if (typeof payload === "object") {
+//         return Object.entries(payload)
+//             .map(([name, seconds]) => ({ name, seconds: Number(seconds) || 0 }))
+//             .sort((a, b) => b.seconds - a.seconds);
+//     }
+//     return [];
+// };
 
 // Streak utilities
 const computeStreaks = (series) => {
@@ -260,10 +260,10 @@ const Heatmap = ({ series }) => {
     );
 };
 
-export default function UserStats({ userId }) {
+export default function UserStats({ userId, languageData }) {
     const [loading, setLoading] = useState(true);
     const [heatmap, setHeatmap] = useState([]);
-    const [languages, setLanguages] = useState([]);
+    const [languages /* setLanguages */] = useState(languageData || []);
     const [series30, setSeries30] = useState([]);
     const [error, setError] = useState(null);
 
@@ -276,14 +276,14 @@ export default function UserStats({ userId }) {
                 const year = new Date().getFullYear();
                 const { startDate, endDate } = lastNDaysRange(30);
 
-                const [h, l, s] = await Promise.all([
+                const [h /*, l */, s] = await Promise.all([
                     getUserHeatmapStats(userId, year),
                     getUserLanguageStats(userId, startDate, endDate),
                     getUserFilterStats(userId, startDate, endDate),
                 ]);
                 if (cancelled) return;
                 setHeatmap(normalizeHeatmap(h));
-                setLanguages(normalizeLanguages(l));
+                // setLanguages(languageData || normalizeLanguages(l));
                 setSeries30(normalizeDailySeries(s));
             } catch (e) {
                 if (!cancelled) setError("Failed to load user stats");

@@ -6,6 +6,7 @@ import Particles from "../components/particles";
 import EditProfileModal from "../components/EditProfileModal";
 import { useAuth } from "../contexts/AuthContext";
 import { getUserProfile } from "../api/userApi";
+import UserStats from "../components/UserStats";
 
 export default function User() {
     const { id } = useParams();
@@ -302,6 +303,9 @@ export default function User() {
                                     )}
                                 </div>
                             </div>
+                        </div>
+                        <div className="md:col-span-2">
+                            <UserStats userId={id} />
                         </div>
                     </div>
                 )}

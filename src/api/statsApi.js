@@ -14,16 +14,21 @@ const endpointUrl = process.env.REACT_APP_API_ENDPOINT;
 const apiToken = process.env.REACT_APP_API_KEY;
 
 export const getGlobalStats = async () => {
-    const response = await axios.fetch(`${endpointUrl}/stats/global`, {
-        headers: { Authorization: `Bearer ${apiToken}` },
-    });
-
-    if (!response.ok) {
-        console.error("<< Failed to fetch stats:", response.statusText);
+    if (!endpointUrl || !apiToken) {
+        console.error(
+            "API endpoint or token is not set in environment variables."
+        );
         return null;
     }
-
-    return response.data;
+    try {
+        const response = await axios.get(`${endpointUrl}/stats/global`, {
+            headers: { Authorization: `Bearer ${apiToken}` },
+        });
+        return response.data;
+    } catch (error) {
+        console.error("<< Failed to fetch stats:", error);
+        return null;
+    }
 };
 
 export const getUserFilterStats = async (userId, startDate, endDate) => {

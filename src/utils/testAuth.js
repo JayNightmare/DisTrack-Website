@@ -1,12 +1,12 @@
 // Test utility to simulate authentication for debugging
 export const testLogin = () => {
     const testUser = {
-        id: "test123",
-        userId: "test123",
-        discordId: "123456789",
-        username: "TestUser",
-        displayName: "Test User",
-        bio: "This is a test user",
+        id: "373097473553727488",
+        userId: "373097473553727488",
+        discordId: "373097473553727488",
+        username: "jaynightmare",
+        displayName: "JayNightmare",
+        bio: "This is a test user for Distrack.",
         avatarUrl: "https://avatar.iran.liara.run/public",
         socials: {},
         email: "test@example.com",

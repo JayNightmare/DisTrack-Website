@@ -6,6 +6,12 @@ import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import Particles from "../components/particles";
 
+const { REACT_APP_DEVELOPMENT } = process.env;
+// Only enable test login in development mode
+const isDevelopment =
+    REACT_APP_DEVELOPMENT === "true" || REACT_APP_DEVELOPMENT === "1";
+console.log("isDevelopment:", isDevelopment);
+
 const Login = () => {
     const { user, isLoggedIn } = useAuth();
     const navigate = useNavigate();
@@ -69,6 +75,30 @@ const Login = () => {
                             >
                                 Install Extension
                             </Link>
+
+                            {/* Test User Login */}
+                            {/* If in development, show test login buttons */}
+                            {isDevelopment && (
+                                <div className="mt-4">
+                                    <button
+                                        onClick={() => {
+                                            // Using the testLogin function from utils/testAuth.js
+                                            window.testLogin();
+                                        }}
+                                        className="text-sm text-yellow-400 underline"
+                                    >
+                                        Login as Test User
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            window.testLogout();
+                                        }}
+                                        className="ml-4 text-sm text-red-400 underline"
+                                    >
+                                        Logout Test User
+                                    </button>
+                                </div>
+                            )}
                         </div>
 
                         <p className="text-zinc-400 text-sm text-center mt-4">

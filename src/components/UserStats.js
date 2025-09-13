@@ -55,7 +55,7 @@ const normalizeDailySeries = (payload) => {
     return [];
 };
 
-const normalizeHeatmap = (payload) => normalizeDailySeries(payload);
+// const normalizeHeatmap = (payload) => normalizeDailySeries(payload);
 
 const normalizeLanguages = (payload) => {
     /* expected:

@@ -340,7 +340,17 @@ export default function UserStats({ userId, languageData, userStreaks }) {
 
                 const langStats = normalizeLanguages(l);
 
-                setHeatmap(normalizeHeatmap(h));
+                // If h.daily?.series exists, use it for heatmap
+                if (h && h.daily && Array.isArray(h.daily.series)) {
+                    setHeatmap(
+                        h.daily.series.map((day) => ({
+                            date: day.date,
+                            seconds: Number(day.totalHours) * 3600,
+                        }))
+                    );
+                } else {
+                    setHeatmap(normalizeHeatmap(h));
+                }
                 setLanguages(
                     Object.entries(langStats.totals)
                         .map(([name, hours]) => ({

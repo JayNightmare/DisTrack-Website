@@ -354,17 +354,22 @@ export default function UserStats({ userId, languageData, userStreaks }) {
                 if (cancelled) return;
 
                 const langStats = normalizeLanguages(l);
-
-                // If h.daily?.series exists, use it for heatmap
-                if (h && h.daily && Array.isArray(h.daily.series)) {
-                    setHeatmap(
-                        h.daily.series.map((day) => ({
-                            date: day.date,
-                            seconds: Number(day.totalHours) * 3600,
-                        }))
-                    );
+                if (h && Array.isArray(h)) {
+                    const daysEntry = h.find((item) => item.date === "days");
+                    if (daysEntry) {
+                        setHeatmap(
+                            Object.entries(daysEntry.seconds).map(
+                                ([date, seconds]) => ({
+                                    date,
+                                    seconds,
+                                })
+                            )
+                        );
+                    } else {
+                        setHeatmap([]);
+                    }
                 } else {
-                    setHeatmap(normalizeHeatmap(h));
+                    setHeatmap([]);
                 }
                 setLanguages(
                     Object.entries(langStats.totals)

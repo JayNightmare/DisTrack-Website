@@ -266,6 +266,10 @@ const LanguageBars = ({ items }) => {
 
 // Year heatmap (simplified weekly blocks)
 const Heatmap = ({ series }) => {
+    // Debug: print incoming series
+    console.log("Heatmap series:", series);
+    // Debug: collect cell match info
+    const cellDebug = [];
     // Renders a square grid of 14 days x 26 weeks (double days and half year)
     const weeks = 26;
     const days = 14;
@@ -287,11 +291,16 @@ const Heatmap = ({ series }) => {
                 String(cell.getMonth() + 1).padStart(2, "0") +
                 "-" +
                 String(cell.getDate()).padStart(2, "0");
+            const hasMatch = byDate.has(iso);
             const seconds = byDate.get(iso) || 0;
+            cellDebug.push({ iso, hasMatch, seconds });
             col.push({ iso, seconds });
         }
         grid.push(col);
     }
+
+    // Debug: print cell match info
+    console.log("Heatmap cellDebug:", cellDebug);
 
     const max = Math.max(1, ...series.map((s) => s.seconds));
     const color = (v) => {

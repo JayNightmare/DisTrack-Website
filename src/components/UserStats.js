@@ -58,13 +58,82 @@ const normalizeDailySeries = (payload) => {
 const normalizeHeatmap = (payload) => normalizeDailySeries(payload);
 
 const normalizeLanguages = (payload) => {
-    // expected: [{ 'language': seconds }]
-    if (!payload) return [];
+    /* expected:
+        {
+            range: { start: YYYY-MM-DDT00:00:00.000Z, end: YYYY-MM-DDT00:00:00.000Z },
+            topLanguages: [ "name" ],
+            timeseries: [{ date: 'YYYY-MM-DD', languages: { name: seconds } }],
+            totals: { name: seconds },
+        }
+    */
+    if (!payload)
+        return {
+            range: null,
+            topLanguages: [],
+            timeseries: [],
+            totals: {},
+        };
+
+    // If payload is already in expected format
+    if (
+        typeof payload === "object" &&
+        payload !== null &&
+        (payload.range ||
+            payload.topLanguages ||
+            payload.timeseries ||
+            payload.totals)
+    ) {
+        // Normalize timeseries: [{ date, languages: { name: seconds } }]
+        let timeseries = Array.isArray(payload.timeseries)
+            ? payload.timeseries.map((ts) => ({
+                  date: ts.date || ts.day || ts.key || ts.timestamp,
+                  languages:
+                      typeof ts.languages === "object" && ts.languages !== null
+                          ? Object.fromEntries(
+                                Object.entries(ts.languages).map(
+                                    ([name, seconds]) => [
+                                        name,
+                                        Number(seconds) || 0,
+                                    ]
+                                )
+                            )
+                          : {},
+              }))
+            : [];
+
+        // Normalize totals: { name: seconds }
+        let totals =
+            typeof payload.totals === "object" && payload.totals !== null
+                ? Object.fromEntries(
+                      Object.entries(payload.totals).map(([name, seconds]) => [
+                          name,
+                          Number(seconds) || 0,
+                      ])
+                  )
+                : {};
+
+        // Normalize topLanguages: [ "name" ]
+        let topLanguages = Array.isArray(payload.topLanguages)
+            ? payload.topLanguages.filter(Boolean).map(String)
+            : [];
+
+        // Normalize range
+        let range = payload.range || null;
+
+        return {
+            range,
+            topLanguages,
+            timeseries,
+            totals,
+        };
+    }
+
+    // Fallback: array of languages
     if (Array.isArray(payload)) {
-        return payload
+        const arr = payload
             .map((l) => {
                 if (!l) return null;
-                const name = l.language || l.name || l.lang || l.key;
+                const name = l.topLanguage || l.name || l.lang || l.key;
                 let seconds =
                     l.seconds ?? l.totalSeconds ?? l.duration ?? l.time ?? 0;
                 seconds = Number(seconds) || 0;
@@ -72,13 +141,38 @@ const normalizeLanguages = (payload) => {
             })
             .filter(Boolean)
             .sort((a, b) => b.seconds - a.seconds);
+        // Convert to expected format
+        return {
+            range: null,
+            topLanguages: arr.map((l) => l.name),
+            timeseries: [],
+            totals: Object.fromEntries(arr.map((l) => [l.name, l.seconds])),
+        };
     }
-    if (typeof payload === "object") {
-        return Object.entries(payload)
+
+    // Fallback: plain object { name: seconds }
+    if (
+        typeof payload === "object" &&
+        payload !== null &&
+        !(payload instanceof Date)
+    ) {
+        const arr = Object.entries(payload)
             .map(([name, seconds]) => ({ name, seconds: Number(seconds) || 0 }))
             .sort((a, b) => b.seconds - a.seconds);
+        return {
+            range: null,
+            topLanguages: arr.map((l) => l.name),
+            timeseries: [],
+            totals: Object.fromEntries(arr.map((l) => [l.name, l.seconds])),
+        };
     }
-    return [];
+    // If nothing matches, return empty expected format
+    return {
+        range: null,
+        topLanguages: [],
+        timeseries: [],
+        totals: {},
+    };
 };
 
 // Streak utilities
@@ -285,9 +379,7 @@ export default function UserStats({ userId, languageData }) {
                 ]);
                 if (cancelled) return;
                 setHeatmap(normalizeHeatmap(h));
-                setLanguages(
-                    normalizeLanguages(languageData) || normalizeLanguages(l)
-                );
+                setLanguages(normalizeLanguages(l));
                 setSeries30(normalizeDailySeries(s));
 
                 // Log Results for Debugging

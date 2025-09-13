@@ -57,27 +57,29 @@ const normalizeDailySeries = (payload) => {
 
 const normalizeHeatmap = (payload) => normalizeDailySeries(payload);
 
-// const normalizeLanguages = (payload) => {
-//     // expected: [{ language: 'X', seconds: n }]
-//     if (!payload) return [];
-//     if (Array.isArray(payload)) {
-//         return payload
-//             .map((l) => {
-//                 const name = l.language || l.name || l.lang || l.key;
-//                 const seconds =
-//                     l.seconds ?? l.totalSeconds ?? l.duration ?? l.time ?? 0;
-//                 return name ? { name, seconds } : null;
-//             })
-//             .filter(Boolean)
-//             .sort((a, b) => b.seconds - a.seconds);
-//     }
-//     if (typeof payload === "object") {
-//         return Object.entries(payload)
-//             .map(([name, seconds]) => ({ name, seconds: Number(seconds) || 0 }))
-//             .sort((a, b) => b.seconds - a.seconds);
-//     }
-//     return [];
-// };
+const normalizeLanguages = (payload) => {
+    // expected: [{ 'language': seconds }]
+    if (!payload) return [];
+    if (Array.isArray(payload)) {
+        return payload
+            .map((l) => {
+                if (!l) return null;
+                const name = l.language || l.name || l.lang || l.key;
+                let seconds =
+                    l.seconds ?? l.totalSeconds ?? l.duration ?? l.time ?? 0;
+                seconds = Number(seconds) || 0;
+                return name ? { name, seconds } : null;
+            })
+            .filter(Boolean)
+            .sort((a, b) => b.seconds - a.seconds);
+    }
+    if (typeof payload === "object") {
+        return Object.entries(payload)
+            .map(([name, seconds]) => ({ name, seconds: Number(seconds) || 0 }))
+            .sort((a, b) => b.seconds - a.seconds);
+    }
+    return [];
+};
 
 // Streak utilities
 const computeStreaks = (series) => {
@@ -263,7 +265,7 @@ const Heatmap = ({ series }) => {
 export default function UserStats({ userId, languageData }) {
     const [loading, setLoading] = useState(true);
     const [heatmap, setHeatmap] = useState([]);
-    const [languages /* setLanguages */] = useState(languageData || []);
+    const [languages, setLanguages] = useState(languageData || []);
     const [series30, setSeries30] = useState([]);
     const [error, setError] = useState(null);
 
@@ -276,15 +278,20 @@ export default function UserStats({ userId, languageData }) {
                 const year = new Date().getFullYear();
                 const { startDate, endDate } = lastNDaysRange(30);
 
-                const [h /*, l */, s] = await Promise.all([
+                const [h, l, s] = await Promise.all([
                     getUserHeatmapStats(userId, year),
                     getUserLanguageStats(userId, startDate, endDate),
                     getUserFilterStats(userId, startDate, endDate),
                 ]);
                 if (cancelled) return;
                 setHeatmap(normalizeHeatmap(h));
-                // setLanguages(languageData || normalizeLanguages(l));
+                setLanguages(languageData || normalizeLanguages(l));
                 setSeries30(normalizeDailySeries(s));
+
+                // Log Results for Debugging
+                console.log("Heatmap Data:", h);
+                console.log("Language Data:", languageData || l);
+                console.log("30-Day Series Data:", s);
             } catch (e) {
                 if (!cancelled) setError("Failed to load user stats");
                 // eslint-disable-next-line no-console
@@ -297,7 +304,7 @@ export default function UserStats({ userId, languageData }) {
         return () => {
             cancelled = true;
         };
-    }, [userId]);
+    }, [userId, languageData]);
 
     const streaks = useMemo(() => computeStreaks(heatmap), [heatmap]);
 

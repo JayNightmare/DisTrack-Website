@@ -384,7 +384,10 @@ export default function UserStats({ userId, languageData }) {
                 setHeatmap(normalizeHeatmap(h));
                 setLanguages(
                     Object.entries(langStats.totals)
-                        .map(([name, seconds]) => ({ name, seconds }))
+                        .map(([name, hours]) => ({
+                            name,
+                            seconds: Number(hours) * 3600,
+                        }))
                         .sort((a, b) => b.seconds - a.seconds)
                 );
                 setSeries30(normalizeDailySeries(s));

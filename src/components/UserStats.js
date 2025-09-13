@@ -312,8 +312,8 @@ const LanguageBars = ({ items }) => {
 
 // Year heatmap (simplified weekly blocks)
 const Heatmap = ({ series }) => {
-    // We'll render last 28 weeks (~7 months) to keep it compact
-    const weeks = 28;
+    // Renders a square grid of 14 days x 26 weeks (double days and half year)
+    const weeks = 26;
     const days = 14;
     const grid = [];
     const byDate = new Map(series.map((d) => [d.date, d.seconds]));

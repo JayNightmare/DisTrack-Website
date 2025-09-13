@@ -292,7 +292,6 @@ export default function UserStats({ userId, languageData }) {
 
                 // Log Results for Debugging
                 console.log("Heatmap Data:", h);
-                console.log("Language Data:", languageData || l);
                 console.log("30-Day Series Data:", s);
             } catch (e) {
                 if (!cancelled) setError("Failed to load user stats");

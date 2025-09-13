@@ -285,7 +285,9 @@ export default function UserStats({ userId, languageData }) {
                 ]);
                 if (cancelled) return;
                 setHeatmap(normalizeHeatmap(h));
-                setLanguages(languageData || normalizeLanguages(l));
+                setLanguages(
+                    normalizeLanguages(languageData) || normalizeLanguages(l)
+                );
                 setSeries30(normalizeDailySeries(s));
 
                 // Log Results for Debugging
@@ -328,11 +330,11 @@ export default function UserStats({ userId, languageData }) {
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Streaks + Heatmap */}
+            {/* Heatmap */}
             <div className="bg-zinc-900/50 border border-zinc-700/50 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-2">
                     <h3 className="text-sm font-semibold text-zinc-300">
-                        Streaks
+                        Heatmap
                     </h3>
                     <div className="text-xs text-zinc-400">
                         Longest:{" "}

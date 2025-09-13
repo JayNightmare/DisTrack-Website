@@ -122,6 +122,11 @@ export default function User() {
         );
     };
 
+    const userStreaks = {
+        current: user.currentStreak,
+        longest: user.longestStreak,
+    } || { current: 0, longest: 0 };
+
     return (
         <div className="min-h-screen text-white p-8 space-y-6 bg-gradient-to-tl via-zinc-600/20 to-black from-black">
             <Navbar />
@@ -308,6 +313,7 @@ export default function User() {
                             <UserStats
                                 userId={id}
                                 languageData={user.languages}
+                                userStreaks={userStreaks}
                             />
                         </div>
                     </div>

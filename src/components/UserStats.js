@@ -175,52 +175,6 @@ const normalizeLanguages = (payload) => {
     };
 };
 
-// Streak utilities
-const computeStreaks = (series) => {
-    // series must be normalized, sorted by date asc
-    if (!series?.length) return { current: 0, longest: 0 };
-    const set = new Set(series.filter((d) => d.seconds > 0).map((d) => d.date));
-    let longest = 0;
-    let current = 0;
-
-    // iterate from oldest to newest to find longest
-    let run = 0;
-    let prevDate = null;
-    for (const d of series) {
-        if (d.seconds <= 0) {
-            run = 0;
-            prevDate = d.date;
-            continue;
-        }
-        if (!prevDate) {
-            run = 1;
-        } else {
-            const prev = new Date(prevDate);
-            const cur = new Date(d.date);
-            const diff = (cur - prev) / (1000 * 60 * 60 * 24);
-            run = diff === 1 ? run + 1 : 1;
-        }
-        longest = Math.max(longest, run);
-        prevDate = d.date;
-    }
-
-    // current streak: count backward from today
-    let today = new Date();
-    today.setHours(0, 0, 0, 0);
-    let curRun = 0;
-    while (true) {
-        const iso = toISODate(today);
-        if (set.has(iso)) {
-            curRun += 1;
-            today.setDate(today.getDate() - 1);
-        } else {
-            break;
-        }
-    }
-    current = curRun;
-    return { current, longest };
-};
-
 // Simple sparkline component with SVG
 const Sparkline = ({ data }) => {
     const width = 400;
@@ -360,10 +314,11 @@ const Heatmap = ({ series }) => {
     );
 };
 
-export default function UserStats({ userId, languageData }) {
+export default function UserStats({ userId, languageData, userStreaks }) {
     const [loading, setLoading] = useState(true);
     const [heatmap, setHeatmap] = useState([]);
     const [languages, setLanguages] = useState([]);
+    const [streaks, setStreaks] = useState({});
     const [series30, setSeries30] = useState([]);
     const [error, setError] = useState(null);
 
@@ -396,10 +351,7 @@ export default function UserStats({ userId, languageData }) {
                 );
                 setSeries30(normalizeDailySeries(s));
 
-                // Log Results for Debugging
-                console.log("Heatmap Data:", h);
-                console.log("Language Data:", l);
-                console.log("30-Day Series Data:", s);
+                setStreaks(userStreaks || { current: 0, longest: 0 });
             } catch (e) {
                 if (!cancelled) setError("Failed to load user stats");
                 // eslint-disable-next-line no-console
@@ -412,9 +364,7 @@ export default function UserStats({ userId, languageData }) {
         return () => {
             cancelled = true;
         };
-    }, [userId, languageData]);
-
-    const streaks = useMemo(() => computeStreaks(heatmap), [heatmap]);
+    }, [userId, languageData, userStreaks]);
 
     if (loading) {
         return (

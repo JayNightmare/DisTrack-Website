@@ -294,11 +294,11 @@ const LanguageBars = ({ items }) => {
                             <div
                                 className="h-2 rounded bg-indigo-500"
                                 style={{ width: `${pct}%` }}
-                                title={`${l.name}: ${secondsToShort(
-                                    l.seconds
-                                )}`}
+                                title={`${l.name}: ${l.seconds}`}
                             />
                         </div>
+                        {/* Time spent */}
+                        <div className="text-xs text-zinc-400">{l.seconds}</div>
                     </div>
                 );
             })}

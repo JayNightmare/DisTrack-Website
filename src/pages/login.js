@@ -44,11 +44,14 @@ const Login = () => {
                     <div className="space-y-4">
                         {/* Discord Login Button */}
                         <button
+                            type="button"
                             onClick={handleDiscordLogin}
                             disabled={isLoading}
                             className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 disabled:bg-zinc-600 disabled:opacity-50 text-white rounded-lg transition-colors font-semibold flex items-center justify-center gap-3"
                         >
                             <svg
+                                title="Discord"
+                                alt-text="Discord"
                                 className="w-5 h-5"
                                 viewBox="0 0 24 24"
                                 fill="currentColor"
@@ -62,11 +65,11 @@ const Login = () => {
 
                         <div className="text-center">
                             <div className="flex items-center justify-center mb-4">
-                                <div className="border-t border-zinc-600 flex-1"></div>
+                                <div className="border-t border-zinc-600 flex-1" />
                                 <div className="px-4 text-zinc-400 text-sm">
                                     or
                                 </div>
-                                <div className="border-t border-zinc-600 flex-1"></div>
+                                <div className="border-t border-zinc-600 flex-1" />
                             </div>
 
                             <Link
@@ -81,6 +84,7 @@ const Login = () => {
                             {isDevelopment && (
                                 <div className="mt-4">
                                     <button
+                                        type="button"
                                         onClick={() => {
                                             // Using the testLogin function from utils/testAuth.js
                                             window.testLogin();
@@ -90,6 +94,7 @@ const Login = () => {
                                         Login as Test User
                                     </button>
                                     <button
+                                        type="button"
                                         onClick={() => {
                                             window.testLogout();
                                         }}

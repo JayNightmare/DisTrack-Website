@@ -175,10 +175,13 @@ export default function User() {
                                 </button>
                                 {isOwnProfile(id) && (
                                     <button
+                                        type="button"
                                         onClick={handleEditProfile}
                                         className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors flex items-center space-x-2"
                                     >
                                         <svg
+                                            title="Edit Profile"
+                                            alt-text="Edit Profile"
                                             className="w-4 h-4"
                                             fill="none"
                                             stroke="currentColor"

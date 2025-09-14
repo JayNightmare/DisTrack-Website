@@ -36,6 +36,7 @@ export default function Leaderboard() {
                 <div className="flex gap-4 mb-8 justify-center flex-wrap">
                     {filters.map((f) => (
                         <button
+                            type="button"
                             key={f}
                             onClick={() => setFilter(f)}
                             className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${

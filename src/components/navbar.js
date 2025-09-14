@@ -83,9 +83,9 @@ const Navbar = () => {
                     onClick={toggleMobileMenu}
                     $isOpen={isMobileMenuOpen}
                 >
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span />
+                    <span />
+                    <span />
                 </HamburgerButton>
 
                 {/* Mobile Navbar */}
@@ -138,10 +138,13 @@ const Navbar = () => {
                     {isLoggedIn ? (
                         <div className="profile-dropdown-container relative">
                             <button
+                                type="button"
                                 onClick={toggleProfileDropdown}
                                 className="flex items-center space-x-2 hover:opacity-80 transition-opacity"
                             >
                                 <img
+                                    title="User Avatar"
+                                    alt-text="User Avatar"
                                     src={
                                         user?.avatarUrl ||
                                         "https://avatar.iran.liara.run/public"
@@ -155,6 +158,8 @@ const Navbar = () => {
                                         "User"}
                                 </span>
                                 <svg
+                                    title="Profile Menu"
+                                    alt-text="Profile Menu"
                                     className={`w-4 h-4 text-white transition-transform duration-200 ${
                                         isProfileDropdownOpen
                                             ? "rotate-180"
@@ -183,6 +188,8 @@ const Navbar = () => {
                                             className="flex items-center px-4 py-2 text-sm text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors"
                                         >
                                             <svg
+                                                title="Profile"
+                                                alt-text="Profile"
                                                 className="w-4 h-4 mr-3"
                                                 fill="none"
                                                 stroke="currentColor"
@@ -198,10 +205,13 @@ const Navbar = () => {
                                             View Profile
                                         </Link>
                                         <button
+                                            type="button"
                                             onClick={handleLogout}
                                             className="flex items-center w-full px-4 py-2 text-sm text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors"
                                         >
                                             <svg
+                                                title="Logout"
+                                                alt-text="Logout"
                                                 className="w-4 h-4 mr-3"
                                                 fill="none"
                                                 stroke="currentColor"

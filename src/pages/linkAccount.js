@@ -125,6 +125,7 @@ export default function LinkAccount() {
                             extension.
                         </p>
                         <button
+                            type="button"
                             onClick={() => {
                                 try {
                                     localStorage.setItem(
@@ -182,11 +183,14 @@ export default function LinkAccount() {
                                 </div>
                                 <div className="flex gap-3">
                                     <button
+                                        type="button"
                                         onClick={copyCode}
                                         disabled={!linkCode}
                                         className="px-4 py-2 bg-zinc-700 hover:bg-zinc-600 rounded-md disabled:opacity-50 flex items-center gap-2"
                                     >
                                         <svg
+                                            title="Copy"
+                                            alt-text="Copy"
                                             className="w-4 h-4"
                                             fill="none"
                                             stroke="currentColor"
@@ -202,6 +206,7 @@ export default function LinkAccount() {
                                         {copied ? "Copied" : "Copy"}
                                     </button>
                                     <button
+                                        type="button"
                                         onClick={handleGenerate}
                                         disabled={loading || cooldown > 0}
                                         className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-md disabled:opacity-50"
@@ -209,6 +214,7 @@ export default function LinkAccount() {
                                         Regenerate
                                     </button>
                                     <button
+                                        type="button"
                                         onClick={handleClear}
                                         disabled={loading}
                                         className="px-4 py-2 bg-zinc-700 hover:bg-zinc-600 rounded-md disabled:opacity-50"
@@ -221,6 +227,7 @@ export default function LinkAccount() {
                             <div className="text-center">
                                 <div className="flex flex-col items-center gap-2">
                                     <button
+                                        type="button"
                                         onClick={handleGenerate}
                                         disabled={loading || cooldown > 0}
                                         className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-md font-semibold disabled:opacity-50"

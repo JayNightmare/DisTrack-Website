@@ -84,7 +84,7 @@ const normalizeLanguages = (payload) => {
             payload.totals)
     ) {
         // Normalize timeseries: [{ date, languages: { name: seconds } }]
-        let timeseries = Array.isArray(payload.timeseries)
+        const timeseries = Array.isArray(payload.timeseries)
             ? payload.timeseries.map((ts) => ({
                   date: ts.date || ts.day || ts.key || ts.timestamp,
                   languages:
@@ -102,7 +102,7 @@ const normalizeLanguages = (payload) => {
             : [];
 
         // Normalize totals: { name: seconds }
-        let totals =
+        const totals =
             typeof payload.totals === "object" && payload.totals !== null
                 ? Object.fromEntries(
                       Object.entries(payload.totals).map(([name, seconds]) => [
@@ -113,12 +113,12 @@ const normalizeLanguages = (payload) => {
                 : {};
 
         // Normalize topLanguages: [ "name" ]
-        let topLanguages = Array.isArray(payload.topLanguages)
+        const topLanguages = Array.isArray(payload.topLanguages)
             ? payload.topLanguages.filter(Boolean).map(String)
             : [];
 
         // Normalize range
-        let range = payload.range || null;
+        const range = payload.range || null;
 
         return {
             range,
@@ -202,6 +202,8 @@ const Sparkline = ({ data }) => {
     return (
         <div>
             <svg
+                title="Coding time trend over the last 30 days"
+                alt-text="Sparkline chart showing coding time trend over the last 30 days"
                 width="100%"
                 viewBox={`0 0 ${width} ${height}`}
                 className="overflow-visible"
@@ -285,12 +287,9 @@ const Heatmap = ({ series }) => {
             const cell = new Date(today);
             cell.setDate(today.getDate() - (w * 7 + (days - 1 - d)));
             // Ensure date is formatted as YYYY-MM-DD
-            const iso =
-                cell.getFullYear() +
-                "-" +
-                String(cell.getMonth() + 1).padStart(2, "0") +
-                "-" +
-                String(cell.getDate()).padStart(2, "0");
+            const iso = `${cell.getFullYear()}-${String(
+                cell.getMonth() + 1
+            ).padStart(2, "0")}-${String(cell.getDate()).padStart(2, "0")}`;
             const hasMatch = byDate.has(iso);
             const seconds = byDate.get(iso) || 0;
             cellDebug.push({ iso, hasMatch, seconds });

@@ -115,10 +115,13 @@ const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
                             Edit Profile
                         </h2>
                         <button
+                            type="button"
                             onClick={onClose}
                             className="text-zinc-400 hover:text-white transition-colors"
                         >
                             <svg
+                                title="Close"
+                                alt-text="Close"
                                 className="w-6 h-6"
                                 fill="none"
                                 stroke="currentColor"

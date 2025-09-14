@@ -229,6 +229,7 @@ export default function FAQ() {
                     {faqData.map((item, index) => (
                         <button
                             // glass morphism effect
+                            type="button"
                             className="w-full text-left bg-zinc-800 bg-opacity-50 p-4 rounded-lg shadow-lg transition-transform duration-300 border-b border-zinc-700"
                             style={{ cursor: "pointer" }}
                             key={index}

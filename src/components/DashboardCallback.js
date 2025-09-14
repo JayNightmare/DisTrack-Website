@@ -156,6 +156,8 @@ const DashboardCallback = () => {
             login(newUser);
             // Navigation should happen after modal closes
         } catch (error) {
+            console.error("Failed to create new user:", error);
+            setError("Failed to create user. Please try again.");
             throw error;
         }
     };
@@ -205,7 +207,7 @@ const DashboardCallback = () => {
             {loading && (
                 <div className="flex justify-center items-center py-16">
                     <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-700/50 rounded-lg p-8 w-full max-w-md text-center">
-                        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-indigo-500 mx-auto mb-4"></div>
+                        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-indigo-500 mx-auto mb-4" />
                         <h1 className="text-2xl font-bold mb-4">
                             Authenticating...
                         </h1>
@@ -217,24 +219,21 @@ const DashboardCallback = () => {
             )}
 
             {/* Check linkedAt vs lastLinkedAt for navigation logic */}
-            {currentUser &&
-                currentUser.linkedAt &&
-                currentUser.lastLinkedAt && (
-                    <>
-                        {/* If lastLinkedAt > linkedAt and user has proper displayName, go to profile */}
-                        {currentUser.lastLinkedAt > currentUser.linkedAt &&
-                            currentUser.displayName &&
-                            currentUser.displayName !==
-                                currentUser.username && (
-                                <Navigate
-                                    to={`/user/${
-                                        currentUser.userId || currentUser.id
-                                    }`}
-                                    replace
-                                />
-                            )}
-                    </>
-                )}
+            {currentUser.linkedAt && currentUser.lastLinkedAt && (
+                <>
+                    {/* If lastLinkedAt > linkedAt and user has proper displayName, go to profile */}
+                    {currentUser.lastLinkedAt > currentUser.linkedAt &&
+                        currentUser.displayName &&
+                        currentUser.displayName !== currentUser.username && (
+                            <Navigate
+                                to={`/user/${
+                                    currentUser.userId || currentUser.id
+                                }`}
+                                replace
+                            />
+                        )}
+                </>
+            )}
 
             {/* New user setup modal */}
             {showNewUserModal && currentUser && (

@@ -79,7 +79,7 @@ export default function User() {
                 <Navbar />
                 <Particles className="absolute inset-0 -z-10" quantity={100} />
                 <div className="flex justify-center items-center py-16">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600" />
                     <span className="ml-3 text-zinc-300">
                         Loading user profile...
                     </span>
@@ -154,11 +154,14 @@ export default function User() {
                             </div>
                             <div className="flex gap-2">
                                 <button
+                                    type="button"
                                     onClick={handleShareProfile}
                                     className="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg transition-colors flex items-center space-x-2"
                                     title="Copy profile link to clipboard"
                                 >
                                     <svg
+                                        title="Share Profile"
+                                        alt-text="Share Profile"
                                         className="w-4 h-4"
                                         fill="none"
                                         stroke="currentColor"
@@ -204,6 +207,8 @@ export default function User() {
                             <div className="text-center py-8">
                                 <div className="bg-zinc-800/50 border border-zinc-600/50 rounded-lg p-6">
                                     <svg
+                                        title="Private Profile Icon"
+                                        alt-text="Private Profile Icon"
                                         className="w-12 h-12 text-zinc-500 mx-auto mb-4"
                                         fill="none"
                                         stroke="currentColor"
@@ -258,6 +263,8 @@ export default function User() {
                                                                 {label}
                                                             </span>
                                                             <svg
+                                                                title="External link icon"
+                                                                alt-text="External link icon"
                                                                 className="w-4 h-4 ml-1"
                                                                 fill="none"
                                                                 stroke="currentColor"

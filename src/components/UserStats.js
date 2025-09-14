@@ -209,6 +209,8 @@ const Sparkline = ({ data }) => {
                 className="overflow-visible"
             >
                 <polyline
+                    title="Coding time trend line"
+                    alt-text="Coding time trend line"
                     fill="none"
                     stroke="#6366f1"
                     strokeWidth="2"

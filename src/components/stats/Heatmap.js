@@ -33,7 +33,26 @@ export default function Heatmap({ series, size = 14, onSelect, selectedDate }) {
         return "bg-indigo-400";
     };
 
-    const formatHours = (s) => (s / 3600).toFixed(2);
+    const formatHours = (s) => {
+        // return (s / 3600).toFixed(2);
+
+        // Convert seconds to hours and minutes
+        const hours = Math.floor(s / 3600);
+        const minutes = Math.floor((s % 3600) / 60);
+
+        let result = "";
+        if (hours > 0) {
+            result += `${hours}h`;
+        }
+        if (minutes > 0) {
+            if (result) result += " ";
+            result += `${minutes}m`;
+        }
+        if (!result) {
+            result = "0h";
+        }
+        return result;
+    };
 
     return (
         <div className="w-full aspect-square">
@@ -45,6 +64,8 @@ export default function Heatmap({ series, size = 14, onSelect, selectedDate }) {
             >
                 {cells.map((c) => {
                     const label = formatHours(c.seconds);
+                    console.log(`Formated Hours: ${label}`);
+                    console.log(`Formated Hours: ${c.seconds}`);
                     return (
                         <div key={c.iso} className="relative group">
                             <div

@@ -212,60 +212,122 @@ const normalizeLanguages = (payload) => {
     };
 };
 
-// Simple sparkline component with SVG
-const Sparkline = ({ data }) => {
+// Sparkline for coding hours, moving averages, and anomaly highlights
+const Sparkline = ({ seriesObj }) => {
     const width = 400;
     const height = 64;
     const padding = 8;
+
+    // Memoize series, ma7, ma30 for stable dependencies
+    const series = useMemo(() => seriesObj?.series || [], [seriesObj]);
+    const ma7 = useMemo(
+        () => seriesObj?.movingAverages?.ma7 || [],
+        [seriesObj]
+    );
+    const ma30 = useMemo(
+        () => seriesObj?.movingAverages?.ma30 || [],
+        [seriesObj]
+    );
+
+    // For now, only plot totalHours as main line
     const points = useMemo(() => {
-        if (!data?.length) return "";
-        const max = Math.max(...data.map((d) => d.seconds), 1);
-        const step = (width - padding * 2) / (data.length - 1 || 1);
-        return data
+        if (!series.length) return "";
+        const max = Math.max(...series.map((d) => d.totalHours), 1);
+        const step = (width - padding * 2) / (series.length - 1 || 1);
+        return series
             .map((d, i) => {
                 const x = padding + i * step;
                 const y =
                     height -
                     padding -
-                    (d.seconds / max) * (height - padding * 2);
+                    (d.totalHours / max) * (height - padding * 2);
                 return `${x},${y}`;
             })
             .join(" ");
-    }, [data]);
+    }, [series]);
 
-    const last = data?.[data.length - 1]?.seconds || 0;
-    const total = data?.reduce((a, b) => a + (b.seconds || 0), 0) || 0;
+    // Moving average lines (ma7, ma30)
+    const ma7points = useMemo(() => {
+        if (!ma7.length) return "";
+        const max = Math.max(...series.map((d) => d.totalHours), 1);
+        const step = (width - padding * 2) / (ma7.length - 1 || 1);
+        return ma7
+            .map((d, i) => {
+                const x = padding + i * step;
+                const y =
+                    height - padding - (d.hours / max) * (height - padding * 2);
+                return `${x},${y}`;
+            })
+            .join(" ");
+    }, [ma7, series]);
+
+    const ma30points = useMemo(() => {
+        if (!ma30.length) return "";
+        const max = Math.max(...series.map((d) => d.totalHours), 1);
+        const step = (width - padding * 2) / (ma30.length - 1 || 1);
+        return ma30
+            .map((d, i) => {
+                const x = padding + i * step;
+                const y =
+                    height - padding - (d.hours / max) * (height - padding * 2);
+                return `${x},${y}`;
+            })
+            .join(" ");
+    }, [ma30, series]);
+
+    // Summary stats
+    const last = series?.[series.length - 1]?.totalHours || 0;
+    const total = series?.reduce((a, b) => a + (b.totalHours || 0), 0) || 0;
+    const lastSessions = series?.[series.length - 1]?.sessions || 0;
 
     return (
         <div>
             <svg
-                title="Coding time trend over the last 30 days"
-                alt-text="Sparkline chart showing coding time trend over the last 30 days"
+                title="Coding hours trend over the last 30 days"
                 width="100%"
                 viewBox={`0 0 ${width} ${height}`}
                 className="overflow-visible"
             >
+                {/* Main line: totalHours */}
                 <polyline
-                    title="Coding time trend line"
-                    alt-text="Coding time trend line"
                     fill="none"
                     stroke="#6366f1"
                     strokeWidth="2"
                     points={points}
                 />
+                {/* MA7: blue, thinner */}
+                {ma7points && (
+                    <polyline
+                        fill="none"
+                        stroke="#60a5fa"
+                        strokeWidth="1"
+                        points={ma7points}
+                        opacity={0.7}
+                    />
+                )}
+                {/* MA30: gray, dashed */}
+                {ma30points && (
+                    <polyline
+                        fill="none"
+                        stroke="#a1a1aa"
+                        strokeWidth="1"
+                        points={ma30points}
+                        opacity={0.5}
+                        strokeDasharray="4 2"
+                    />
+                )}
             </svg>
             <div className="text-xs text-zinc-400 mt-1 flex gap-4">
                 <span>
                     Last day:{" "}
-                    <span className="text-indigo-300">
-                        {secondsToShort(last)}
+                    <span className="text-indigo-300">{last.toFixed(2)}h</span>{" "}
+                    <span className="text-zinc-400">
+                        ({lastSessions} sessions)
                     </span>
                 </span>
                 <span>
                     Period total:{" "}
-                    <span className="text-indigo-300">
-                        {secondsToShort(total)}
-                    </span>
+                    <span className="text-indigo-300">{total.toFixed(2)}h</span>
                 </span>
             </div>
         </div>
@@ -477,8 +539,8 @@ export default function UserStats({ userId, languageData, userStreaks }) {
                         Last 30 days
                     </h3>
                 </div>
-                {series30.length ? (
-                    <Sparkline data={series30} />
+                {series30 && series30.series ? (
+                    <Sparkline seriesObj={series30} />
                 ) : (
                     <div className="text-xs text-zinc-400">No activity yet</div>
                 )}

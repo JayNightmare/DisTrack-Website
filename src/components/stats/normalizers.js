@@ -115,7 +115,9 @@ export const normalizeLanguages = (payload) => {
                 const hoursVal =
                     l.hours ?? l.totalHours ?? l.time ?? l.duration ?? null;
                 const secVal =
-                    l.seconds ?? l.totalSeconds ?? (hoursVal == null ? 0 : null);
+                    l.seconds ??
+                    l.totalSeconds ??
+                    (hoursVal == null ? 0 : null);
                 const seconds = Number(
                     hoursVal != null
                         ? Number(hoursVal) * 3600
@@ -140,7 +142,10 @@ export const normalizeLanguages = (payload) => {
         !(payload instanceof Date)
     ) {
         const arr = Object.entries(payload)
-            .map(([name, hours]) => ({ name, seconds: Number(hours) * 3600 || 0 }))
+            .map(([name, hours]) => ({
+                name,
+                seconds: Number(hours) * 3600 || 0,
+            }))
             .sort((a, b) => b.seconds - a.seconds);
         return {
             range: null,

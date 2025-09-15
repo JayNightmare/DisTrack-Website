@@ -389,6 +389,9 @@ export default function UserStats({ userId, languageData, userStreaks }) {
                         .sort((a, b) => b.seconds - a.seconds)
                 );
 
+                // Debug log for series
+                console.log("UserStats series raw:", s);
+
                 // Trend series
                 setSeries30(normalizeDailySeries(s));
 

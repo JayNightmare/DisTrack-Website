@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { toISODateUTC, secondsToShort } from "./timeUtils";
+import { toISODateUTC } from "./timeUtils";
 
 // Square heatmap that fills its container using a dynamic CSS grid
 export default function Heatmap({ series, size = 14, onSelect, selectedDate }) {

@@ -1,13 +1,24 @@
 // Data normalization helpers for various stats payload shapes
 
+// NOTE: API returns time in HOURS; components expect seconds for heatmap/language charts.
+// Convert incoming hour values to seconds consistently.
 export const normalizeDailySeries = (payload) => {
     if (!payload) return [];
     if (Array.isArray(payload)) {
         return payload
             .map((d) => {
                 const date = d.date || d.day || d.key || d.timestamp;
-                const seconds =
-                    d.seconds ?? d.totalSeconds ?? d.duration ?? d.time ?? 0;
+                // Prefer hour fields; fall back to known second-like fields (convert)
+                const hoursField = d.hours ?? d.totalHours;
+                const secField =
+                    d.seconds ?? d.totalSeconds ?? d.duration ?? d.time;
+                const seconds = Number(
+                    hoursField != null
+                        ? Number(hoursField) * 3600
+                        : secField != null
+                        ? Number(secField)
+                        : 0
+                );
                 return date
                     ? { date: String(date).slice(0, 10), seconds }
                     : null;
@@ -16,11 +27,12 @@ export const normalizeDailySeries = (payload) => {
             .sort((a, b) => (a.date < b.date ? -1 : 1));
     }
     if (typeof payload === "object") {
+        // Map of date -> hours (convert) or seconds
         return Object.entries(payload)
-            .map(([date, seconds]) => ({
-                date: String(date).slice(0, 10),
-                seconds,
-            }))
+            .map(([date, value]) => {
+                const seconds = Number(value) * 3600; // assume hours in map
+                return { date: String(date).slice(0, 10), seconds };
+            })
             .sort((a, b) => (a.date < b.date ? -1 : 1));
     }
     return [];
@@ -36,17 +48,17 @@ export const normalizeHeatmap = (payload) => {
         payload.days !== null
     ) {
         return Object.entries(payload.days)
-            .map(([date, seconds]) => ({
+            .map(([date, hours]) => ({
                 date: String(date).slice(0, 10),
-                seconds: Number(seconds) || 0,
+                seconds: Number(hours) * 3600 || 0,
             }))
             .sort((a, b) => (a.date < b.date ? -1 : 1));
     }
     if (typeof payload === "object" && payload !== null) {
         return Object.entries(payload)
-            .map(([date, seconds]) => ({
+            .map(([date, hours]) => ({
                 date: String(date).slice(0, 10),
-                seconds: Number(seconds) || 0,
+                seconds: Number(hours) * 3600 || 0,
             }))
             .sort((a, b) => (a.date < b.date ? -1 : 1));
     }
@@ -71,9 +83,9 @@ export const normalizeLanguages = (payload) => {
                       typeof ts.languages === "object" && ts.languages !== null
                           ? Object.fromEntries(
                                 Object.entries(ts.languages).map(
-                                    ([name, seconds]) => [
+                                    ([name, hours]) => [
                                         name,
-                                        Number(seconds) || 0,
+                                        Number(hours) * 3600 || 0,
                                     ]
                                 )
                             )
@@ -83,9 +95,9 @@ export const normalizeLanguages = (payload) => {
         const totals =
             typeof payload.totals === "object" && payload.totals !== null
                 ? Object.fromEntries(
-                      Object.entries(payload.totals).map(([name, seconds]) => [
+                      Object.entries(payload.totals).map(([name, hours]) => [
                           name,
-                          Number(seconds) || 0,
+                          Number(hours) * 3600 || 0,
                       ])
                   )
                 : {};
@@ -100,9 +112,17 @@ export const normalizeLanguages = (payload) => {
             .map((l) => {
                 if (!l) return null;
                 const name = l.topLanguage || l.name || l.lang || l.key;
-                let seconds =
-                    l.seconds ?? l.totalSeconds ?? l.duration ?? l.time ?? 0;
-                seconds = Number(seconds) || 0;
+                const hoursVal =
+                    l.hours ?? l.totalHours ?? l.time ?? l.duration ?? null;
+                const secVal =
+                    l.seconds ?? l.totalSeconds ?? (hoursVal == null ? 0 : null);
+                const seconds = Number(
+                    hoursVal != null
+                        ? Number(hoursVal) * 3600
+                        : secVal != null
+                        ? Number(secVal)
+                        : 0
+                );
                 return name ? { name, seconds } : null;
             })
             .filter(Boolean)
@@ -120,7 +140,7 @@ export const normalizeLanguages = (payload) => {
         !(payload instanceof Date)
     ) {
         const arr = Object.entries(payload)
-            .map(([name, seconds]) => ({ name, seconds: Number(seconds) || 0 }))
+            .map(([name, hours]) => ({ name, seconds: Number(hours) * 3600 || 0 }))
             .sort((a, b) => b.seconds - a.seconds);
         return {
             range: null,

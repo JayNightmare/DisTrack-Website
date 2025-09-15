@@ -43,7 +43,7 @@ export default function UserStats({ userId, languageData, userStreaks }) {
 
                 // Languages
                 const langStats = normalizeLanguages(l);
-                // Top totals list (assume seconds)
+                // Top totals list (API hours; normalizer converts to seconds already)
                 setLanguages(
                     Object.entries(langStats.totals)
                         .map(([name, seconds]) => ({

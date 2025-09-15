@@ -11,6 +11,14 @@ const toISODate = (d) => {
     return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 };
 
+// Format a Date as YYYY-MM-DD in UTC to avoid TZ drift with API keys
+const toISODateUTC = (d) => {
+    const pad = (n) => String(n).padStart(2, "0");
+    return `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(
+        d.getUTCDate()
+    )}`;
+};
+
 const lastNDaysRange = (n) => {
     const end = new Date();
     const start = new Date();
@@ -55,7 +63,36 @@ const normalizeDailySeries = (payload) => {
     return [];
 };
 
-// const normalizeHeatmap = (payload) => normalizeDailySeries(payload);
+// Heatmap normalizer: accepts arrays or objects like { days: { 'YYYY-MM-DD': seconds } }
+const normalizeHeatmap = (payload) => {
+    if (!payload) return [];
+    // Already an array of day objects
+    if (Array.isArray(payload)) return normalizeDailySeries(payload);
+    // Object with 'days' map
+    if (
+        typeof payload === "object" &&
+        payload !== null &&
+        typeof payload.days === "object" &&
+        payload.days !== null
+    ) {
+        return Object.entries(payload.days)
+            .map(([date, seconds]) => ({
+                date: String(date).slice(0, 10),
+                seconds: Number(seconds) || 0,
+            }))
+            .sort((a, b) => (a.date < b.date ? -1 : 1));
+    }
+    // Plain object mapping dates to seconds
+    if (typeof payload === "object" && payload !== null) {
+        return Object.entries(payload)
+            .map(([date, seconds]) => ({
+                date: String(date).slice(0, 10),
+                seconds: Number(seconds) || 0,
+            }))
+            .sort((a, b) => (a.date < b.date ? -1 : 1));
+    }
+    return [];
+};
 
 const normalizeLanguages = (payload) => {
     /* expected:
@@ -270,38 +307,28 @@ const LanguageBars = ({ items }) => {
 
 // Year heatmap (simplified weekly blocks)
 const Heatmap = ({ series }) => {
-    // Debug: print incoming series
-    console.log("Heatmap series:", series);
-    // Debug: collect cell match info
-    const cellDebug = [];
-    // Renders a square grid of 14 days x 26 weeks (double days and half year)
-    const weeks = 26;
-    const days = 14;
+    // Renders 7 days x 28 weeks grid (standard calendar-like)
+    const weeks = 28;
+    const days = 7;
     const grid = [];
     const byDate = new Map(series.map((d) => [d.date, d.seconds]));
     const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    // Use UTC midnight to align with API date keys
+    today.setUTCHours(0, 0, 0, 0);
 
     // Build columns, newest on the right
     for (let w = weeks - 1; w >= 0; w--) {
         const col = [];
         for (let d = 0; d < days; d++) {
             const cell = new Date(today);
-            cell.setDate(today.getDate() - (w * 7 + (days - 1 - d)));
-            // Ensure date is formatted as YYYY-MM-DD
-            const iso = `${cell.getFullYear()}-${String(
-                cell.getMonth() + 1
-            ).padStart(2, "0")}-${String(cell.getDate()).padStart(2, "0")}`;
-            const hasMatch = byDate.has(iso);
+            // For week w (0 = newest), day index d (0..6), compute UTC date
+            cell.setUTCDate(today.getUTCDate() - (w * 7 + (days - 1 - d)));
+            const iso = toISODateUTC(cell);
             const seconds = byDate.get(iso) || 0;
-            cellDebug.push({ iso, hasMatch, seconds });
             col.push({ iso, seconds });
         }
         grid.push(col);
     }
-
-    // Debug: print cell match info
-    console.log("Heatmap cellDebug:", cellDebug);
 
     const max = Math.max(1, ...series.map((s) => s.seconds));
     const color = (v) => {
@@ -353,33 +380,21 @@ export default function UserStats({ userId, languageData, userStreaks }) {
                     getUserFilterStats(userId, startDate, endDate),
                 ]);
                 if (cancelled) return;
+                // Heatmap
+                setHeatmap(normalizeHeatmap(h));
 
+                // Languages
                 const langStats = normalizeLanguages(l);
-                if (h && Array.isArray(h)) {
-                    const daysEntry = h.find((item) => item.date === "days");
-                    if (daysEntry) {
-                        setHeatmap(
-                            Object.entries(daysEntry.seconds).map(
-                                ([date, seconds]) => ({
-                                    date,
-                                    seconds,
-                                })
-                            )
-                        );
-                    } else {
-                        setHeatmap([]);
-                    }
-                } else {
-                    setHeatmap([]);
-                }
                 setLanguages(
                     Object.entries(langStats.totals)
-                        .map(([name, hours]) => ({
+                        .map(([name, seconds]) => ({
                             name,
-                            seconds: Number(hours) * 3600,
+                            seconds: Number(seconds) || 0,
                         }))
                         .sort((a, b) => b.seconds - a.seconds)
                 );
+
+                // Trend series
                 setSeries30(normalizeDailySeries(s));
 
                 setStreaks(userStreaks || { current: 0, longest: 0 });

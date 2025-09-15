@@ -63,7 +63,7 @@ const faqData = [
     },
     {
         question: "Can I share my stats on Discord?",
-        answer: "Yes, Dis.Track allows you to share your coding stats on Discord via the `/profile` command.",
+        answer: "Yes, Dis.Track allows you to share your coding stats in 2 ways: Sharing the share link on your profile, or using the /profile user: command in Discord to view your profile card.",
     },
     {
         question: "How do I contact support?",

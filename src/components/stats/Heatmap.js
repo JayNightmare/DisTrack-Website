@@ -35,7 +35,7 @@ export default function Heatmap({ series, size = 14 }) {
     const formatHours = (s) => (s / 3600).toFixed(2);
 
     return (
-        <div className="w-full aspect-square" title="Coding heatmap">
+        <div className="w-full aspect-square">
             <div
                 className="grid gap-1 w-full h-full overflow-visible"
                 style={{

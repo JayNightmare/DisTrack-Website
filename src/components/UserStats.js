@@ -305,32 +305,24 @@ const LanguageBars = ({ items }) => {
     );
 };
 
-// Year heatmap (simplified weekly blocks)
-const Heatmap = ({ series }) => {
-    // Renders 7 days x 28 weeks grid (standard calendar-like)
-    const weeks = 28;
-    const days = 7;
-    const grid = [];
+// Square heatmap that fills its container using a dynamic CSS grid
+const Heatmap = ({ series, size = 14 }) => {
+    // size x size (e.g., 14x14) latest days, newest at the end (bottom-right visually)
     const byDate = new Map(series.map((d) => [d.date, d.seconds]));
     const today = new Date();
-    // Use UTC midnight to align with API date keys
     today.setUTCHours(0, 0, 0, 0);
 
-    // Build columns, newest on the right
-    for (let w = weeks - 1; w >= 0; w--) {
-        const col = [];
-        for (let d = 0; d < days; d++) {
-            const cell = new Date(today);
-            // For week w (0 = newest), day index d (0..6), compute UTC date
-            cell.setUTCDate(today.getUTCDate() - (w * 7 + (days - 1 - d)));
-            const iso = toISODateUTC(cell);
-            const seconds = byDate.get(iso) || 0;
-            col.push({ iso, seconds });
-        }
-        grid.push(col);
-    }
+    const totalCells = size * size;
+    const cells = new Array(totalCells).fill(null).map((_, idx) => {
+        const cell = new Date(today);
+        // Oldest at index 0, newest at index totalCells-1
+        const daysAgo = totalCells - 1 - idx;
+        cell.setUTCDate(today.getUTCDate() - daysAgo);
+        const iso = toISODateUTC(cell);
+        return { iso, seconds: byDate.get(iso) || 0 };
+    });
 
-    const max = Math.max(1, ...series.map((s) => s.seconds));
+    const max = Math.max(1, ...cells.map((c) => c.seconds));
     const color = (v) => {
         if (v === 0) return "bg-zinc-800/80";
         const t = v / max; // 0..1
@@ -341,18 +333,21 @@ const Heatmap = ({ series }) => {
     };
 
     return (
-        <div className="flex gap-1 overflow-x-auto py-1" title="Coding heatmap">
-            {grid.map((col, i) => (
-                <div key={i} className="flex flex-col gap-1">
-                    {col.map((c) => (
-                        <div
-                            key={c.iso}
-                            className={`w-3 h-3 rounded ${color(c.seconds)}`}
-                            title={`${c.iso}: ${secondsToShort(c.seconds)}`}
-                        />
-                    ))}
-                </div>
-            ))}
+        <div className="w-full aspect-square" title="Coding heatmap">
+            <div
+                className="grid gap-1 w-full h-full"
+                style={{
+                    gridTemplateColumns: `repeat(${size}, minmax(0, 1fr))`,
+                }}
+            >
+                {cells.map((c) => (
+                    <div
+                        key={c.iso}
+                        className={`aspect-square rounded ${color(c.seconds)}`}
+                        title={`${c.iso}: ${secondsToShort(c.seconds)}`}
+                    />
+                ))}
+            </div>
         </div>
     );
 };

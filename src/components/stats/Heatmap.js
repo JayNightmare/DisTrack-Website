@@ -50,7 +50,6 @@ export default function Heatmap({ series, size = 14 }) {
                                 className={`aspect-square rounded ${color(
                                     c.seconds
                                 )}`}
-                                title={`${c.iso}: ${hours}h`}
                             />
                             <div className="pointer-events-none absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap rounded px-1.5 py-0.5 text-[10px] bg-zinc-900/90 text-zinc-100 border border-zinc-700/50 opacity-0 group-hover:opacity-100 transition-opacity shadow-md">
                                 {c.iso}: {hours}h

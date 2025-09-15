@@ -382,9 +382,9 @@ export default function UserStats({ userId, languageData, userStreaks }) {
                 const langStats = normalizeLanguages(l);
                 setLanguages(
                     Object.entries(langStats.totals)
-                        .map(([name, seconds]) => ({
+                        .map(([name, hours]) => ({
                             name,
-                            seconds: Number(seconds) || 0,
+                            seconds: Number(hours) * 3600,
                         }))
                         .sort((a, b) => b.seconds - a.seconds)
                 );

@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { toISODateUTC, secondsToShort } from "./timeUtils";
 
 // Square heatmap that fills its container using a dynamic CSS grid
-export default function Heatmap({ series, size = 14 }) {
+export default function Heatmap({ series, size = 14, onSelect, selectedDate }) {
     const byDate = useMemo(
         () => new Map(series.map((d) => [d.date, d.seconds])),
         [series]
@@ -47,9 +47,32 @@ export default function Heatmap({ series, size = 14 }) {
                     return (
                         <div key={c.iso} className="relative group">
                             <div
-                                className={`aspect-square rounded ${color(
+                                role={onSelect ? "button" : undefined}
+                                tabIndex={onSelect ? 0 : -1}
+                                onClick={
+                                    onSelect ? () => onSelect(c.iso) : undefined
+                                }
+                                onKeyDown={
+                                    onSelect
+                                        ? (e) => {
+                                              if (
+                                                  e.key === "Enter" ||
+                                                  e.key === " "
+                                              ) {
+                                                  e.preventDefault();
+                                                  onSelect(c.iso);
+                                              }
+                                          }
+                                        : undefined
+                                }
+                                className={`aspect-square rounded outline-none ${color(
                                     c.seconds
-                                )}`}
+                                )} ${
+                                    selectedDate === c.iso
+                                        ? "ring-2 ring-indigo-400 ring-offset-1 ring-offset-zinc-900"
+                                        : ""
+                                }`}
+                                aria-label={`${c.iso}: ${label}`}
                             />
                             <div className="pointer-events-none absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap rounded px-1.5 py-0.5 text-[10px] bg-zinc-900/90 text-zinc-100 border border-zinc-700/50 opacity-0 group-hover:opacity-100 transition-opacity shadow-md">
                                 {c.iso}: {label}

@@ -7,6 +7,7 @@ import {
 import Sparkline from "./stats/Sparkline";
 import Heatmap from "./stats/Heatmap";
 import LanguageBars from "./stats/LanguageBars";
+import DayBreakdown from "./stats/DayBreakdown";
 import { lastNDaysRange } from "./stats/timeUtils";
 import { normalizeHeatmap, normalizeLanguages } from "./stats/normalizers";
 import { computeStreaks, mergeStreakOverride } from "./stats/streakUtils";
@@ -17,6 +18,8 @@ export default function UserStats({ userId, languageData, userStreaks }) {
     const [languages, setLanguages] = useState([]);
     const [streaks, setStreaks] = useState({});
     const [trend30, setTrend30] = useState(null); // raw trend object { series, movingAverages, anomalies }
+    const [languageDaily, setLanguageDaily] = useState({}); // { 'YYYY-MM-DD': { lang: seconds } }
+    const [selectedDate, setSelectedDate] = useState(null);
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -40,7 +43,7 @@ export default function UserStats({ userId, languageData, userStreaks }) {
 
                 // Languages
                 const langStats = normalizeLanguages(l);
-                // Assume API returns seconds already; if it returns hours switch back to *3600
+                // Top totals list (assume seconds)
                 setLanguages(
                     Object.entries(langStats.totals)
                         .map(([name, seconds]) => ({
@@ -49,6 +52,14 @@ export default function UserStats({ userId, languageData, userStreaks }) {
                         }))
                         .sort((a, b) => b.seconds - a.seconds)
                 );
+                // Build per-day language map for breakdowns
+                const daily = {};
+                for (const ts of langStats.timeseries || []) {
+                    const d = String(ts.date || "").slice(0, 10);
+                    if (!d) continue;
+                    daily[d] = ts.languages || {};
+                }
+                setLanguageDaily(daily);
 
                 // Debug log for series / trend
                 // eslint-disable-next-line no-console
@@ -140,7 +151,24 @@ export default function UserStats({ userId, languageData, userStreaks }) {
                     </span>{" "}
                     days
                 </div>
-                <Heatmap series={heatmap} />
+                <Heatmap
+                    series={heatmap}
+                    onSelect={setSelectedDate}
+                    selectedDate={selectedDate}
+                />
+                <div className="mt-3 text-xs text-zinc-300">
+                    {selectedDate ? (
+                        <DayBreakdown
+                            date={selectedDate}
+                            languages={languageDaily[selectedDate]}
+                            trendSeries={trend30?.series}
+                        />
+                    ) : (
+                        <span className="text-zinc-500">
+                            Click a day to see details
+                        </span>
+                    )}
+                </div>
             </div>
 
             {/* Languages */}

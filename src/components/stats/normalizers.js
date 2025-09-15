@@ -8,17 +8,20 @@ export const normalizeDailySeries = (payload) => {
         return payload
             .map((d) => {
                 const date = d.date || d.day || d.key || d.timestamp;
+                const seconds =
+                    d.seconds ?? d.totalSeconds ?? d.duration ?? d.time ?? 0;
+
                 // Prefer hour fields; fall back to known second-like fields (convert)
-                const hoursField = d.hours ?? d.totalHours;
-                const secField =
-                    d.seconds ?? d.totalSeconds ?? d.duration ?? d.time;
-                const seconds = Number(
-                    hoursField != null
-                        ? Number(hoursField) * 3600
-                        : secField != null
-                        ? Number(secField)
-                        : 0
-                );
+                // const hoursField = d.hours ?? d.totalHours;
+                // const secField =
+                //     d.seconds ?? d.totalSeconds ?? d.duration ?? d.time;
+                // const seconds = Number(
+                //     hoursField != null
+                //         ? Number(hoursField) * 3600
+                //         : secField != null
+                //         ? Number(secField)
+                //         : 0
+                // );
                 return date
                     ? { date: String(date).slice(0, 10), seconds }
                     : null;

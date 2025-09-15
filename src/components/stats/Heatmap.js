@@ -32,7 +32,8 @@ export default function Heatmap({ series, size = 14, onSelect, selectedDate }) {
         if (t < 0.75) return "bg-indigo-500";
         return "bg-indigo-400";
     };
-    const formatHM = (s) => secondsToShort(s);
+
+    const formatHours = (s) => (s / 3600).toFixed(2);
 
     return (
         <div className="w-full aspect-square">
@@ -43,7 +44,7 @@ export default function Heatmap({ series, size = 14, onSelect, selectedDate }) {
                 }}
             >
                 {cells.map((c) => {
-                    const label = formatHM(c.seconds);
+                    const label = formatHours(c.seconds);
                     return (
                         <div key={c.iso} className="relative group">
                             <div

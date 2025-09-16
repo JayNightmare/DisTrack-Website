@@ -10,7 +10,6 @@ export default function DayBreakdown({
         .map(([name, seconds]) => ({ name, seconds: Number(seconds) || 0 }))
         .sort((a, b) => b.seconds - a.seconds);
     const totalSeconds = entries.reduce((a, b) => a + b.seconds, 0);
-    console.log("totalSeconds", totalSeconds);
     const trendDay = (trendSeries || []).find(
         (d) => d.date?.slice(0, 10) === date
     );
@@ -29,9 +28,7 @@ export default function DayBreakdown({
                 <div className="text-zinc-400">{date}</div>
                 <div className="text-zinc-300">
                     Total:{" "}
-                    <span className="text-indigo-300">
-                        {totalHours.toFixed(2)}h
-                    </span>
+                    <span className="text-indigo-300">{totalHours}h</span>
                     {sessions ? (
                         <span className="text-zinc-500">
                             {" "}
@@ -48,7 +45,7 @@ export default function DayBreakdown({
                             className="flex justify-between text-zinc-300 text-xs"
                         >
                             <span>{e.name}</span>
-                            <span>{(e.seconds / 3600).toFixed(2)}h</span>
+                            <span>{e.seconds.toFixed(2)}h</span>
                         </li>
                     ))}
                 </ul>

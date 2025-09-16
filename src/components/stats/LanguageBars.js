@@ -2,7 +2,7 @@ import React from "react";
 import { secondsToShort } from "./timeUtils";
 
 // Simple horizontal bar visualization for language usage
-export default function LanguageBars({ items, maxItems = 5 }) {
+export default function LanguageBars({ items, maxItems = 10 }) {
     if (!Array.isArray(items) || !items.length) return null;
     const total = items.reduce((a, b) => a + (b.seconds || 0), 0) || 1;
     return (

@@ -10,6 +10,7 @@ export default function DayBreakdown({
         .map(([name, seconds]) => ({ name, seconds: Number(seconds) || 0 }))
         .sort((a, b) => b.seconds - a.seconds);
     const totalSeconds = entries.reduce((a, b) => a + b.seconds, 0);
+    console.log("totalSeconds", totalSeconds);
     const trendDay = (trendSeries || []).find(
         (d) => d.date?.slice(0, 10) === date
     );

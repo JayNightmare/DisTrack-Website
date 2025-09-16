@@ -4,6 +4,7 @@ export default function DayBreakdown({
     date,
     languages = {},
     trendSeries = [],
+    daySeconds = null, // optional: seconds from heatmap for this day
 }) {
     const entries = Object.entries(languages)
         .map(([name, seconds]) => ({ name, seconds: Number(seconds) || 0 }))
@@ -12,7 +13,14 @@ export default function DayBreakdown({
     const trendDay = (trendSeries || []).find(
         (d) => d.date?.slice(0, 10) === date
     );
-    const totalHours = trendDay?.totalHours ?? totalSeconds / 3600;
+    // Prefer exact seconds from heatmap if available, then trend's totalHours, then sum of language seconds
+    const heatmapHours = daySeconds != null ? Number(daySeconds) / 3600 : null;
+    const totalHours =
+        (heatmapHours != null && !Number.isNaN(heatmapHours)
+            ? heatmapHours
+            : undefined) ??
+        trendDay?.totalHours ??
+        totalSeconds / 3600;
     const sessions = trendDay?.sessions ?? 0;
     return (
         <div className="rounded border border-zinc-700/50 bg-zinc-900/40 p-3">

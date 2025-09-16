@@ -162,6 +162,10 @@ export default function UserStats({ userId, languageData, userStreaks }) {
                             date={selectedDate}
                             languages={languageDaily[selectedDate]}
                             trendSeries={trend30?.series}
+                            daySeconds={
+                                heatmap.find((d) => d.date === selectedDate)
+                                    ?.seconds ?? null
+                            }
                         />
                     ) : (
                         <span className="text-zinc-500">

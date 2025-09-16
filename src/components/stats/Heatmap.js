@@ -34,23 +34,16 @@ export default function Heatmap({ series, size = 14, onSelect, selectedDate }) {
     };
 
     const formatHours = (s) => {
-        // return (s / 3600).toFixed(2);
-
-        // Convert seconds to hours and minutes
         const hours = Math.floor(s / 3600);
         const minutes = Math.floor((s % 3600) / 60);
 
         let result = "";
-        if (hours > 0) {
-            result += `${hours}h`;
-        }
+        if (hours > 0) result += `${hours}h`;
         if (minutes > 0) {
             if (result) result += " ";
             result += `${minutes}m`;
         }
-        if (!result) {
-            result = "0h";
-        }
+        if (!result) result = "0h";
         return result;
     };
 

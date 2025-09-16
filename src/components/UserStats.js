@@ -166,6 +166,7 @@ export default function UserStats({ userId, languageData, userStreaks }) {
                                 heatmap.find((d) => d.date === selectedDate)
                                     ?.seconds ?? null
                             }
+                            debug={true}
                         />
                     ) : (
                         <span className="text-zinc-500">

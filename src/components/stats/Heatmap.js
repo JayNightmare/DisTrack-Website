@@ -64,8 +64,6 @@ export default function Heatmap({ series, size = 14, onSelect, selectedDate }) {
             >
                 {cells.map((c) => {
                     const label = formatHours(c.seconds);
-                    console.log(`Formated Hours: ${label}`);
-                    console.log(`Formated Hours: ${c.seconds}`);
                     return (
                         <div key={c.iso} className="relative group">
                             <div

@@ -1,17 +1,19 @@
 // Data normalization helpers for various stats payload shapes
 
-// NOTE: API returns time in HOURS; components expect seconds for heatmap/language charts.
-// Convert incoming hour values to seconds consistently.
+// NOTE: Most API endpoints return time in HOURS, but components expect seconds
+// for heatmap and language charts. Convert incoming hour values to seconds
+// consistently. The heatmap endpoint specifically returns seconds per day.
+
 export const normalizeDailySeries = (payload) => {
     if (!payload) return [];
     if (Array.isArray(payload)) {
         return payload
             .map((d) => {
+                if (!d) return null;
                 const date = d.date || d.day || d.key || d.timestamp;
-                // Prefer hour fields; fall back to known second-like fields (convert)
-                const hoursField = d.hours ?? d.totalHours;
+                const hoursField = d.hours ?? d.totalHours; // preferred
                 const secField =
-                    d.seconds ?? d.totalSeconds ?? d.duration ?? d.time;
+                    d.seconds ?? d.totalSeconds ?? d.duration ?? d.time; // passthrough
                 const seconds = Number(
                     hoursField != null
                         ? Number(hoursField) * 3600
@@ -26,11 +28,12 @@ export const normalizeDailySeries = (payload) => {
             .filter(Boolean)
             .sort((a, b) => (a.date < b.date ? -1 : 1));
     }
-    if (typeof payload === "object") {
-        // Map of date -> hours (convert) or seconds
+    if (typeof payload === "object" && payload !== null) {
+        // Generic map of date -> hours (convert) or seconds (if already provided)
         return Object.entries(payload)
             .map(([date, value]) => {
-                const seconds = Number(value) * 3600; // assume hours in map
+                // Assume hours for generic maps
+                const seconds = Number(value) * 3600;
                 return { date: String(date).slice(0, 10), seconds };
             })
             .sort((a, b) => (a.date < b.date ? -1 : 1));
@@ -41,6 +44,7 @@ export const normalizeDailySeries = (payload) => {
 export const normalizeHeatmap = (payload) => {
     if (!payload) return [];
     if (Array.isArray(payload)) return normalizeDailySeries(payload);
+    // Prefer payload.days which is a date -> seconds map
     if (
         typeof payload === "object" &&
         payload !== null &&
@@ -48,17 +52,18 @@ export const normalizeHeatmap = (payload) => {
         payload.days !== null
     ) {
         return Object.entries(payload.days)
-            .map(([date, hours]) => ({
+            .map(([date, seconds]) => ({
                 date: String(date).slice(0, 10),
-                seconds: Number(hours) * 3600 || 0,
+                seconds: Number(seconds) || 0,
             }))
             .sort((a, b) => (a.date < b.date ? -1 : 1));
     }
+    // Fallback: treat the object as a date -> seconds map
     if (typeof payload === "object" && payload !== null) {
         return Object.entries(payload)
-            .map(([date, hours]) => ({
+            .map(([date, seconds]) => ({
                 date: String(date).slice(0, 10),
-                seconds: Number(hours) * 3600 || 0,
+                seconds: Number(seconds) || 0,
             }))
             .sort((a, b) => (a.date < b.date ? -1 : 1));
     }
@@ -68,6 +73,8 @@ export const normalizeHeatmap = (payload) => {
 export const normalizeLanguages = (payload) => {
     if (!payload)
         return { range: null, topLanguages: [], timeseries: [], totals: {} };
+
+    // Structured payload with timeseries and totals
     if (
         typeof payload === "object" &&
         payload !== null &&
@@ -77,10 +84,15 @@ export const normalizeLanguages = (payload) => {
             payload.totals)
     ) {
         const timeseries = Array.isArray(payload.timeseries)
-            ? payload.timeseries.map((ts) => ({
-                  date: ts.date || ts.day || ts.key || ts.timestamp,
-                  languages:
-                      typeof ts.languages === "object" && ts.languages !== null
+            ? payload.timeseries.map((ts) => {
+                  const date = String(ts.date || ts.day || ts.key || "").slice(
+                      0,
+                      10
+                  );
+                  const languages =
+                      ts &&
+                      typeof ts.languages === "object" &&
+                      ts.languages !== null
                           ? Object.fromEntries(
                                 Object.entries(ts.languages).map(
                                     ([name, hours]) => [
@@ -89,9 +101,11 @@ export const normalizeLanguages = (payload) => {
                                     ]
                                 )
                             )
-                          : {},
-              }))
+                          : {};
+                  return { date, languages };
+              })
             : [];
+
         const totals =
             typeof payload.totals === "object" && payload.totals !== null
                 ? Object.fromEntries(
@@ -101,12 +115,15 @@ export const normalizeLanguages = (payload) => {
                       ])
                   )
                 : {};
+
         const topLanguages = Array.isArray(payload.topLanguages)
             ? payload.topLanguages.filter(Boolean).map(String)
             : [];
         const range = payload.range || null;
         return { range, topLanguages, timeseries, totals };
     }
+
+    // Array payload of language totals
     if (Array.isArray(payload)) {
         const arr = payload
             .map((l) => {
@@ -136,6 +153,8 @@ export const normalizeLanguages = (payload) => {
             totals: Object.fromEntries(arr.map((l) => [l.name, l.seconds])),
         };
     }
+
+    // Map of language -> hours
     if (
         typeof payload === "object" &&
         payload !== null &&
@@ -154,5 +173,6 @@ export const normalizeLanguages = (payload) => {
             totals: Object.fromEntries(arr.map((l) => [l.name, l.seconds])),
         };
     }
+
     return { range: null, topLanguages: [], timeseries: [], totals: {} };
 };

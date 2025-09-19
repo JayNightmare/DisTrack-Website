@@ -173,7 +173,7 @@ export default function LanguageShareDonut({
     return (
         <>
             <div className="text-sm font-semibold text-zinc-200 mb-3">
-                Hall of Flame · Fastest growing (7d)
+                Language share (top {items.length})
             </div>
             <div className="flex gap-4 items-center">
                 <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>

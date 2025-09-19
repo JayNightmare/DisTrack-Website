@@ -170,7 +170,7 @@ export default function HomePage() {
 
             {/* Hero heatmap + language donut + hall of flame */}
             <div className="w-full px-4 mt-8 max-w-6xl grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div className="lg:col-span-2 rounded-lg border border-zinc-700/50 bg-zinc-900/40 p-4">
+                <div className="rounded-lg border border-zinc-700/50 bg-zinc-900/40 p-4">
                     {hourlyMatrix ? (
                         <WorldCodingHeatmap matrix={hourlyMatrix} />
                     ) : (
@@ -183,9 +183,9 @@ export default function HomePage() {
                     ) : (
                         <div className="h-64 rounded bg-zinc-900/40 border border-zinc-700/40 animate-pulse" />
                     )}
-                </div>
-                <div className="lg:col-span-3">
-                    <HallOfFlame users={hof} />
+                    <div className="lg:col-span-3">
+                        <HallOfFlame users={hof} />
+                    </div>
                 </div>
             </div>
             <Footer className="mt-8" />

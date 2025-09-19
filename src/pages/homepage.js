@@ -169,7 +169,7 @@ export default function HomePage() {
             </div>
 
             {/* Hero heatmap + language donut + hall of flame */}
-            <div className="w-full px-4 mt-8 max-w-6xl grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="w-full px-4 mt-8 max-w-6xl grid grid-cols-1 gap-6">
                 <div className="rounded-lg border border-zinc-700/50 bg-zinc-900/40 p-4">
                     {hourlyMatrix ? (
                         <WorldCodingHeatmap matrix={hourlyMatrix} />

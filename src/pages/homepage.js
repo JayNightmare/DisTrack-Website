@@ -177,13 +177,15 @@ export default function HomePage() {
                         <div className="h-64 rounded bg-zinc-900/40 border border-zinc-700/40 animate-pulse" />
                     )}
                 </div>
-                <div className="rounded-lg border border-zinc-700/50 bg-zinc-900/40 p-4 flex justify-between flex-row">
-                    {langShare ? (
-                        <LanguageShareDonut items={langShare.items} />
-                    ) : (
-                        <div className="h-64 rounded bg-zinc-900/40 border border-zinc-700/40 animate-pulse" />
-                    )}
-                    <div className="lg:col-span-3">
+                <div className="rounded-lg border border-zinc-700/50 bg-zinc-900/40 p-4 flex flex-col md:flex-row gap-6">
+                    <div className="w-full md:w-1/2">
+                        {langShare ? (
+                            <LanguageShareDonut items={langShare.items} />
+                        ) : (
+                            <div className="h-64 rounded bg-zinc-900/40 border border-zinc-700/40 animate-pulse" />
+                        )}
+                    </div>
+                    <div className="w-full md:w-1/2">
                         <HallOfFlame users={hof} />
                     </div>
                 </div>

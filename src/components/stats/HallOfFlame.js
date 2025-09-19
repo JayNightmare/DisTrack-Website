@@ -31,8 +31,8 @@ export default function HallOfFlame({ users = [] }) {
                                         .toUpperCase()}
                                 </div>
                             )}
-                            <div className="flex-1">
-                                <div className="text-zinc-200 text-sm">
+                            <div className="flex-1 min-w-0">
+                                <div className="text-zinc-200 text-sm truncate">
                                     {u.name || "Unknown"}
                                 </div>
                                 <div className="text-zinc-500 text-xs">
@@ -44,7 +44,7 @@ export default function HallOfFlame({ users = [] }) {
                                         : "—"}
                                 </div>
                             </div>
-                            <div className="text-right">
+                            <div className="text-right whitespace-nowrap">
                                 {u.deltaHours != null ? (
                                     <span className="text-emerald-400 text-sm font-semibold">
                                         +{fmt.format(Math.round(u.deltaHours))}h

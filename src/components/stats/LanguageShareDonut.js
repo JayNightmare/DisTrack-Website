@@ -171,12 +171,18 @@ export default function LanguageShareDonut({
     }
 
     return (
-        <div className="flex flex-col sm:flex-row gap-4 items-center gap-4">
-            <div className="text-sm font-semibold text-zinc-200 mb-3">
+        <div className="flex flex-col md:flex-row items-start gap-4 md:gap-6">
+            <div className="text-sm font-semibold text-zinc-200">
                 Language share (top {items.length})
             </div>
-            <div className="flex flex-col sm:flex-row items-center gap-6">
-                <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+            <div className="flex w-full md:w-auto flex-col md:flex-row items-center gap-4 md:gap-6">
+                <svg
+                    width="100%"
+                    height="auto"
+                    viewBox={`0 0 ${size} ${size}`}
+                    className="max-w-[260px] md:max-w-[220px]"
+                    preserveAspectRatio="xMidYMid meet"
+                >
                     <circle cx={cx} cy={cy} r={rOuter} fill="#18181b" />
                     {arcs.map((a, i) => (
                         <g key={a.name + i}>
@@ -196,7 +202,7 @@ export default function LanguageShareDonut({
                     ))}
                     <circle cx={cx} cy={cy} r={rInner} fill="#09090b" />
                 </svg>
-                <div className="space-y-2">
+                <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
                     {items.slice(0, 8).map((it, i) => {
                         const pct =
                             (it.share || (it.seconds || 0) / total) * 100;
@@ -206,7 +212,7 @@ export default function LanguageShareDonut({
                         return (
                             <div
                                 key={it.name}
-                                className="flex items-center gap-2 text-sm"
+                                className="flex items-center gap-2"
                             >
                                 <span
                                     className="inline-block w-3 h-3 rounded"

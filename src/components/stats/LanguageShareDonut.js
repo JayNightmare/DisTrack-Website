@@ -10,15 +10,128 @@ function arcPath(cx, cy, r, startAngle, endAngle) {
 }
 
 const palette = [
-    "#818cf8", // indigo-400
-    "#34d399", // emerald-400
-    "#f472b6", // pink-400
-    "#f59e0b", // amber-500
-    "#60a5fa", // blue-400
-    "#a78bfa", // violet-400
-    "#f87171", // red-400
-    "#22d3ee", // cyan-400
+    {
+        name: "javaScript",
+        color: "#f7df1e", // yellow
+    },
+    {
+        name: "python",
+        color: "#3572A5", // blue
+    },
+    {
+        name: "java",
+        color: "#b07219", // brown
+    },
+    {
+        name: "typeScript",
+        color: "#3178c6", // blue
+    },
+    {
+        name: "cpp",
+        color: "#f34b7d", // pink
+    },
+    {
+        name: "csharp",
+        color: "#178600", // green
+    },
+    {
+        name: "ruby",
+        color: "#701516", // dark red
+    },
+    {
+        name: "go",
+        color: "#00ADD8", // cyan
+    },
+    {
+        name: "php",
+        color: "#4F5D95", // purple
+    },
+    {
+        name: "c",
+        color: "#555555", // gray
+    },
+    {
+        name: "shell",
+        color: "#89e051", // light green
+    },
+    {
+        name: "swift",
+        color: "#ffac45", // orange
+    },
+    {
+        name: "kotlin",
+        color: "#A97BFF", // purple
+    },
+    {
+        name: "rust",
+        color: "#dea584", // light brown
+    },
+    {
+        name: "dart",
+        color: "#00B4AB", // teal
+    },
+    {
+        name: "scala",
+        color: "#c22d40", // red
+    },
+    {
+        name: "lua",
+        color: "#000080", // navy
+    },
+    {
+        name: "html",
+        color: "#e34c26", // orange
+    },
+    {
+        name: "css",
+        color: "#563d7c", // purple
+    },
+    {
+        name: "json",
+        color: "#292929", // dark gray
+    },
+    {
+        name: "markdown",
+        color: "#083fa1", // blue
+    },
+    {
+        name: "properties",
+        color: "#6d8086", // gray
+    },
+    {
+        name: "other",
+        color: "#6e6e6e", // medium gray
+    },
 ];
+
+// Normalize language names to canonical keys for color lookup
+function normalizeLang(name) {
+    let key = String(name || "")
+        .toLowerCase()
+        .trim();
+    // Common aliases
+    if (key === "c++" || key === "cpp") key = "cpp";
+    if (key === "c#" || key === "csharp") key = "csharp";
+    if (key === "js" || key === "java script" || key === "javascript")
+        key = "javascript";
+    if (key === "ts" || key === "type script" || key === "typescript")
+        key = "typescript";
+    if (key === "golang") key = "go";
+    if (key === "bash" || key === "zsh" || key === "sh") key = "shell";
+    if (key === "html5") key = "html";
+    if (key === "css3") key = "css";
+    if (key === "md") key = "markdown";
+    return key;
+}
+
+// Build a map of normalized language name -> color
+const NAMED_COLORS = Object.fromEntries(
+    palette.map((p) => [normalizeLang(p.name), p.color])
+);
+const FALLBACK_COLORS = palette.map((p) => p.color);
+const colorByLang = (name, idx) =>
+    NAMED_COLORS[normalizeLang(name)] ||
+    FALLBACK_COLORS[idx % FALLBACK_COLORS.length];
 
 export default function LanguageShareDonut({
     items = [],
@@ -38,7 +151,7 @@ export default function LanguageShareDonut({
                 ...it,
                 start,
                 end,
-                color: palette[idx % palette.length],
+                color: colorByLang(it.name, idx),
                 share,
             };
         });
@@ -92,9 +205,7 @@ export default function LanguageShareDonut({
                         >
                             <span
                                 className="inline-block w-3 h-3 rounded"
-                                style={{
-                                    background: palette[i % palette.length],
-                                }}
+                                style={{ background: colorByLang(it.name, i) }}
                             />
                             <span className="text-zinc-200">{it.name}</span>
                             <span className="text-zinc-400">

@@ -177,7 +177,7 @@ export default function HomePage() {
                         <div className="h-64 rounded bg-zinc-900/40 border border-zinc-700/40 animate-pulse" />
                     )}
                 </div>
-                <div className="rounded-lg border border-zinc-700/50 bg-zinc-900/40 p-4">
+                <div className="rounded-lg border border-zinc-700/50 bg-zinc-900/40 p-4 flex flex-col justify-between">
                     {langShare ? (
                         <LanguageShareDonut items={langShare.items} />
                     ) : (

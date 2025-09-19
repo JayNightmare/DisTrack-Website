@@ -171,71 +171,66 @@ export default function LanguageShareDonut({
     }
 
     return (
-        <>
+        <div className="flex gap-4 items-center">
             <div className="text-sm font-semibold text-zinc-200 mb-3">
                 Language share (top {items.length})
             </div>
-            <div className="flex gap-4 items-center">
-                <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-                    <circle cx={cx} cy={cy} r={rOuter} fill="#18181b" />
-                    {arcs.map((a, i) => (
-                        <g key={a.name + i}>
-                            <path
-                                d={arcPath(
-                                    cx,
-                                    cy,
-                                    (rOuter + rInner) / 2,
-                                    a.start,
-                                    a.end
-                                )}
-                                stroke={a.color}
-                                strokeWidth={thickness}
-                                fill="none"
+            <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+                <circle cx={cx} cy={cy} r={rOuter} fill="#18181b" />
+                {arcs.map((a, i) => (
+                    <g key={a.name + i}>
+                        <path
+                            d={arcPath(
+                                cx,
+                                cy,
+                                (rOuter + rInner) / 2,
+                                a.start,
+                                a.end
+                            )}
+                            stroke={a.color}
+                            strokeWidth={thickness}
+                            fill="none"
+                        />
+                    </g>
+                ))}
+                <circle cx={cx} cy={cy} r={rInner} fill="#09090b" />
+            </svg>
+            <div className="space-y-2">
+                {items.slice(0, 8).map((it, i) => {
+                    const pct = (it.share || (it.seconds || 0) / total) * 100;
+                    const delta = it.deltaPctPoints || 0;
+                    const up = delta > 0.0001;
+                    const down = delta < -0.0001;
+                    return (
+                        <div
+                            key={it.name}
+                            className="flex items-center gap-2 text-sm"
+                        >
+                            <span
+                                className="inline-block w-3 h-3 rounded"
+                                style={{
+                                    background: colorByLang(it.name, i),
+                                }}
                             />
-                        </g>
-                    ))}
-                    <circle cx={cx} cy={cy} r={rInner} fill="#09090b" />
-                </svg>
-                <div className="space-y-2">
-                    {items.slice(0, 8).map((it, i) => {
-                        const pct =
-                            (it.share || (it.seconds || 0) / total) * 100;
-                        const delta = it.deltaPctPoints || 0;
-                        const up = delta > 0.0001;
-                        const down = delta < -0.0001;
-                        return (
-                            <div
-                                key={it.name}
-                                className="flex items-center gap-2 text-sm"
-                            >
-                                <span
-                                    className="inline-block w-3 h-3 rounded"
-                                    style={{
-                                        background: colorByLang(it.name, i),
-                                    }}
-                                />
-                                <span className="text-zinc-200">{it.name}</span>
-                                <span className="text-zinc-400">
-                                    {pct.toFixed(1)}%
+                            <span className="text-zinc-200">{it.name}</span>
+                            <span className="text-zinc-400">
+                                {pct.toFixed(1)}%
+                            </span>
+                            {up ? (
+                                <span className="text-emerald-400 text-xs">
+                                    ▲ {delta.toFixed(1)}pp
                                 </span>
-                                {up ? (
-                                    <span className="text-emerald-400 text-xs">
-                                        ▲ {delta.toFixed(1)}pp
-                                    </span>
-                                ) : down ? (
-                                    <span className="text-rose-400 text-xs">
-                                        ▼ {Math.abs(delta).toFixed(1)}pp
-                                    </span>
-                                ) : (
-                                    <span className="text-zinc-500 text-xs">
-                                        •
-                                    </span>
-                                )}
-                            </div>
-                        );
-                    })}
-                </div>
+                            ) : down ? (
+                                <span className="text-rose-400 text-xs">
+                                    ▼ {Math.abs(delta).toFixed(1)}pp
+                                </span>
+                            ) : (
+                                <span className="text-zinc-500 text-xs">•</span>
+                            )}
+                        </div>
+                    );
+                })}
             </div>
-        </>
+        </div>
     );
 }

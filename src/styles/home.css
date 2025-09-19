@@ -58,7 +58,7 @@
     }
 }
 
-@media (min-width: 465px) {
+@media (max-width: 465px) {
     .language-list {
         grid-template-columns: repeat(1, minmax(0, 1fr));
     }

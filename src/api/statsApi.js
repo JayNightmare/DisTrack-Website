@@ -147,10 +147,13 @@ export const getGlobalLiveCounters = async () => {
 // Returns 7-day rolling trends for homepage mini-cards
 // Expected response: { hoursTracked: number[], activeUsers: number[], avgStreak: number[] }
 export const getGlobalTrends = async (days = 7) => {
-    if (!endpointUrl || !apiToken) return null;
+    if (!endpointUrl) return null;
     try {
+        const headers = apiToken
+            ? { Authorization: `Bearer ${apiToken}` }
+            : undefined;
         const { data } = await axios.get(`${endpointUrl}/stats/global/trends`, {
-            headers: { Authorization: `Bearer ${apiToken}` },
+            headers,
             params: { days },
         });
         return data;
@@ -166,12 +169,15 @@ export const getGlobalTrends = async (days = 7) => {
 // - Array<{ dayOfWeek: 0-6, hour: 0-23, seconds: number }>
 // - { counts: { "d-h": seconds } }
 export const getGlobalHourlyHeatmap = async (windowDays = 30) => {
-    if (!endpointUrl || !apiToken) return null;
+    if (!endpointUrl) return null;
     try {
+        const headers = apiToken
+            ? { Authorization: `Bearer ${apiToken}` }
+            : undefined;
         const { data } = await axios.get(
             `${endpointUrl}/stats/global/heatmap/hourly`,
             {
-                headers: { Authorization: `Bearer ${apiToken}` },
+                headers,
                 params: { window: windowDays },
             }
         );
@@ -185,12 +191,15 @@ export const getGlobalHourlyHeatmap = async (windowDays = 30) => {
 // Returns language totals for last 30 days and previous period for deltas
 // Expected: { current: { lang: seconds|hours }, previous: { lang: seconds|hours } }
 export const getGlobalLanguageShare = async (days = 30, compare = true) => {
-    if (!endpointUrl || !apiToken) return null;
+    if (!endpointUrl) return null;
     try {
+        const headers = apiToken
+            ? { Authorization: `Bearer ${apiToken}` }
+            : undefined;
         const { data } = await axios.get(
             `${endpointUrl}/stats/global/languages`,
             {
-                headers: { Authorization: `Bearer ${apiToken}` },
+                headers,
                 params: { days, compare },
             }
         );
@@ -204,10 +213,13 @@ export const getGlobalLanguageShare = async (days = 30, compare = true) => {
 // Returns Hall of Flame: fastest growing users by delta hours for the period
 // Expected: Array<{ userId, name, avatarUrl?, deltaHours, totalHours }>
 export const getFastestGrowingUsers = async (period = "week", limit = 10) => {
-    if (!endpointUrl || !apiToken) return [];
+    if (!endpointUrl) return [];
     try {
+        const headers = apiToken
+            ? { Authorization: `Bearer ${apiToken}` }
+            : undefined;
         const { data } = await axios.get(`${endpointUrl}/leaderboard/growth`, {
-            headers: { Authorization: `Bearer ${apiToken}` },
+            headers,
             params: { period, limit },
         });
         return Array.isArray(data) ? data : [];
@@ -218,7 +230,12 @@ export const getFastestGrowingUsers = async (period = "week", limit = 10) => {
         );
         try {
             // Fallback to weekly leaderboard (absolute time)
-            const res = await axios.get(`${endpointUrl}/leaderboard/week`);
+            const headers = apiToken
+                ? { Authorization: `Bearer ${apiToken}` }
+                : undefined;
+            const res = await axios.get(`${endpointUrl}/leaderboard/week`, {
+                headers,
+            });
             const arr = Array.isArray(res.data) ? res.data : [];
             // Map to growth-like structure without delta
             return arr.slice(0, limit).map((u) => ({

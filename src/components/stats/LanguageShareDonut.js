@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 
+// Build an SVG arc path between two angles
 function arcPath(cx, cy, r, startAngle, endAngle) {
     const toXY = (a) => [cx + r * Math.cos(a), cy + r * Math.sin(a)];
     const [sx, sy] = toXY(startAngle);
@@ -24,11 +25,12 @@ export default function LanguageShareDonut({
     size = 220,
     thickness = 18,
 }) {
-    const total = items.reduce((a, b) => a + (b.seconds || 0), 0) || 1;
+    const total = items.reduce((a, b) => a + (b.seconds || 0), 0) || 0;
+
     const arcs = useMemo(() => {
         let angle = -Math.PI / 2; // start at top
         return items.map((it, idx) => {
-            const share = (it.seconds || 0) / total;
+            const share = total > 0 ? (it.seconds || 0) / total : 0;
             const start = angle;
             const end = angle + share * Math.PI * 2;
             angle = end;
@@ -46,6 +48,14 @@ export default function LanguageShareDonut({
     const cy = size / 2;
     const rOuter = size / 2 - 4;
     const rInner = rOuter - thickness;
+
+    if (!items.length || total <= 0) {
+        return (
+            <div className="flex items-center justify-center h-64 text-sm text-zinc-500">
+                No language data for the selected period
+            </div>
+        );
+    }
 
     return (
         <div className="flex gap-4 items-center">
@@ -71,7 +81,7 @@ export default function LanguageShareDonut({
             </svg>
             <div className="space-y-2">
                 {items.slice(0, 8).map((it, i) => {
-                    const pct = (it.share || 0) * 100;
+                    const pct = (it.share || (it.seconds || 0) / total) * 100;
                     const delta = it.deltaPctPoints || 0;
                     const up = delta > 0.0001;
                     const down = delta < -0.0001;

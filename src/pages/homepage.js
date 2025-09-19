@@ -185,11 +185,7 @@ export default function HomePage() {
                     )}
                 </div>
                 <div className="lg:col-span-3">
-                    {hof && hof.length ? (
-                        <HallOfFlame users={hof} />
-                    ) : (
-                        <div className="h-40 rounded bg-zinc-900/40 border border-zinc-700/40 animate-pulse" />
-                    )}
+                    <HallOfFlame users={hof} />
                 </div>
             </div>
             <Footer className="mt-8" />

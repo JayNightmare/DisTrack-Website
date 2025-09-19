@@ -171,11 +171,11 @@ export default function LanguageShareDonut({
     }
 
     return (
-        <div className="flex flex-col md:flex-row items-start gap-4 md:gap-6">
+        <div className="flex flex-col items-start gap-4 md:gap-6">
             <div className="text-sm font-semibold text-zinc-200">
                 Language share (top {items.length})
             </div>
-            <div className="flex w-full md:w-auto flex-col md:flex-row items-center gap-4 md:gap-6">
+            <div className="flex w-full md:w-auto flex-col md:flex-col items-center gap-4 md:gap-6">
                 <svg
                     width="100%"
                     height="auto"
@@ -202,7 +202,7 @@ export default function LanguageShareDonut({
                     ))}
                     <circle cx={cx} cy={cy} r={rInner} fill="#09090b" />
                 </svg>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm language-list">
                     {items.slice(0, 8).map((it, i) => {
                         const pct =
                             (it.share || (it.seconds || 0) / total) * 100;

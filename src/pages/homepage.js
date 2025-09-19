@@ -178,7 +178,7 @@ export default function HomePage() {
                     )}
                 </div>
                 <div className="rounded-lg border border-zinc-700/50 bg-zinc-900/40 p-4 flex flex-col md:flex-row gap-6">
-                    <div className="w-full md:w-1/2">
+                    <div className="w-full md:w-1/2 ">
                         {langShare ? (
                             <LanguageShareDonut items={langShare.items} />
                         ) : (

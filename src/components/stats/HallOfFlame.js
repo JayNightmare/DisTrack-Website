@@ -3,7 +3,7 @@ import React from "react";
 export default function HallOfFlame({ users = [] }) {
     const fmt = new Intl.NumberFormat();
     return (
-        <div className="rounded-lg border border-zinc-700/50 bg-zinc-900/50 p-4">
+        <div className="p-4">
             <div className="text-sm font-semibold text-zinc-200 mb-3">
                 Hall of Flame · Fastest growing (7d)
             </div>

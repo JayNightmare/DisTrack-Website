@@ -12,7 +12,7 @@ export default function HallOfFlame({ users = [] }) {
                     No growth data available for this period
                 </div>
             ) : (
-                <ul className="divide-y divide-zinc-800">
+                <ul className="rounded-lg border border-zinc-700/50 bg-zinc-900/50 divide-y divide-zinc-800 px-4 divide-y divide-zinc-800">
                     {users.slice(0, 10).map((u, i) => (
                         <li
                             key={(u.userId || u.name || i) + "-hof"}

@@ -176,3 +176,84 @@ export const normalizeLanguages = (payload) => {
 
     return { range: null, topLanguages: [], timeseries: [], totals: {} };
 };
+
+// Normalize 24x7 UTC hourly heatmap to a fixed 7x24 matrix of seconds
+// Input flexible: { matrix }, array of { dayOfWeek, hour, seconds }, or map { 'd-h': seconds }
+export const normalizeHourlyMatrix = (payload) => {
+    const matrix = new Array(7).fill(null).map(() => new Array(24).fill(0));
+    if (!payload) return matrix;
+    if (Array.isArray(payload)) {
+        for (const r of payload) {
+            if (!r) continue;
+            const d = Number(r.dayOfWeek);
+            const h = Number(r.hour);
+            const s = Number(r.seconds || r.totalSeconds || 0);
+            if (d >= 0 && d < 7 && h >= 0 && h < 24) matrix[d][h] += s;
+        }
+        return matrix;
+    }
+    if (typeof payload === "object" && payload !== null) {
+        if (Array.isArray(payload.matrix)) {
+            // trust shape but coerce numbers
+            for (let d = 0; d < 7; d++) {
+                for (let h = 0; h < 24; h++) {
+                    const v = payload.matrix?.[d]?.[h] ?? 0;
+                    matrix[d][h] = Number(v) || 0;
+                }
+            }
+            return matrix;
+        }
+        if (typeof payload.counts === "object" && payload.counts !== null) {
+            for (const [key, v] of Object.entries(payload.counts)) {
+                const [dStr, hStr] = String(key).split("-");
+                const d = Number(dStr);
+                const h = Number(hStr);
+                if (d >= 0 && d < 7 && h >= 0 && h < 24)
+                    matrix[d][h] += Number(v) || 0;
+            }
+            return matrix;
+        }
+    }
+    return matrix;
+};
+
+// Compute language share with deltas between current and previous periods
+// Input flexible: { current: { lang: hours|seconds }, previous: { lang: hours|seconds } }
+export const computeLanguageShareWithDelta = (payload) => {
+    const toSecondsMap = (m) => {
+        if (!m || typeof m !== "object") return {};
+        return Object.fromEntries(
+            Object.entries(m).map(([k, v]) => {
+                const n = Number(v);
+                // Heuristic: if value > 1000, assume seconds; else assume hours
+                const seconds = n > 1000 ? n : n * 3600;
+                return [k, seconds || 0];
+            })
+        );
+    };
+    const current = toSecondsMap(payload?.current);
+    const previous = toSecondsMap(payload?.previous);
+    const allLangs = Array.from(
+        new Set([...Object.keys(current), ...Object.keys(previous)])
+    );
+    const currentTotal =
+        allLangs.reduce((a, k) => a + (current[k] || 0), 0) || 1;
+    const previousTotal =
+        allLangs.reduce((a, k) => a + (previous[k] || 0), 0) || 1;
+    const items = allLangs
+        .map((name) => {
+            const cur = current[name] || 0;
+            const prev = previous[name] || 0;
+            const share = cur / currentTotal;
+            const prevShare = prev / previousTotal;
+            const deltaPctPoints = (share - prevShare) * 100;
+            return {
+                name,
+                seconds: cur,
+                share,
+                deltaPctPoints,
+            };
+        })
+        .sort((a, b) => b.seconds - a.seconds);
+    return { items, currentTotal, previousTotal };
+};

@@ -4,7 +4,6 @@ import {
     getUserHeatmapStats,
     getUserLanguageStats,
 } from "../api/statsApi";
-import Sparkline from "./stats/Sparkline";
 import Heatmap from "./stats/Heatmap";
 import LanguageBars from "./stats/LanguageBars";
 import DayBreakdown from "./stats/DayBreakdown";
@@ -189,20 +188,6 @@ export default function UserStats({ userId, languageData, userStreaks }) {
                     <div className="text-xs text-zinc-400">
                         No language data
                     </div>
-                )}
-            </div>
-
-            {/* Trend sparkline */}
-            <div className="bg-zinc-900/50 border border-zinc-700/50 rounded-lg p-4 md:col-span-2">
-                <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-sm font-semibold text-zinc-300">
-                        Last 30 days
-                    </h3>
-                </div>
-                {trend30?.series?.length ? (
-                    <Sparkline trend={trend30} />
-                ) : (
-                    <div className="text-xs text-zinc-400">No activity yet</div>
                 )}
             </div>
         </div>

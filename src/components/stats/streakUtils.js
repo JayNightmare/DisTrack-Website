@@ -23,10 +23,6 @@ export function computeStreaks(series) {
     let current = 0;
     let running = 0;
 
-    // We'll track whether the last date seen is contiguous with today for current streak.
-    const today = new Date();
-    today.setUTCHours(0, 0, 0, 0);
-
     // Map dates with activity for quick lookup
     const active = new Set(
         days.filter((d) => (d.seconds || 0) > 0).map((d) => d.date)
@@ -54,15 +50,25 @@ export function computeStreaks(series) {
         }
     }
 
-    // Compute current streak by walking backward from today until a gap or zero-activity day
-    let cursor = new Date(today);
-    while (true) {
-        const iso = cursor.toISOString().slice(0, 10);
-        if (active.has(iso)) {
-            current += 1;
-            cursor.setUTCDate(cursor.getUTCDate() - 1);
-        } else {
-            break;
+    // Compute current streak by walking backward from the MOST RECENT active day
+    // rather than strictly from "today". This aligns with the heatmap when there
+    // is no activity today but there is a contiguous streak ending yesterday (or earlier).
+    const activeDaysSorted = Array.from(active).sort((a, b) =>
+        a < b ? -1 : a > b ? 1 : 0
+    );
+    const lastActiveIso = activeDaysSorted.length
+        ? activeDaysSorted[activeDaysSorted.length - 1]
+        : null;
+    if (lastActiveIso) {
+        let cursor = parseISODate(lastActiveIso);
+        while (true) {
+            const iso = cursor.toISOString().slice(0, 10);
+            if (active.has(iso)) {
+                current += 1;
+                cursor.setUTCDate(cursor.getUTCDate() - 1);
+            } else {
+                break;
+            }
         }
     }
 

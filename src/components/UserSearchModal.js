@@ -211,11 +211,26 @@ const UserSearchModal = ({ isOpen, onClose }) => {
                                                     @{user.username}
                                                 </p>
                                             )}
-                                        {user.bio && (
-                                            <p className="text-zinc-400 text-sm mt-1 truncate">
-                                                {user.bio}
-                                            </p>
-                                        )}
+                                        <div className="flex items-center space-x-4 text-zinc-400 text-xs mt-1">
+                                            {user.currentStreak !==
+                                                undefined && (
+                                                <span>
+                                                    🔥 {user.currentStreak} day
+                                                    streak
+                                                </span>
+                                            )}
+                                            {user.totalCodingTime !==
+                                                undefined && (
+                                                <span>
+                                                    ⏱️{" "}
+                                                    {Math.round(
+                                                        user.totalCodingTime /
+                                                            3600
+                                                    )}
+                                                    h total
+                                                </span>
+                                            )}
+                                        </div>
                                     </div>
                                     <svg
                                         className="w-5 h-5 text-zinc-400"

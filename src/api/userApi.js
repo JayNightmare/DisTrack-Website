@@ -96,7 +96,7 @@ export async function clearLinkCode(userId) {
 }
 
 // Search for users by display name or username
-export async function searchUsers(query) {
+export async function searchUsers(query, limit = 10) {
     if (!endpointUrl || !apiToken) {
         console.error(
             "API endpoint or token is not set in environment variables."
@@ -105,12 +105,13 @@ export async function searchUsers(query) {
     }
     try {
         const response = await axios.get(`${endpointUrl}/users/search`, {
-            params: { q: query },
+            params: { q: query, limit },
             headers: { Authorization: `Bearer ${apiToken}` },
         });
-        return response.data;
+        // Backend returns { users: [...] }, so we extract the users array
+        return response.data.users || [];
     } catch (error) {
         console.error(`<< Failed to search users:`, error);
-        return null;
+        return [];
     }
 }

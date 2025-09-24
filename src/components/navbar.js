@@ -4,6 +4,7 @@ import "../styles/navbar.css";
 import { HamburgerButton } from "../styles/m-nb-style";
 import MobileNavbar from "./mobileNavbar";
 import UserSearchModal from "./UserSearchModal";
+import UserAvatar from "./UserAvatar";
 import { useAuth } from "../contexts/AuthContext";
 
 const Navbar = () => {
@@ -159,15 +160,14 @@ const Navbar = () => {
                                 onClick={toggleProfileDropdown}
                                 className="flex items-center space-x-2 hover:opacity-80 transition-opacity"
                             >
-                                <img
-                                    title="User Avatar"
-                                    alt-text="User Avatar"
+                                <UserAvatar
                                     src={
                                         user?.avatarUrl ||
                                         "https://avatar.iran.liara.run/public"
                                     }
                                     alt={`${user?.username}'s avatar`}
-                                    className="w-8 h-8 rounded-full border-2 border-indigo-500"
+                                    user={user}
+                                    size="sm"
                                 />
                                 <span className="hidden md:inline text-white">
                                     {user?.displayName ||

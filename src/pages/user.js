@@ -4,6 +4,7 @@ import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import Particles from "../components/particles";
 import EditProfileModal from "../components/EditProfileModal";
+import UserAvatar from "../components/UserAvatar";
 import { useAuth } from "../contexts/AuthContext";
 import { getUserProfile } from "../api/userApi";
 import UserStats from "../components/UserStats";
@@ -138,13 +139,14 @@ export default function User() {
                         {/* User Profile Header */}
                         <div className="flex items-center justify-between mb-4">
                             <div className="flex items-center space-x-4">
-                                <img
+                                <UserAvatar
                                     src={
                                         user.avatarUrl ||
                                         "https://avatar.iran.liara.run/public"
                                     }
                                     alt={`${user.username}'s avatar`}
-                                    className="w-16 h-16 rounded-full border-2 border-indigo-500"
+                                    user={user}
+                                    size="lg"
                                 />
                                 <h1 className="text-3xl font-bold text-indigo-400">
                                     {user.displayName ||

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { searchUsers } from "../api/userApi";
+import UserAvatar from "./UserAvatar";
 
 const UserSearchModal = ({ isOpen, onClose }) => {
     const [query, setQuery] = useState("");
@@ -192,13 +193,15 @@ const UserSearchModal = ({ isOpen, onClose }) => {
                                     onClick={handleUserSelect}
                                     className="flex items-center p-4 hover:bg-zinc-800 transition-colors border-b border-zinc-800 last:border-b-0"
                                 >
-                                    <img
+                                    <UserAvatar
                                         src={
                                             user.avatarUrl ||
                                             "https://avatar.iran.liara.run/public"
                                         }
                                         alt={user.displayName || user.username}
-                                        className="w-10 h-10 rounded-full border-2 border-indigo-500 mr-3"
+                                        user={user}
+                                        size="md"
+                                        className="mr-3"
                                     />
                                     <div className="flex-1">
                                         <h3 className="text-white font-semibold">

@@ -145,7 +145,7 @@ const Navbar = () => {
                         to="/contact"
                         className="navbar-link"
                         onClick={closeMobileMenu}
-                        style="text-wrap: nowrap;"
+                        style={{ whiteSpace: "nowrap" }}
                     >
                         Report Bug
                     </Link>

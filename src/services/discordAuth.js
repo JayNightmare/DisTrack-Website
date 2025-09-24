@@ -34,7 +34,7 @@ export const checkUserExists = async (discordUserId) => {
     }
 };
 
-export const createUser = async (discordUser, displayName) => {
+export const createUser = async (discordUser, displayName, timezone = null) => {
     try {
         const response = await axios.post(
             `${API_ENDPOINT}/auth/discord/user`,
@@ -46,6 +46,9 @@ export const createUser = async (discordUser, displayName) => {
                     ? `https://cdn.discordapp.com/avatars/${discordUser.id}/${discordUser.avatar}.png`
                     : null,
                 email: discordUser.email,
+                timezone:
+                    timezone ||
+                    Intl.DateTimeFormat().resolvedOptions().timeZone,
             },
             {
                 headers: { Authorization: `Bearer ${API_KEY}` },

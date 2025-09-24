@@ -8,6 +8,8 @@ const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
         socials: user?.socials || {},
         avatarUrl: user?.avatarUrl || "",
         isPublic: user?.isPublic !== undefined ? user.isPublic : false, // Default to false if not set
+        timezone:
+            user?.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone,
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -216,6 +218,116 @@ const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
                                 className="w-full p-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder-zinc-400 focus:outline-none focus:border-indigo-500"
                                 placeholder="Enter your display name"
                             />
+                        </div>
+
+                        {/* Timezone Section */}
+                        <div>
+                            <label className="block text-white font-semibold mb-2">
+                                Timezone
+                            </label>
+                            <select
+                                value={formData.timezone}
+                                onChange={(e) =>
+                                    handleInputChange(
+                                        "timezone",
+                                        e.target.value
+                                    )
+                                }
+                                className="w-full p-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white focus:outline-none focus:border-indigo-500"
+                            >
+                                <option value="America/New_York">
+                                    Eastern Time (America/New_York)
+                                </option>
+                                <option value="America/Chicago">
+                                    Central Time (America/Chicago)
+                                </option>
+                                <option value="America/Denver">
+                                    Mountain Time (America/Denver)
+                                </option>
+                                <option value="America/Los_Angeles">
+                                    Pacific Time (America/Los_Angeles)
+                                </option>
+                                <option value="America/Anchorage">
+                                    Alaska Time (America/Anchorage)
+                                </option>
+                                <option value="Pacific/Honolulu">
+                                    Hawaii Time (Pacific/Honolulu)
+                                </option>
+                                <option value="Europe/London">
+                                    Greenwich Mean Time (Europe/London)
+                                </option>
+                                <option value="Europe/Berlin">
+                                    Central European Time (Europe/Berlin)
+                                </option>
+                                <option value="Europe/Paris">
+                                    Central European Time (Europe/Paris)
+                                </option>
+                                <option value="Europe/Rome">
+                                    Central European Time (Europe/Rome)
+                                </option>
+                                <option value="Europe/Madrid">
+                                    Central European Time (Europe/Madrid)
+                                </option>
+                                <option value="Europe/Amsterdam">
+                                    Central European Time (Europe/Amsterdam)
+                                </option>
+                                <option value="Europe/Stockholm">
+                                    Central European Time (Europe/Stockholm)
+                                </option>
+                                <option value="Europe/Helsinki">
+                                    Eastern European Time (Europe/Helsinki)
+                                </option>
+                                <option value="Europe/Moscow">
+                                    Moscow Standard Time (Europe/Moscow)
+                                </option>
+                                <option value="Asia/Tokyo">
+                                    Japan Standard Time (Asia/Tokyo)
+                                </option>
+                                <option value="Asia/Shanghai">
+                                    China Standard Time (Asia/Shanghai)
+                                </option>
+                                <option value="Asia/Seoul">
+                                    Korea Standard Time (Asia/Seoul)
+                                </option>
+                                <option value="Asia/Kolkata">
+                                    India Standard Time (Asia/Kolkata)
+                                </option>
+                                <option value="Asia/Dubai">
+                                    Gulf Standard Time (Asia/Dubai)
+                                </option>
+                                <option value="Australia/Sydney">
+                                    Australian Eastern Time (Australia/Sydney)
+                                </option>
+                                <option value="Australia/Melbourne">
+                                    Australian Eastern Time
+                                    (Australia/Melbourne)
+                                </option>
+                                <option value="Australia/Perth">
+                                    Australian Western Time (Australia/Perth)
+                                </option>
+                                <option value="Pacific/Auckland">
+                                    New Zealand Time (Pacific/Auckland)
+                                </option>
+                                <option value="America/Sao_Paulo">
+                                    Brasília Time (America/Sao_Paulo)
+                                </option>
+                                <option value="America/Mexico_City">
+                                    Central Standard Time (America/Mexico_City)
+                                </option>
+                                <option value="America/Toronto">
+                                    Eastern Time (America/Toronto)
+                                </option>
+                                <option value="America/Vancouver">
+                                    Pacific Time (America/Vancouver)
+                                </option>
+                                <option value="UTC">
+                                    Coordinated Universal Time (UTC)
+                                </option>
+                            </select>
+                            <p className="text-zinc-400 text-sm mt-1">
+                                Your timezone helps us display times correctly
+                                in your profile
+                            </p>
                         </div>
 
                         {/* Bio Section */}

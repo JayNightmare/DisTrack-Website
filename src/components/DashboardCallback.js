@@ -98,11 +98,19 @@ const DashboardCallback = () => {
                     console.warn("Could not store JWT token:", storageError);
                 }
 
-                // Store the distrack_user
+                // Get user's timezone and add to userData
+                const userTimezone =
+                    Intl.DateTimeFormat().resolvedOptions().timeZone;
+                const enhancedUserData = {
+                    ...userData,
+                    timezone: userTimezone,
+                };
+
+                // Store the distrack_user with timezone
                 try {
                     localStorage.setItem(
                         "distrack_user",
-                        JSON.stringify(userData)
+                        JSON.stringify(enhancedUserData)
                     );
                 } catch (storageError) {
                     console.warn("Could not store user data:", storageError);
@@ -151,7 +159,13 @@ const DashboardCallback = () => {
 
     const handleNewUserCreate = async (discordUser, displayName) => {
         try {
-            const newUser = await createUser(discordUser, displayName);
+            const userTimezone =
+                Intl.DateTimeFormat().resolvedOptions().timeZone;
+            const newUser = await createUser(
+                discordUser,
+                displayName,
+                userTimezone
+            );
             setCurrentUser(newUser);
             login(newUser);
             // Navigation should happen after modal closes

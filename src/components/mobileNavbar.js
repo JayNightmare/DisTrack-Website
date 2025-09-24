@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     MobileSidebar,
     MobileNavList,
@@ -7,10 +7,12 @@ import {
     MobileOverlay,
     MobileLogoutButton,
 } from "../styles/m-nb-style";
+import UserSearchModal from "./UserSearchModal";
 import { useAuth } from "../contexts/AuthContext";
 
 const MobileNavbar = ({ isMobileMenuOpen, closeMobileMenu }) => {
     const { user, logout } = useAuth();
+    const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
 
     const handleLogout = () => {
         logout();
@@ -32,11 +34,6 @@ const MobileNavbar = ({ isMobileMenuOpen, closeMobileMenu }) => {
                         </MobileNavLink>
                     </MobileNavItem>
                     <MobileNavItem>
-                        <MobileNavLink to="/faq" onClick={closeMobileMenu}>
-                            FAQ
-                        </MobileNavLink>
-                    </MobileNavItem>
-                    <MobileNavItem>
                         <MobileNavLink
                             to="/leaderboard"
                             onClick={closeMobileMenu}
@@ -53,9 +50,15 @@ const MobileNavbar = ({ isMobileMenuOpen, closeMobileMenu }) => {
                         </MobileNavLink>
                     </MobileNavItem>
                     <MobileNavItem>
-                        <MobileNavLink to="/contact" onClick={closeMobileMenu}>
-                            Contact
-                        </MobileNavLink>
+                        <button
+                            onClick={() => {
+                                setIsSearchModalOpen(true);
+                                closeMobileMenu();
+                            }}
+                            className="w-full text-left px-4 py-2 text-white hover:bg-zinc-800 transition-colors"
+                        >
+                            Search Users
+                        </button>
                     </MobileNavItem>
                     {user ? (
                         <MobileNavItem>
@@ -75,6 +78,12 @@ const MobileNavbar = ({ isMobileMenuOpen, closeMobileMenu }) => {
                     )}
                 </MobileNavList>
             </MobileSidebar>
+
+            {/* User Search Modal */}
+            <UserSearchModal
+                isOpen={isSearchModalOpen}
+                onClose={() => setIsSearchModalOpen(false)}
+            />
         </>
     );
 };

@@ -94,3 +94,23 @@ export async function clearLinkCode(userId) {
         return null;
     }
 }
+
+// Search for users by display name or username
+export async function searchUsers(query) {
+    if (!endpointUrl || !apiToken) {
+        console.error(
+            "API endpoint or token is not set in environment variables."
+        );
+        return null;
+    }
+    try {
+        const response = await axios.get(`${endpointUrl}/users/search`, {
+            params: { q: query },
+            headers: { Authorization: `Bearer ${apiToken}` },
+        });
+        return response.data;
+    } catch (error) {
+        console.error(`<< Failed to search users:`, error);
+        return null;
+    }
+}

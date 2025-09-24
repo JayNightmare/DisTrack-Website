@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import "../styles/navbar.css";
 import { HamburgerButton } from "../styles/m-nb-style";
 import MobileNavbar from "./mobileNavbar";
+import UserSearchModal from "./UserSearchModal";
 import { useAuth } from "../contexts/AuthContext";
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+    const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
     const { isLoggedIn, user, logout, loading } = useAuth();
 
     // Handle body scroll locking for mobile menu
@@ -105,19 +107,33 @@ const Navbar = () => {
                         Home
                     </Link>
                     <Link
-                        to="/faq"
-                        className="navbar-link"
-                        onClick={closeMobileMenu}
-                    >
-                        FAQ
-                    </Link>
-                    <Link
                         to="/leaderboard"
                         className="navbar-link"
                         onClick={closeMobileMenu}
                     >
                         Leaderboard
                     </Link>
+                    <div className="navbar-search">
+                        <button
+                            className="navbar-search-btn navbar-link"
+                            onClick={() => setIsSearchModalOpen(true)}
+                            title="Search Users"
+                        >
+                            <svg
+                                className="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                />
+                            </svg>
+                        </button>
+                    </div>
                     <Link
                         to="/downloads"
                         className="navbar-link"
@@ -130,7 +146,7 @@ const Navbar = () => {
                         className="navbar-link"
                         onClick={closeMobileMenu}
                     >
-                        Contact
+                        Report Bug
                     </Link>
                 </div>
 
@@ -241,6 +257,12 @@ const Navbar = () => {
                     )}
                 </div>
             </div>
+
+            {/* User Search Modal */}
+            <UserSearchModal
+                isOpen={isSearchModalOpen}
+                onClose={() => setIsSearchModalOpen(false)}
+            />
         </nav>
     );
 };

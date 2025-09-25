@@ -46,11 +46,28 @@ export default function HallOfFlame({ users = [] }) {
                             </div>
                             <div className="text-right whitespace-nowrap">
                                 {u.deltaHours != null ? (
-                                    <span className="text-emerald-400 text-sm font-semibold">
-                                        +{fmt.format(Math.round(u.deltaHours))}h
-                                    </span>
+                                    u.deltaHours > 0 ? (
+                                        <span className="text-emerald-400 text-sm font-semibold">
+                                            +
+                                            {fmt.format(
+                                                Math.round(u.deltaHours)
+                                            )}
+                                            h
+                                        </span>
+                                    ) : u.deltaHours < 0 ? (
+                                        <span className="text-red-400 text-sm font-semibold">
+                                            {fmt.format(
+                                                Math.round(u.deltaHours)
+                                            )}
+                                            h
+                                        </span>
+                                    ) : (
+                                        <span className="text-zinc-500 text-sm font-semibold">
+                                            —
+                                        </span>
+                                    )
                                 ) : (
-                                    <span className="text-zinc-500 text-sm">
+                                    <span className="text-zinc-500 text-sm font-semibold">
                                         —
                                     </span>
                                 )}

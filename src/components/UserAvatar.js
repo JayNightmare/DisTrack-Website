@@ -25,7 +25,11 @@ const UserAvatar = ({
         if (!user) return "normal";
 
         // Check user properties to determine type
-        if (user.isSponsor || user.sponsor || user.userType === "sponsor") {
+        if (
+            user.isSponsor ||
+            user.sponsor !== "false" ||
+            user.userType === "sponsor"
+        ) {
             return "sponsor";
         }
         if (user.premium || user.isPremium || user.userType === "premium") {

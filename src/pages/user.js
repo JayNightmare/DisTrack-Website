@@ -146,7 +146,7 @@ export default function User() {
                                     }
                                     alt={`${user.username}'s avatar`}
                                     user={user}
-                                    size="lg"
+                                    size="w-16 h-16"
                                 />
                                 <h1 className="text-3xl font-bold text-indigo-400">
                                     {user.displayName ||

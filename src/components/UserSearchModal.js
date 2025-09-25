@@ -200,7 +200,7 @@ const UserSearchModal = ({ isOpen, onClose }) => {
                                         }
                                         alt={user.displayName || user.username}
                                         user={user}
-                                        size="md"
+                                        size="w-10 h-10"
                                         className="mr-3"
                                     />
                                     <div className="flex-1">

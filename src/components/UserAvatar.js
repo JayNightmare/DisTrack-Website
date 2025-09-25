@@ -28,6 +28,9 @@ const UserAvatar = ({
         if (user.isSponsor || user.sponsor || user.userType === "sponsor") {
             return "sponsor";
         }
+        if (user.premium || user.isPremium || user.userType === "premium") {
+            return "premium";
+        }
         if (!user.isPublic || user.userType === "private") {
             return "private";
         }

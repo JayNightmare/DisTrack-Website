@@ -167,7 +167,7 @@ const Navbar = () => {
                                     }
                                     alt={`${user?.username}'s avatar`}
                                     user={user}
-                                    size="sm"
+                                    size="w-8 h-8"
                                 />
                                 <span className="hidden md:inline text-white">
                                     {user?.displayName ||

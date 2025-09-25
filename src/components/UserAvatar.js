@@ -43,6 +43,8 @@ const UserAvatar = ({
     const getBorderColor = (type) => {
         switch (type) {
             case "sponsor":
+                return "border-pink-400 shadow-lg shadow-pink-400/20";
+            case "premium":
                 return "border-yellow-400 shadow-lg shadow-yellow-400/20";
             case "private":
                 return "border-gray-500";

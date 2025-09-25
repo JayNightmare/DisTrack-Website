@@ -1,4 +1,5 @@
 import React from "react";
+import UserAvatar from "../UserAvatar";
 
 export default function HallOfFlame({ users = [] }) {
     const fmt = new Intl.NumberFormat();
@@ -19,10 +20,10 @@ export default function HallOfFlame({ users = [] }) {
                             className="py-2 flex items-center gap-3"
                         >
                             {u.avatarUrl ? (
-                                <img
+                                <UserAvatar
                                     src={u.avatarUrl}
-                                    alt={u.name}
-                                    className="w-8 h-8 rounded-full"
+                                    alt={u.name || "User Avatar"}
+                                    size="w-8 h-8"
                                 />
                             ) : (
                                 <div className="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center text-xs text-zinc-400">
@@ -41,7 +42,9 @@ export default function HallOfFlame({ users = [] }) {
                                         ? `${fmt.format(
                                               Math.round(u.totalHours)
                                           )}h`
-                                        : "—"}
+                                        : u.totalHours === 0
+                                        ? "—"
+                                        : null}
                                 </div>
                             </div>
                             <div className="text-right whitespace-nowrap">
@@ -61,11 +64,11 @@ export default function HallOfFlame({ users = [] }) {
                                             )}
                                             h
                                         </span>
-                                    ) : (
+                                    ) : u.deltaHours === 0 ? (
                                         <span className="text-zinc-500 text-sm font-semibold">
                                             —
                                         </span>
-                                    )
+                                    ) : null
                                 ) : (
                                     <span className="text-zinc-500 text-sm font-semibold">
                                         —

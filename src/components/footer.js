@@ -6,21 +6,6 @@ const Footer = () => {
     return (
         <footer className="footer fade-in-custom">
             <div className="footer-container">
-                <div className="footer-links text-center mb-4">
-                    <Link
-                        to="/faq"
-                        className="text-white-500 hover:text-indigo transition duration-300"
-                    >
-                        FAQ
-                    </Link>
-                    <span className="mx-2">|</span>
-                    <Link
-                        to="/contact"
-                        className="text-white-500 hover:text-indigo transition duration-300"
-                    >
-                        Contact
-                    </Link>
-                </div>
                 <p className="text-center text-gray-500">
                     &copy; {new Date().getFullYear()} DisTrack. All rights
                     reserved.
@@ -45,6 +30,36 @@ const Footer = () => {
                         href="https://LinkedIn.com/in/jordan-s-bell"
                     >
                         LinkedIn
+                    </a>
+                </div>
+                <div className="footer-links text-center mb-4">
+                    <Link
+                        to="/faq"
+                        className="text-white-500 hover:text-indigo transition duration-300"
+                    >
+                        FAQ
+                    </Link>
+                    <span className="mx-2">|</span>
+                    <Link
+                        to="/contact"
+                        className="text-white-500 hover:text-indigo transition duration-300"
+                    >
+                        Contact
+                    </Link>
+                </div>
+                <div className="footer-links text-center mb-4">
+                    <a
+                        href="https://terms-and-privacy.nexusgit.info/desktop-apps/terms"
+                        className="text-white-500 hover:text-indigo transition duration-300"
+                    >
+                        Terms of Service
+                    </a>
+                    <span className="mx-2">|</span>
+                    <a
+                        href="https://terms-and-privacy.nexusgit.info/desktop-apps/privacy"
+                        className="text-white-500 hover:text-indigo transition duration-300"
+                    >
+                        Privacy Policy
                     </a>
                 </div>
             </div>

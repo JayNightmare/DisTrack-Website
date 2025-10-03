@@ -91,7 +91,7 @@ export default function HomePage() {
             />
 
             <h1 className="dis-container py-3.5 px-0.5 z-10 text-4xl text-white duration-1000 bg-white cursor-default text-edge-outline animate-title font-display sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text ">
-                <p className="dis">Dis.</p>Track
+                <p className="dis">Dis</p>Track
             </h1>
 
             <div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
@@ -118,6 +118,35 @@ export default function HomePage() {
                 >
                     Add to VSCode
                 </Link>
+            </div>
+
+            {/* Announcement about the current state of the extension */}
+            <div className="w-full max-w-3xl px-4">
+                <div className="w-full p-4 rounded-lg bg-yellow-900/30 border border-yellow-700/50 text-yellow-200 text-center text-sm">
+                    <p>
+                        <strong className="font-semibold">Announcement:</strong>{" "}
+                        The DisTrack extension is currently private and not
+                        available on VSCode Marketplace due to a secuirity issue
+                        found in a third-party library and secrets management. I
+                        am working on a fix and will make it public again as
+                        soon as possible. Thank you for your patience and
+                        understanding!
+                    </p>
+                    <p>
+                        If you already have it installed, it will continue to
+                        work as normal. If you want to be notified when it's
+                        public again, please join our{" "}
+                        <a
+                            href="https://discord.gg/Zx45G4pZ3J"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="underline font-semibold hover:text-yellow-300"
+                        >
+                            Discord server
+                        </a>
+                        .
+                    </p>
+                </div>
             </div>
 
             {/* Live counters row */}

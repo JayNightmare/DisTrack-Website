@@ -121,10 +121,10 @@ export default function HomePage() {
             </div>
 
             {/* Announcement about the current state of the extension */}
-            <div className="w-full max-w-3xl px-4">
+            <div className="w-full max-w-3xl px-4 mb-10">
                 <div className="w-full p-4 rounded-lg bg-yellow-900/30 border border-yellow-700/50 text-yellow-200 text-center text-sm">
+                    <strong className="font-semibold">Announcement:</strong>{" "}
                     <p>
-                        <strong className="font-semibold">Announcement:</strong>{" "}
                         The DisTrack extension is currently private and not
                         available on VSCode Marketplace due to a secuirity issue
                         found in a third-party library and secrets management. I

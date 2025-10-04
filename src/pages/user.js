@@ -78,7 +78,6 @@ export default function User() {
         return (
             <div className="min-h-screen text-white p-8 space-y-6 bg-gradient-to-tl via-zinc-600/20 to-black from-black">
                 <Navbar />
-                <Particles className="absolute inset-0 -z-10" quantity={100} />
                 <div className="flex justify-center items-center py-16">
                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600" />
                     <span className="ml-3 text-zinc-300">

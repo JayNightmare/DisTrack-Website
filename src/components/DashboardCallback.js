@@ -5,7 +5,6 @@ import { checkUserExists, createUser } from "../services/discordAuth";
 import NewUserSetupModal from "./NewUserSetupModal";
 import Navbar from "./navbar";
 import Footer from "./footer";
-import Particles from "./particles";
 
 const DashboardCallback = () => {
     const [searchParams] = useSearchParams();
@@ -193,7 +192,6 @@ const DashboardCallback = () => {
         return (
             <div className="min-h-screen text-white p-8 space-y-6 bg-gradient-to-tl via-zinc-600/20 to-black from-black">
                 <Navbar />
-                <Particles className="absolute inset-0 -z-10" quantity={100} />
                 <div className="flex justify-center items-center py-16">
                     <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-700/50 rounded-lg p-8 w-full max-w-md text-center">
                         <div className="text-6xl mb-4">❌</div>
@@ -217,7 +215,6 @@ const DashboardCallback = () => {
     return (
         <div className="min-h-screen text-white p-8 space-y-6 bg-gradient-to-tl via-zinc-600/20 to-black from-black">
             <Navbar />
-            <Particles className="absolute inset-0 -z-10" quantity={100} />
             {loading && (
                 <div className="flex justify-center items-center py-16">
                     <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-700/50 rounded-lg p-8 w-full max-w-md text-center">

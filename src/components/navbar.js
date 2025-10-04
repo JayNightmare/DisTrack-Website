@@ -78,7 +78,12 @@ const Navbar = () => {
     return (
         <nav className="navbar z-50">
             <div className="navbar-container">
-                <Link to="/" className="navbar-logo">
+                <Link
+                    to="/"
+                    className="navbar-logo font-bold dis-alt text-2xl"
+                    onClick={closeMobileMenu}
+                    style={{ whiteSpace: "nowrap" }}
+                >
                     DisTrack
                 </Link>
 
@@ -251,7 +256,7 @@ const Navbar = () => {
                         <Link
                             to="/login"
                             onClick={handleLogin}
-                            className="login-btn"
+                            className="login-btn bg-indigo-600 hover:bg-indigo-800 transition duration-300 rounded-lg"
                         >
                             Login
                         </Link>

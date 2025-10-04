@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
-import Particles from "../components/particles";
+
 import { useAuth } from "../contexts/AuthContext";
 import { generateLinkCode, clearLinkCode } from "../api/userApi";
 import { useNavigate } from "react-router-dom";
@@ -112,7 +112,6 @@ export default function LinkAccount() {
     return (
         <div className="min-h-screen text-white p-8 space-y-6 bg-gradient-to-tl via-zinc-600/20 to-black from-black">
             <Navbar />
-            <Particles className="absolute inset-0 -z-10" quantity={100} />
             <div className="max-w-xl mx-auto mt-10 bg-zinc-900/50 backdrop-blur-sm border border-zinc-700/50 rounded-lg p-6 space-y-6">
                 <h1 className="text-2xl font-bold text-indigo-400 text-center">
                     Link VSCode Extension

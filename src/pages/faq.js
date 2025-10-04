@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
-import Particles from "../components/particles";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -221,9 +221,17 @@ export default function FAQ() {
     return (
         <div className="min-h-screen text-white p-8 space-y-6 bg-gradient-to-tl via-zinc-600/20 to-black from-black">
             <Navbar />
-            <Particles className="absolute inset-0 -z-10" quantity={100} />
-            <div className="container mx-auto px-4 py-8">
-                <h1 className="text-3xl font-bold text-center mb-6">FAQ</h1>
+            <div className="container mx-auto px-4">
+                <div className="flex items-center justify-center mb-8 flex-col">
+                    <h1 className="dis-container py-3.5 px-0.5 z-10 text-white bg-white cursor-default text-edge-outline font-display sm:text-6xl md:text-5xl whitespace-nowrap bg-clip-text">
+                        <p className="">FAQ</p>
+                    </h1>
+                    <p className="text-lg text-zinc-400">
+                        <span className="text-zinc-400">
+                            Frequently Asked Questions about Dis.Track
+                        </span>
+                    </p>
+                </div>
                 {/* FAQ List */}
                 <div className="space-y-4">
                     {faqData.map((item, index) => (

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
-import Particles from "../components/particles";
+
 import EditProfileModal from "../components/EditProfileModal";
 import UserAvatar from "../components/UserAvatar";
 import { useAuth } from "../contexts/AuthContext";
@@ -94,7 +94,6 @@ export default function User() {
         return (
             <div className="min-h-screen text-white p-8 space-y-6 bg-gradient-to-tl via-zinc-600/20 to-black from-black">
                 <Navbar />
-                <Particles className="absolute inset-0 -z-10" quantity={100} />
                 <div className="flex justify-center items-center py-16">
                     <div className="bg-red-900/20 border border-red-500/50 rounded-lg p-6 text-red-300 max-w-md">
                         <h2 className="text-xl font-semibold mb-2">
@@ -131,7 +130,6 @@ export default function User() {
     return (
         <div className="min-h-screen text-white p-8 space-y-6 bg-gradient-to-tl via-zinc-600/20 to-black from-black">
             <Navbar />
-            <Particles className="absolute inset-0 -z-10" quantity={100} />
 
             <div className="max-w-4xl mx-auto space-y-6">
                 <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-700/50 rounded-lg p-6">

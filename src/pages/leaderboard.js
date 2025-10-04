@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/navbar";
-import Particles from "../components/particles";
+
 import Footer from "../components/footer";
 import LeaderboardTable from "../components/LeaderboardTable";
 
@@ -14,24 +14,25 @@ export default function Leaderboard() {
         <div className="min-h-screen text-white p-8 space-y-6 bg-gradient-to-tl via-zinc-600/20 to-black from-black">
             {/* Nav Bar */}
             <Navbar />
-            <Particles className="absolute inset-0 -z-10" quantity={100} />
 
             <div className="max-w-6xl mx-auto">
-                <h1 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-                    Leaderboard
-                </h1>
+                <div className="flex items-center justify-center mb-8 flex-col">
+                    <h1 className="dis-container py-3.5 px-0.5 z-10 text-white bg-white cursor-default text-edge-outline font-display sm:text-6xl md:text-5xl whitespace-nowrap bg-clip-text">
+                        Leaderboard
+                    </h1>
 
-                <p className="text-lg text-zinc-400 mb-8 text-center">
-                    <span>Check out the top users of Dis.Track!</span>
-                    <br />
-                    The leaderboard is updated in real-time, so you can see who
-                    is leading the way in tracking their coding time.
-                    <br />
-                    <span className="text-indigo-400">
-                        Note: The leaderboard will reset at the end of each
-                        filter period.
-                    </span>
-                </p>
+                    <p className="text-lg text-zinc-400 mb-8 text-center">
+                        <span>Check out the top users of Dis.Track!</span>
+                        <br />
+                        The leaderboard is updated in real-time, so you can see
+                        who is leading the way in tracking their coding time.
+                        <br />
+                        <span className="text-indigo-400">
+                            Note: The leaderboard will reset at the end of each
+                            filter period.
+                        </span>
+                    </p>
+                </div>
 
                 <div className="flex gap-4 mb-8 justify-center flex-wrap">
                     {filters.map((f) => (

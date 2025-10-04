@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../components/navbar";
-import Particles from "../components/particles";
+
 import Footer from "../components/footer";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -21,8 +21,8 @@ export default function Showcase() {
             title: "About Us",
             content: (
                 <p className="text-zinc-300">
-                    DisTrack helps developers stay accountable by tracking coding activity and
-                    sharing progress with friends.
+                    DisTrack helps developers stay accountable by tracking
+                    coding activity and sharing progress with friends.
                 </p>
             ),
         },
@@ -45,8 +45,9 @@ export default function Showcase() {
             title: "What You Can Do",
             content: (
                 <p className="text-zinc-300">
-                    Visualize your progress with interactive charts, track achievements, and manage
-                    as many teams and goals as you need with our premium tools.
+                    Visualize your progress with interactive charts, track
+                    achievements, and manage as many teams and goals as you need
+                    with our premium tools.
                 </p>
             ),
         },
@@ -54,8 +55,9 @@ export default function Showcase() {
             title: "Special Offer",
             content: (
                 <p className="text-zinc-300">
-                    The first 100 people to sign up for premium will receive all future premium
-                    updates for free, provided they remain subscribed for at least 3 months.
+                    The first 100 people to sign up for premium will receive all
+                    future premium updates for free, provided they remain
+                    subscribed for at least 3 months.
                 </p>
             ),
         },
@@ -63,8 +65,8 @@ export default function Showcase() {
             title: "Community Growth",
             content: (
                 <p className="text-zinc-300">
-                    As our community grows, we plan to hold coding competitions and team based
-                    leaderboards.
+                    As our community grows, we plan to hold coding competitions
+                    and team based leaderboards.
                 </p>
             ),
         },
@@ -73,12 +75,12 @@ export default function Showcase() {
     return (
         <div className="min-h-screen text-white p-8 space-y-6 bg-gradient-to-tl via-zinc-600/20 to-black from-black">
             <Navbar />
-            <Particles className="absolute inset-0 -z-10" quantity={100} />
 
             <section className="text-center mt-12 space-y-4">
                 <h1 className="text-4xl font-extrabold">Discover DisTrack</h1>
                 <p className="text-zinc-300 max-w-2xl mx-auto">
-                    Explore premium tools designed to keep you motivated and connected.
+                    Explore premium tools designed to keep you motivated and
+                    connected.
                 </p>
                 <a
                     href="/login"
@@ -90,14 +92,21 @@ export default function Showcase() {
 
             <div className="max-w-3xl mx-auto mt-8 space-y-4">
                 {sections.map((s, i) => (
-                    <div key={s.title} className="bg-zinc-800/50 rounded-lg overflow-hidden">
+                    <div
+                        key={s.title}
+                        className="bg-zinc-800/50 rounded-lg overflow-hidden"
+                    >
                         <button
                             type="button"
-                            onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                            onClick={() =>
+                                setOpenIndex(openIndex === i ? null : i)
+                            }
                             className="w-full flex justify-between items-center p-4 hover:bg-zinc-700/50 transition-colors"
                         >
                             <h2 className="text-xl font-bold">{s.title}</h2>
-                            <span className="text-2xl">{openIndex === i ? "−" : "+"}</span>
+                            <span className="text-2xl">
+                                {openIndex === i ? "−" : "+"}
+                            </span>
                         </button>
                         <AnimatePresence initial={false}>
                             {openIndex === i && (

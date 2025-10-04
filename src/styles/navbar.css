@@ -65,6 +65,20 @@
 
 .navbar-auth {
     text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+}
+
+.support-btn {
+    color: white;
+    font-size: 32px;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: #ff6b81;
+    }
 }
 
 .navbar-toggle {
@@ -87,18 +101,12 @@
 }
 
 .login-btn {
-    background-color: #7289da;
     color: white;
-    border: none;
+    font-weight: bold;
     padding: 10px 20px;
-    border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
-
-    &:hover {
-        background-color: #5b6eae;
-    }
 }
 
 .profile-dropdown-container {

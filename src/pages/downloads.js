@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
-import Particles from "../components/particles";
 
 export default function Downloads() {
     const [open, setOpen] = useState(null); // 'vscode' | 'cursor' | null
@@ -16,27 +15,37 @@ export default function Downloads() {
             name: "VS Code",
             url: vscodeUrl,
             instructions: (
-                <ol className="list-decimal pl-5 space-y-2 text-zinc-300 text-sm">
-                    <li>Open VS Code.</li>
-                    <li>Go to Extensions (Ctrl+Shift+X).</li>
-                    <li>
-                        Search for{" "}
-                        <span className="font-semibold">Dis.Track</span>.
-                    </li>
-                    <li>Click Install on the Dis.Track extension.</li>
-                    <li>
-                        Or install via Marketplace:{" "}
-                        <a
-                            href={vscodeUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="text-indigo-400 hover:text-indigo-300 underline"
-                        >
-                            marketplace listing
-                        </a>
-                        .
-                    </li>
-                </ol>
+                // <ol className="list-decimal pl-5 space-y-2 text-zinc-300 text-sm">
+                //     <li>Open VS Code.</li>
+                //     <li>Go to Extensions (Ctrl+Shift+X).</li>
+                //     <li>
+                //         Search for{" "}
+                //         <span className="font-semibold">Dis.Track</span>.
+                //     </li>
+                //     <li>Click Install on the Dis.Track extension.</li>
+                //     <li>
+                //         Or install via Marketplace:{" "}
+                //         <a
+                //             href={vscodeUrl}
+                //             target="_blank"
+                //             rel="noreferrer"
+                //             className="text-indigo-400 hover:text-indigo-300 underline"
+                //         >
+                //             marketplace listing
+                //         </a>
+                //         .
+                //     </li>
+                // </ol>
+                <>
+                    {/* Notice: VSCode Extension is currently unavailable */}
+                    <p className="w-full p-4 rounded-lg bg-yellow-900/30 border border-yellow-700/50 text-yellow-200 text-center text-sm">
+                        Note: The VS Code extension is currently{" "}
+                        <strong>unavailable</strong> due to Marketplace issues.
+                        Please check back later or use the Cursor extension.
+                    </p>
+
+                    {/* {instructions} */}
+                </>
             ),
             Icon: function VSCodeIcon({ className = "w-10 h-10" }) {
                 return (
@@ -303,16 +312,55 @@ export default function Downloads() {
             },
         },
     ];
+
+    const randomMessages = [
+        "Closing...",
+        "See you later!",
+        "Come back soon!",
+        "Take care!",
+        "Goodbye!",
+        "Until next time!",
+        "Have a great day!",
+        "Stay awesome!",
+        "Keep coding!",
+        "Noooooo",
+        "Farewell, friend!",
+        "Femboy...",
+        "Your Mother...",
+        "Don't forget to star the repo!",
+        "192.168.127...",
+        "Why did you close me?",
+        "I'll be here when you return",
+        "Adios, amigo!",
+        "Catch you on the flip side!",
+        "May the source be with you!",
+        "I know where you live...",
+        "I see you...",
+        "You can't escape me!",
+        "I'll be watching...",
+        "Linux user detected...",
+        "Windows user detected...",
+        "Mac user detected...",
+        "Have you tried turning it off and on again?",
+        "Did you read the documentation?",
+        "Remember to back up your data!",
+    ];
+    const messages = Math.floor(Math.random() * randomMessages.length);
+
     return (
         <div className="min-h-screen text-white p-8 space-y-6 bg-gradient-to-tl via-zinc-600/20 to-black from-black">
             <Navbar />
 
-            <Particles className="absolute inset-0 -z-10" quantity={100} />
-
-            <div className="flex items-center justify-center mb-8">
-                <h1 className="dis-container py-3.5 px-0.5 z-10 text-white bg-white cursor-default text-edge-outline font-display sm:text-6xl md:text-5xl whitespace-nowrap bg-clip-text ">
-                    <p className="dis-alt">Download</p>
+            <div className="flex items-center justify-center mb-8 flex-col">
+                <h1 className="dis-container py-3.5 px-0.5 z-10 text-white bg-white cursor-default text-edge-outline font-display sm:text-6xl md:text-5xl whitespace-nowrap bg-clip-text">
+                    <p className="">Download</p>
                 </h1>
+                <p className="text-lg text-zinc-400">
+                    <span className="text-zinc-400">
+                        Get started by installing the extension for your IDE
+                        below.
+                    </span>
+                </p>
             </div>
 
             <div className="max-w-5xl mx-auto space-y-10">
@@ -322,7 +370,7 @@ export default function Downloads() {
                         href="https://discord.com/oauth2/authorize?client_id=1305258645906526328"
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-2 px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-500 hover:scale-105 transition duration-300"
+                        className="inline-flex items-center gap-2 px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-800 hover:scale-[95%] transition duration-300"
                     >
                         <span>Invite Discord Bot</span>
                     </a>
@@ -375,15 +423,23 @@ export default function Downloads() {
                                     </div>
                                 </div>
                                 <div
-                                    className={`overflow-hidden transition-all duration-300 ${
+                                    className={`overflow-hidden transition-all duration-[300ms] ${
                                         open === id
                                             ? "mt-4 max-h-[400px]"
                                             : "max-h-0"
                                     }`}
                                 >
-                                    <div className="pt-2 border-t border-zinc-800/60">
-                                        {instructions}
-                                    </div>
+                                    {open === id ? (
+                                        <div className="pt-2 border-t border-zinc-800/60">
+                                            {instructions}
+                                        </div>
+                                    ) : (
+                                        <div className="pt-2 border-t border-zinc-800/60">
+                                            <p className="text-zinc-400 text-sm">
+                                                {randomMessages[messages]}
+                                            </p>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         ))}
@@ -393,32 +449,70 @@ export default function Downloads() {
                 {/* Project links */}
                 <section className="space-y-4">
                     <h2 className="text-center text-zinc-300">
-                        Follow the project on GitHub
+                        <span className="text-zinc-300">Source Code</span> |{" "}
+                        <span className="text-zinc-300">Support</span> |{" "}
+                        <span className="text-zinc-300">Roadmap</span>
                     </h2>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                         <a
                             href="https://github.com/JayNightmare"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-block px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-500 hover:scale-105 transition duration-300"
+                            className="inline-block px-6 py-3 text-base font-semibold text-white bg-indigo-600  shadow-md hover:bg-indigo-800 hover:scale-[95%] transition duration-300 rounded-xl"
                         >
-                            Follow on GitHub
+                            {/* Icon of GitHub */}
+                            <svg
+                                width="24"
+                                height="24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 97 96"
+                                className="w-6 h-6 inline-block -mt-0.5"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"
+                                    fill="#fff"
+                                />
+                            </svg>
                         </a>
                         <a
                             href="https://github.com/sponsors/JayNightmare"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-block px-6 py-3 text-base font-semibold text-white bg-pink-600 rounded-lg shadow-md hover:bg-pink-500 hover:scale-105 transition duration-300"
+                            className="inline-block px-6 py-3 text-base font-semibold text-white bg-pink-600  shadow-md hover:bg-pink-800 hover:scale-[95%] transition duration-300 rounded-xl"
                         >
-                            Sponsor on GitHub
+                            {/* Icon of Heart */}
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={2}
+                                stroke="currentColor"
+                                className="w-6 h-6 inline-block -mt-0.5"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                                />
+                            </svg>
                         </a>
                         <a
                             href="https://github.com/users/JayNightmare/projects/4"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-block px-6 py-3 text-base font-semibold text-white bg-purple-600 rounded-lg shadow-md hover:bg-purple-500 hover:scale-105 transition duration-300"
+                            className="inline-block px-6 py-3 text-base font-semibold text-white bg-purple-600  shadow-md hover:bg-purple-800 hover:scale-[95%] transition duration-300 rounded-xl"
                         >
-                            Follow the Project
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 640 640"
+                                fill="currentColor"
+                                className="w-6 h-6 inline-block -mt-0.5"
+                            >
+                                <path d="M480 576L192 576C139 576 96 533 96 480L96 160C96 107 139 64 192 64L496 64C522.5 64 544 85.5 544 112L544 400C544 420.9 530.6 438.7 512 445.3L512 512C529.7 512 544 526.3 544 544C544 561.7 529.7 576 512 576L480 576zM192 448C174.3 448 160 462.3 160 480C160 497.7 174.3 512 192 512L448 512L448 448L192 448zM224 216C224 229.3 234.7 240 248 240L424 240C437.3 240 448 229.3 448 216C448 202.7 437.3 192 424 192L248 192C234.7 192 224 202.7 224 216zM248 288C234.7 288 224 298.7 224 312C224 325.3 234.7 336 248 336L424 336C437.3 336 448 325.3 448 312C448 298.7 437.3 288 424 288L248 288z" />
+                            </svg>
                         </a>
                     </div>
                 </section>

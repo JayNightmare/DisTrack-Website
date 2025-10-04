@@ -46,11 +46,20 @@ const Footer = () => {
                     >
                         Contact
                     </Link>
+                    <span className="mx-2">|</span>
+                    <a
+                        href="/support"
+                        className="text-white-500 hover:text-indigo transition duration-300"
+                    >
+                        Support the Developer
+                    </a>
                 </div>
                 <div className="footer-links text-center mb-4">
                     <a
                         href="https://terms-and-privacy.nexusgit.info/desktop-apps/terms"
                         className="text-white-500 hover:text-indigo transition duration-300"
+                        rel="noopener noreferrer"
+                        target="_blank"
                     >
                         Terms of Service
                     </a>
@@ -58,6 +67,8 @@ const Footer = () => {
                     <a
                         href="https://terms-and-privacy.nexusgit.info/desktop-apps/privacy"
                         className="text-white-500 hover:text-indigo transition duration-300"
+                        rel="noopener noreferrer"
+                        target="_blank"
                     >
                         Privacy Policy
                     </a>

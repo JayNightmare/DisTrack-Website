@@ -14,6 +14,7 @@ import Debug from "./pages/debug";
 import Dashboard from "./pages/dashboard";
 import DashboardCallback from "./components/DashboardCallback";
 import LinkAccount from "./pages/linkAccount";
+import SupportPage from "./pages/support";
 
 // Import test auth for debugging
 import "./utils/testAuth";
@@ -34,6 +35,7 @@ export default function App() {
                 <Route path="/debug" element={<Debug />} />
                 <Route path="/auth/distrack" element={<DashboardCallback />} />
                 <Route path="/link-account" element={<LinkAccount />} />
+                <Route path="/support" element={<SupportPage />} />
             </Routes>
         </AuthProvider>
     );

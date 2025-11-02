@@ -120,17 +120,26 @@ export default function HomePage() {
                 <div className="w-full p-4 rounded-lg bg-yellow-900/30 border border-yellow-700/50 text-yellow-200 text-center text-sm">
                     <strong className="font-semibold">Announcement:</strong>{" "}
                     <p>
-                        The DisTrack extension is currently private and not
-                        available on VSCode Marketplace due to a secuirity issue
-                        found in a third-party library and secrets management. I
-                        am working on a fix and will make it public again as
-                        soon as possible. Thank you for your patience and
-                        understanding!
+                        The endpoint for DisTrack is currently going through
+                        maintenance and refactoring. Specifically on how the
+                        server handles API Key generation and tokens.
                     </p>
                     <p>
-                        If you already have it installed, it will continue to
-                        work as normal. If you want to be notified when it's
-                        public again, please join our{" "}
+                        As a solo developer on this project, I'm finding it hard
+                        to find time with work and Masters. If you're a
+                        developer and have knowledge in{" "}
+                        <strong>
+                            Node.JS Backend Developement, please reach out!
+                        </strong>
+                    </p>
+                    <p>
+                        If you have Dis<strong>.</strong>Track installed, please
+                        uninstall and install <strong>DisTrack</strong> instead.
+                    </p>
+                    <p>
+                        I started a Discord Server for this project, so if
+                        you're a programmer and looking for like-minded people,
+                        join the{" "}
                         <a
                             href="https://discord.gg/Zx45G4pZ3J"
                             target="_blank"

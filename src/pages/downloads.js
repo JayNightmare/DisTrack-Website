@@ -6,13 +6,13 @@ export default function Downloads() {
     const [open, setOpen] = useState(null); // 'vscode' | 'cursor' | null
 
     const vscodeUrl =
-        "https://marketplace.visualstudio.com/items?itemName=JayNightmare.dis-track";
-    const cursorUrl = "https://open-vsx.org/extension/JayNightmare/dis-track";
+        "https://marketplace.visualstudio.com/items?itemName=JayNightmare.distrack";
+    const cursorUrl = "https://open-vsx.org/extension/JayNightmare/distrack";
 
     const cards = [
         {
             id: "vscode",
-            name: "VS Code",
+            name: "VSCode",
             url: vscodeUrl,
             instructions: (
                 // <ol className="list-decimal pl-5 space-y-2 text-zinc-300 text-sm">

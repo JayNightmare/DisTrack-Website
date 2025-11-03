@@ -1,0 +1,26 @@
+[
+  {
+    "title": "DisTrack",
+    "description": "Track your coding across Discord with rich stats and leaderboards.",
+    "image": "/images/carousel/distrack/Banner.jpg",
+    "siteUrl": "https://distrack.nexusgit.info/",
+    "repoUrl": "https://github.com/JayNightmare/distrack-website",
+    "tags": ["React", "Tailwind", "Node"]
+  },
+  {
+    "title": "Augmented Perception",
+    "description": "Creating software for Augmented Reality. Specialising in real-time software applications and technical innovation",
+    "image": "/images/carousel/ap/Banner.jpg",
+    "siteUrl": "#",
+    "repoUrl": "#",
+    "tags": ["Next.js", "Tailwind"]
+  },
+  {
+    "title": "asd",
+    "description": "Another example project card.",
+    "image": "https://picsum.photos/1280/720",
+    "siteUrl": "#",
+    "repoUrl": "#",
+    "tags": ["API", "Charts"]
+  }
+]

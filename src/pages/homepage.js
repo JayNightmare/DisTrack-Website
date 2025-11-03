@@ -124,6 +124,7 @@ export default function HomePage() {
                         maintenance and refactoring. Specifically on how the
                         server handles API Key generation and tokens.
                     </p>
+                    <br />
                     <p>
                         As a solo developer on this project, I'm finding it hard
                         to find time with work and Masters. If you're a
@@ -132,6 +133,7 @@ export default function HomePage() {
                             Node.JS Backend Developement, please reach out!
                         </strong>
                     </p>
+                    <br />
                     <p>
                         If you have Dis<strong>.</strong>Track installed, please
                         uninstall and install <strong>DisTrack</strong> instead.

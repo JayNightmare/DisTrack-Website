@@ -3,6 +3,7 @@ import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import ConfettiButton from "../components/ConfettiButton";
 import "../styles/gfm.css";
+import ProjectsCarousel from "../components/ProjectsCarousel";
 
 export default function SupportPage() {
     return (
@@ -61,6 +62,12 @@ export default function SupportPage() {
                     </ConfettiButton>
                 </div>
             </div>
+
+            {/* Other Projects Carousel */}
+            <div className="mt-8">
+                <ProjectsCarousel title="Other Projects" />
+            </div>
+            {/* --------------------- */}
 
             <div className="max-w-3xl mx-auto bg-zinc-900/50 p-6 rounded-lg shadow-lg flex flex-col items-center">
                 <h2 className="text-2xl font-bold mb-4">

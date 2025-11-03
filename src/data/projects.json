@@ -1,0 +1,26 @@
+[
+  {
+    "title": "DisTrack",
+    "description": "Track your coding across Discord with rich stats and leaderboards.",
+    "image": "/images/carousel/distrack/Banner.jpg",
+    "siteUrl": "https://distrack.nexusgit.info/",
+    "repoUrl": "https://github.com/JayNightmare/distrack-website",
+    "tags": ["React", "Tailwind", "Node", "TypeScript", "JavaScript"]
+  },
+  {
+    "title": "Augmented Perception",
+    "description": "Creating software for Augmented Reality. Specialising in real-time software applications through Behavioral Learning",
+    "image": "/images/carousel/ap/Banner.jpg",
+    "siteUrl": "https://augmented-perception.nexusgit.info/",
+    "repoUrl": "https://github.com/Augmented-Perception",
+    "tags": ["Python", "YOLO", "OpenCV"]
+  },
+  {
+    "title": "PhunParty",
+    "description": "Cozy Indie Trivia Game. Host on desktop, Join on mobile.",
+    "image": "/images/carousel/phunparty/Banner.jpg",
+    "siteUrl": "https://phun.party",
+    "repoUrl": "https://github.com/JayNightmare/PhunParty-Website",
+    "tags": ["React", "PostGRE", "FastAPI", "Web Sockets"]
+  }
+]

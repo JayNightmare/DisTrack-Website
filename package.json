@@ -12,7 +12,7 @@
     "typecheck": "rome check"
   },
   "dependencies": {
-    "axios": "^1.11.0",
+    "axios": "^1.13.2",
     "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

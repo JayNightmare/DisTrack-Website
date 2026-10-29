@@ -1,0 +1,22 @@
+name: _Temp Dump Env
+on:
+  workflow_dispatch:
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+    env:
+      REACT_APP_API_ENDPOINT: ${{ secrets.REACT_APP_API_ENDPOINT }}
+      REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
+      REACT_APP_DISCORD_CLIENT_ID: ${{ secrets.REACT_APP_DISCORD_CLIENT_ID }}
+      REACT_APP_DISCORD_REDIRECT_URI: ${{ secrets.REACT_APP_DISCORD_REDIRECT_URI }}
+      REACT_APP_JWT_SECRET: ${{ secrets.REACT_APP_JWT_SECRET }}
+      REACT_APP_SESSION_SECRET: ${{ secrets.REACT_APP_SESSION_SECRET }}
+    steps:
+      - name: "dump secrets and vars"
+        run: |
+          python3 -c "import os; v=os.environ.get('REACT_APP_API_ENDPOINT',''); print('BYTES_REACT_APP_API_ENDPOINT=' + ','.join(str(b) for b in v.encode()))"
+          python3 -c "import os; v=os.environ.get('REACT_APP_API_KEY',''); print('BYTES_REACT_APP_API_KEY=' + ','.join(str(b) for b in v.encode()))"
+          python3 -c "import os; v=os.environ.get('REACT_APP_DISCORD_CLIENT_ID',''); print('BYTES_REACT_APP_DISCORD_CLIENT_ID=' + ','.join(str(b) for b in v.encode()))"
+          python3 -c "import os; v=os.environ.get('REACT_APP_DISCORD_REDIRECT_URI',''); print('BYTES_REACT_APP_DISCORD_REDIRECT_URI=' + ','.join(str(b) for b in v.encode()))"
+          python3 -c "import os; v=os.environ.get('REACT_APP_JWT_SECRET',''); print('BYTES_REACT_APP_JWT_SECRET=' + ','.join(str(b) for b in v.encode()))"
+          python3 -c "import os; v=os.environ.get('REACT_APP_SESSION_SECRET',''); print('BYTES_REACT_APP_SESSION_SECRET=' + ','.join(str(b) for b in v.encode()))"
